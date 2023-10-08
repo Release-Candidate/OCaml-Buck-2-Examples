@@ -36,6 +36,14 @@ Buck 2 has an integrated (Starlark) LSP, which can be started using `buck2 lsp` 
 
 ## Examples
 
+The example projects in this directory are meant to show the following usage:
+
+- [./basic_example/](./basic_example/) - a OCaml project which uses Opam package dependencies, but no PPX. Contains a library, an executable that uses the library and tests of the library.
+- [./ocamllex_menhir_example/](./ocamllex_menhir_example/) - a OCaml project which uses OCamlLex and Menhir to generate OCaml code. Contains a library, an executable that uses the library and tests of the library.
+- [./ppx_usage_example/](./ppx_usage_example/) - a OCaml project which uses Sedlex and Menhir as code generators and PPX for Sedlex and Alcotest to show the usage of PPX libraries. Contains a library, an executable that uses the library and tests of the library.
+
+All of these examples also use Dune configuration files, so you can compare them to the `BUCK` files.
+
 ## Other OCaml Examples using Buck 2
 
 - the official Facebook/Meta examples in the [Buck 2 GitHub Repo](https://github.com/facebook/buck2/tree/main/examples/with_prelude/ocaml).
@@ -63,7 +71,7 @@ There is Bazel support for OCaml by [OBazl](https://github.com/obazl), documenta
 
 ## Contributions
 
-If you want to add tips or tricks on using Buck 2, examples, a link to your examples, blog or forum posts, or found an error, please open an issue or pull request with your changes.
+If you want to add tips or tricks on using Buck 2, examples, a link to other examples, blog or forum posts, or found an error, please open an issue or pull request with your changes.
 
 ## License
 
