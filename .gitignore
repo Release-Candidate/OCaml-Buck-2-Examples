@@ -27,3 +27,6 @@ setup.log
 
 # Local OPAM switch
 _opam/
+
+# Do not include Dune-generated Opam files
+*.opam

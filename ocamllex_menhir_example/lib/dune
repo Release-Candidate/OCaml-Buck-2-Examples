@@ -1,0 +1,2 @@
+(library
+ (name ocamllex_menhir_example))

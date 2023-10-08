@@ -1,0 +1,4 @@
+(executable
+ (public_name ocamllex_menhir_example)
+ (name main)
+ (libraries ocamllex_menhir_example))
