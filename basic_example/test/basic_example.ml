@@ -15,6 +15,7 @@ open Basic_example.Fibonacci
 
 let () =
   let open Alcotest in
+  let open QCheck_alcotest in
   run
     "Fibonacci Tests"
     [ ( "Naive Fibonacci tests"
@@ -31,6 +32,18 @@ let () =
         ; test_case "F10 is 55" `Quick (fun () ->
             (check int) "same ints" 55 (fibonacci 10))
         ] )
-    ; "Tail Recursive Fibonacci tests", []
+    ; ( "Compare naive and tail recursive"
+      , [ to_alcotest
+            ~colors:true
+            ~verbose:true
+            ~long:true
+            QCheck2.(
+              Test.make
+                ~name:"Using Quickcheck"
+                ~count:10
+                ~print:Print.(int)
+                Gen.(small_nat)
+                (fun n -> fibonacci n = fibonacci_tailrec n))
+        ] )
     ]
 ;;

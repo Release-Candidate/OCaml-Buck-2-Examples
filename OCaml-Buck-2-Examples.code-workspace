@@ -10,10 +10,15 @@
 			"Bazl",
 			"endline",
 			"ocamllex",
+			"Quickcheck",
 			"Sedlex",
 			"Starlark",
 			"tailrec"
-		]
+		],
+		"ocaml.sandbox": {
+			"kind": "opam",
+			"switch": "${workspaceFolder:OCaml-Buck-2-Examples}/basic_example/third-party"
+		}
 	},
 	"extensions": {
 		"recommendations": [
