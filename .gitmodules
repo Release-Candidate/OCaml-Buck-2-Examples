@@ -1,0 +1,3 @@
+[submodule "basic_example/prelude"]
+	path = basic_example/prelude
+	url = https://github.com/facebook/buck2-prelude.git
