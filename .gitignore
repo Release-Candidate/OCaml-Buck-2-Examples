@@ -33,3 +33,6 @@ _opam/
 
 # Buck output directory
 buck-out/
+
+# MacOS specific files
+.DS_Store

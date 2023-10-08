@@ -1,28 +1,5 @@
 # A list of available rules and their signatures can be found here: https://buck2.build/docs/api/rules/
 
-export_file(
-    name = "fibonacci.mli",
-    src = "fibonacci.mli",
-    visibility = [
-        ":basic_example",
-        ":basic_example__",
-    ],
-)
-
-# buildifier: disable=no-effect
-ocaml_library(
-    name = "basic_example__",
-    srcs = [
-        "fibonacci.ml",
-        ":fibonacci.mli",
-    ],
-    compiler_flags = [
-        "-no-alias-deps",
-        "-w",
-        "-49",
-    ],
-    visibility = [":basic_example"],
-) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 ocaml_library(
@@ -32,15 +9,6 @@ ocaml_library(
         "-no-alias-deps",
         "-w",
         "-49",
-         "-open",
-        "Basic_example",
     ],
-    ocamldep_flags = [
-        "-open",
-        "Basic_example",
-        "-map",
-        "$(location :fibonacci.mli)",
-    ],
-    deps = [":basic_example__"],
     visibility = ["PUBLIC"],
 ) if not host_info().os.is_windows else None
