@@ -40,9 +40,9 @@ let () =
             QCheck2.(
               Test.make
                 ~name:"Using Quickcheck"
-                ~count:10
+                ~count:100
                 ~print:Print.(int)
-                Gen.(small_nat)
+                Gen.(int_range 0 40)
                 (fun n -> fibonacci n = fibonacci_tailrec n))
         ] )
     ]

@@ -10,3 +10,9 @@ alias(
     actual="//lib:basic_example",
     visibility=["PUBLIC"],
 )
+
+alias(
+    name="test",
+    actual="//test:basic_example",
+    visibility=["PUBLIC"],
+)
