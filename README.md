@@ -36,7 +36,7 @@ Buck 2 has an integrated (Starlark) LSP, which can be started using `buck2 lsp` 
 
 ## Examples
 
-The example projects in this directory are meant to show the following usage:
+Each example project directory contains a `README.md` file explaining its Buck 2 configuration files and how to generate them.
 
 - [./basic_example/](./basic_example/) - a OCaml project which uses Opam package dependencies, but no PPX. Contains a library, an executable that uses the library and tests of the library.
 - [./ocamllex_menhir_example/](./ocamllex_menhir_example/) - a OCaml project which uses OCamlLex and Menhir to generate OCaml code. Contains a library, an executable that uses the library and tests of the library.

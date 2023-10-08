@@ -1,2 +1,3 @@
 (test
- (name basic_example))
+ (name basic_example)
+ (libraries alcotest basic_example))

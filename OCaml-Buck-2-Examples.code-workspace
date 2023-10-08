@@ -11,7 +11,8 @@
 			"endline",
 			"ocamllex",
 			"Sedlex",
-			"Starlark"
+			"Starlark",
+			"tailrec"
 		]
 	},
 	"extensions": {
