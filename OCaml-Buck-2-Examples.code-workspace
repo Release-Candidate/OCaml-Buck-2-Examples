@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cSpell.words": [
+			"Bazel",
+			"Bazl",
+			"Starlark"
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"peerstudios.buck2-lsp-adapter"
+		]
+	}
+}
