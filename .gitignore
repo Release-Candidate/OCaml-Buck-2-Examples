@@ -30,3 +30,6 @@ _opam/
 
 # Do not include Dune-generated Opam files
 *.opam
+
+# Buck output directory
+buck-out/

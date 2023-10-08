@@ -1,0 +1,11 @@
+# A list of available rules and their signatures can be found here: https://buck2.build/docs/api/rules/
+
+# buildifier: disable=no-effect
+ocaml_binary(
+    name = "basic_example",
+    srcs = ["./main.ml"],
+    deps = [
+        "//lib:basic_example",
+    ],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None
