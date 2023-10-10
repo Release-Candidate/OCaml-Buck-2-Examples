@@ -8,8 +8,12 @@
 		"cSpell.words": [
 			"Bazel",
 			"Bazl",
+			"buckconfig",
+			"buckroot",
 			"endline",
+			"ints",
 			"ocamllex",
+			"qcheck",
 			"Quickcheck",
 			"Sedlex",
 			"Starlark",
