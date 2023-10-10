@@ -2,7 +2,7 @@
 prebuilt_cxx_library(
     name = "ocaml-dev",
     header_dirs = [
-        "_opam/lib/ocaml",
+        "opam/lib/ocaml",
     ],
     header_only = True,
     visibility = [
@@ -13,25 +13,25 @@ prebuilt_cxx_library(
 # buildifier: disable=no-effect
 export_file(
     name = "libasmrun.a",
-    src = "_opam/lib/ocaml/libasmrun.a",
+    src = "opam/lib/ocaml/libasmrun.a",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "interop_includes",
-    src = "_opam/lib/ocaml",
+    src = "opam/lib/ocaml",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlrun",
-    src = "_opam/bin/ocamlrun",
+    src = "opam/bin/ocamlrun",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "ocamldebug",
-    src = "_opam/bin/ocamldebug",
+    src = "opam/bin/ocamldebug",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -41,6 +41,7 @@ command_alias(
     resources = [
         ":ocamlrun",
         ":ocamldebug",
+        "opam/lib/ocaml",
     ],
     visibility = [
         "PUBLIC",
@@ -50,7 +51,7 @@ command_alias(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocaml-exe",
-    main = "_opam/bin/ocaml",
+    main = "opam/bin/ocaml",
     visibility = [
         "PUBLIC",
     ],
@@ -59,7 +60,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlopt-exe",
-    main = "_opam/bin/ocamlopt.opt",
+    main = "opam/bin/ocamlopt.opt",
     visibility = [
         "PUBLIC",
     ],
@@ -68,13 +69,13 @@ sh_binary(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlopt.byte",
-    src = "_opam/bin/ocamlopt.byte",
+    src = "opam/bin/ocamlopt.byte",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamllsp-exe",
-    main = "_opam/bin/ocamllsp",
+    main = "opam/bin/ocamllsp",
     visibility = [
         "PUBLIC",
     ],
@@ -83,7 +84,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "menhir-exe",
-    main = "_opam/bin/menhir",
+    main = "opam/bin/menhir",
     visibility = [
         "PUBLIC",
     ],
@@ -92,7 +93,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlprof-exe",
-    main = "_opam/bin/ocamlprof",
+    main = "opam/bin/ocamlprof",
     visibility = [
         "PUBLIC",
     ],
@@ -101,7 +102,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "dune-exe",
-    main = "_opam/bin/dune",
+    main = "opam/bin/dune",
     visibility = [
         "PUBLIC",
     ],
@@ -110,7 +111,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlmklib-exe",
-    main = "_opam/bin/ocamlmklib",
+    main = "opam/bin/ocamlmklib",
     visibility = [
         "PUBLIC",
     ],
@@ -119,7 +120,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "cppo-exe",
-    main = "_opam/bin/cppo",
+    main = "opam/bin/cppo",
     visibility = [
         "PUBLIC",
     ],
@@ -128,7 +129,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlruni-exe",
-    main = "_opam/bin/ocamlruni",
+    main = "opam/bin/ocamlruni",
     visibility = [
         "PUBLIC",
     ],
@@ -137,7 +138,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ydump-exe",
-    main = "_opam/bin/ydump",
+    main = "opam/bin/ydump",
     visibility = [
         "PUBLIC",
     ],
@@ -146,13 +147,13 @@ sh_binary(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamllex.byte",
-    src = "_opam/bin/ocamllex.byte",
+    src = "opam/bin/ocamllex.byte",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlobjinfo-exe",
-    main = "_opam/bin/ocamlobjinfo.opt",
+    main = "opam/bin/ocamlobjinfo.opt",
     visibility = [
         "PUBLIC",
     ],
@@ -161,7 +162,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlbuild-exe",
-    main = "_opam/bin/ocamlbuild",
+    main = "opam/bin/ocamlbuild",
     visibility = [
         "PUBLIC",
     ],
@@ -170,7 +171,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlyacc-exe",
-    main = "_opam/bin/ocamlyacc",
+    main = "opam/bin/ocamlyacc",
     visibility = [
         "PUBLIC",
     ],
@@ -179,7 +180,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "safe_camlp4-exe",
-    main = "_opam/bin/safe_camlp4",
+    main = "opam/bin/safe_camlp4",
     visibility = [
         "PUBLIC",
     ],
@@ -188,7 +189,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlfind-exe",
-    main = "_opam/bin/ocamlfind",
+    main = "opam/bin/ocamlfind",
     visibility = [
         "PUBLIC",
     ],
@@ -197,7 +198,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocp-indent-exe",
-    main = "_opam/bin/ocp-indent",
+    main = "opam/bin/ocp-indent",
     visibility = [
         "PUBLIC",
     ],
@@ -206,7 +207,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlmktop-exe",
-    main = "_opam/bin/ocamlmktop",
+    main = "opam/bin/ocamlmktop",
     visibility = [
         "PUBLIC",
     ],
@@ -215,7 +216,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlformat-exe",
-    main = "_opam/bin/ocamlformat",
+    main = "opam/bin/ocamlformat",
     visibility = [
         "PUBLIC",
     ],
@@ -224,7 +225,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlrun-exe",
-    main = "_opam/bin/ocamlrun",
+    main = "opam/bin/ocamlrun",
     visibility = [
         "PUBLIC",
     ],
@@ -233,7 +234,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlc-exe",
-    main = "_opam/bin/ocamlc.opt",
+    main = "opam/bin/ocamlc.opt",
     visibility = [
         "PUBLIC",
     ],
@@ -242,13 +243,13 @@ sh_binary(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlbuild.byte",
-    src = "_opam/bin/ocamlbuild.byte",
+    src = "opam/bin/ocamlbuild.byte",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamldep-exe",
-    main = "_opam/bin/ocamldep.opt",
+    main = "opam/bin/ocamldep.opt",
     visibility = [
         "PUBLIC",
     ],
@@ -257,13 +258,13 @@ sh_binary(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamldep.byte",
-    src = "_opam/bin/ocamldep.byte",
+    src = "opam/bin/ocamldep.byte",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamllex-exe",
-    main = "_opam/bin/ocamllex.opt",
+    main = "opam/bin/ocamllex.opt",
     visibility = [
         "PUBLIC",
     ],
@@ -272,7 +273,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "usegtrip-exe",
-    main = "_opam/bin/usegtrip",
+    main = "opam/bin/usegtrip",
     visibility = [
         "PUBLIC",
     ],
@@ -281,7 +282,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "utftrip-exe",
-    main = "_opam/bin/utftrip",
+    main = "opam/bin/utftrip",
     visibility = [
         "PUBLIC",
     ],
@@ -290,7 +291,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlrund-exe",
-    main = "_opam/bin/ocamlrund",
+    main = "opam/bin/ocamlrund",
     visibility = [
         "PUBLIC",
     ],
@@ -299,7 +300,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamldoc-exe",
-    main = "_opam/bin/ocamldoc.opt",
+    main = "opam/bin/ocamldoc.opt",
     visibility = [
         "PUBLIC",
     ],
@@ -308,13 +309,13 @@ sh_binary(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlc.byte",
-    src = "_opam/bin/ocamlc.byte",
+    src = "opam/bin/ocamlc.byte",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlformat-rpc-exe",
-    main = "_opam/bin/ocamlformat-rpc",
+    main = "opam/bin/ocamlformat-rpc",
     visibility = [
         "PUBLIC",
     ],
@@ -323,13 +324,13 @@ sh_binary(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlobjinfo.byte",
-    src = "_opam/bin/ocamlobjinfo.byte",
+    src = "opam/bin/ocamlobjinfo.byte",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlcmt-exe",
-    main = "_opam/bin/ocamlcmt",
+    main = "opam/bin/ocamlcmt",
     visibility = [
         "PUBLIC",
     ],
@@ -338,7 +339,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocaml-syntax-shims-exe",
-    main = "_opam/bin/ocaml-syntax-shims",
+    main = "opam/bin/ocaml-syntax-shims",
     visibility = [
         "PUBLIC",
     ],
@@ -347,7 +348,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamlcp-exe",
-    main = "_opam/bin/ocamlcp",
+    main = "opam/bin/ocamlcp",
     visibility = [
         "PUBLIC",
     ],
@@ -356,7 +357,7 @@ sh_binary(
 # buildifier: disable=no-effect
 sh_binary(
     name = "ocamloptp-exe",
-    main = "_opam/bin/ocamloptp",
+    main = "opam/bin/ocamloptp",
     visibility = [
         "PUBLIC",
     ],
@@ -370,36 +371,36 @@ prebuilt_ocaml_library(
     ],
     lib_name = "alcotest",
     lib_dir = "",
-    include_dir = "_opam/lib/alcotest",
-    native_lib = "_opam/lib/alcotest/alcotest.cmxa",
-    bytecode_lib = "_opam/lib/alcotest/alcotest.cma",
+    include_dir = "opam/lib/alcotest",
+    native_lib = "opam/lib/alcotest/alcotest.cmxa",
+    bytecode_lib = "opam/lib/alcotest/alcotest.cma",
     c_libs = None,
     native_c_libs = [
-        "_opam/lib/alcotest/libalcotest_stubs.a",
+        "opam/lib/alcotest/libalcotest_stubs.a",
     ],
     bytecode_c_libs = [
-        "_opam/lib/alcotest/libalcotest_stubs.a",
+        "opam/lib/alcotest/libalcotest_stubs.a",
     ],
     bytecode_only = True,
     deps = [
-        ":fmt",
-        ":fmt.tty",
         ":alcotest.engine",
-        ":unix",
+        ":fmt.tty",
         ":astring",
+        ":unix",
+        ":fmt",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "alcotest.alcotest-plugin",
-    src = "_opam/lib/alcotest/alcotest.cmxs",
+    src = "opam/lib/alcotest/alcotest.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "alcotest.runtime.js",
-    src = "_opam/lib/alcotest/runtime.js",
+    src = "opam/lib/alcotest/runtime.js",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -410,9 +411,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "alcotest.engine",
     lib_dir = "",
-    include_dir = "_opam/lib/alcotest/engine",
-    native_lib = "_opam/lib/alcotest/engine/alcotest_engine.cmxa",
-    bytecode_lib = "_opam/lib/alcotest/engine/alcotest_engine.cma",
+    include_dir = "opam/lib/alcotest/engine",
+    native_lib = "opam/lib/alcotest/engine/alcotest_engine.cmxa",
+    bytecode_lib = "opam/lib/alcotest/engine/alcotest_engine.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -420,21 +421,21 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":fmt",
-        ":cmdliner",
+        ":uutf",
         ":stdlib-shims",
         ":fmt.cli",
-        ":uutf",
-        ":alcotest.stdlib_ext",
         ":astring",
         ":re",
+        ":alcotest.stdlib_ext",
+        ":fmt",
+        ":cmdliner",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "alcotest.engine.alcotest_engine-plugin",
-    src = "_opam/lib/alcotest/engine/alcotest_engine.cmxs",
+    src = "opam/lib/alcotest/engine/alcotest_engine.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -445,9 +446,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "alcotest.stdlib_ext",
     lib_dir = "",
-    include_dir = "_opam/lib/alcotest/stdlib_ext",
-    native_lib = "_opam/lib/alcotest/stdlib_ext/alcotest_stdlib_ext.cmxa",
-    bytecode_lib = "_opam/lib/alcotest/stdlib_ext/alcotest_stdlib_ext.cma",
+    include_dir = "opam/lib/alcotest/stdlib_ext",
+    native_lib = "opam/lib/alcotest/stdlib_ext/alcotest_stdlib_ext.cmxa",
+    bytecode_lib = "opam/lib/alcotest/stdlib_ext/alcotest_stdlib_ext.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -455,16 +456,16 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":cmdliner",
         ":astring",
         ":uutf",
+        ":cmdliner",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "alcotest.stdlib_ext.alcotest_stdlib_ext-plugin",
-    src = "_opam/lib/alcotest/stdlib_ext/alcotest_stdlib_ext.cmxs",
+    src = "opam/lib/alcotest/stdlib_ext/alcotest_stdlib_ext.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -475,9 +476,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "astring",
     lib_dir = "",
-    include_dir = "_opam/lib/astring",
-    native_lib = "_opam/lib/astring/astring.cmxa",
-    bytecode_lib = "_opam/lib/astring/astring.cma",
+    include_dir = "opam/lib/astring",
+    native_lib = "opam/lib/astring/astring.cmxa",
+    bytecode_lib = "opam/lib/astring/astring.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -491,7 +492,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "astring.astring-plugin",
-    src = "_opam/lib/astring/astring.cmxs",
+    src = "opam/lib/astring/astring.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -502,9 +503,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "astring.top",
     lib_dir = "",
-    include_dir = "_opam/lib/astring",
-    native_lib = "_opam/lib/astring/astring_top.cmxa",
-    bytecode_lib = "_opam/lib/astring/astring_top.cma",
+    include_dir = "opam/lib/astring",
+    native_lib = "opam/lib/astring/astring_top.cmxa",
+    bytecode_lib = "opam/lib/astring/astring_top.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -519,7 +520,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "astring.top.astring_top-plugin",
-    src = "_opam/lib/astring/astring_top.cmxs",
+    src = "opam/lib/astring/astring_top.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -530,35 +531,35 @@ prebuilt_ocaml_library(
     ],
     lib_name = "base",
     lib_dir = "",
-    include_dir = "_opam/lib/base",
-    native_lib = "_opam/lib/base/base.cmxa",
-    bytecode_lib = "_opam/lib/base/base.cma",
+    include_dir = "opam/lib/base",
+    native_lib = "opam/lib/base/base.cmxa",
+    bytecode_lib = "opam/lib/base/base.cma",
     c_libs = None,
     native_c_libs = [
-        "_opam/lib/base/libbase_stubs.a",
+        "opam/lib/base/libbase_stubs.a",
     ],
     bytecode_c_libs = [
-        "_opam/lib/base/libbase_stubs.a",
+        "opam/lib/base/libbase_stubs.a",
     ],
     bytecode_only = True,
     deps = [
-        ":base.shadow_stdlib",
         ":base.base_internalhash_types",
-        ":base.caml",
         ":sexplib0",
+        ":base.caml",
+        ":base.shadow_stdlib",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "base.base-plugin",
-    src = "_opam/lib/base/base.cmxs",
+    src = "opam/lib/base/base.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "base.runtime.js",
-    src = "_opam/lib/base/runtime.js",
+    src = "opam/lib/base/runtime.js",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -569,15 +570,15 @@ prebuilt_ocaml_library(
     ],
     lib_name = "base.base_internalhash_types",
     lib_dir = "",
-    include_dir = "_opam/lib/base/base_internalhash_types",
-    native_lib = "_opam/lib/base/base_internalhash_types/base_internalhash_types.cmxa",
-    bytecode_lib = "_opam/lib/base/base_internalhash_types/base_internalhash_types.cma",
+    include_dir = "opam/lib/base/base_internalhash_types",
+    native_lib = "opam/lib/base/base_internalhash_types/base_internalhash_types.cmxa",
+    bytecode_lib = "opam/lib/base/base_internalhash_types/base_internalhash_types.cma",
     c_libs = None,
     native_c_libs = [
-        "_opam/lib/base/base_internalhash_types/libbase_internalhash_types_stubs.a",
+        "opam/lib/base/base_internalhash_types/libbase_internalhash_types_stubs.a",
     ],
     bytecode_c_libs = [
-        "_opam/lib/base/base_internalhash_types/libbase_internalhash_types_stubs.a",
+        "opam/lib/base/base_internalhash_types/libbase_internalhash_types_stubs.a",
     ],
     bytecode_only = True,
     deps = [
@@ -587,13 +588,13 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "base.base_internalhash_types.base_internalhash_types-plugin",
-    src = "_opam/lib/base/base_internalhash_types/base_internalhash_types.cmxs",
+    src = "opam/lib/base/base_internalhash_types/base_internalhash_types.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "base.base_internalhash_types.runtime.js",
-    src = "_opam/lib/base/base_internalhash_types/runtime.js",
+    src = "opam/lib/base/base_internalhash_types/runtime.js",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -604,9 +605,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "base.caml",
     lib_dir = "",
-    include_dir = "_opam/lib/base/caml",
-    native_lib = "_opam/lib/base/caml/caml.cmxa",
-    bytecode_lib = "_opam/lib/base/caml/caml.cma",
+    include_dir = "opam/lib/base/caml",
+    native_lib = "opam/lib/base/caml/caml.cmxa",
+    bytecode_lib = "opam/lib/base/caml/caml.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -620,7 +621,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "base.caml.caml-plugin",
-    src = "_opam/lib/base/caml/caml.cmxs",
+    src = "opam/lib/base/caml/caml.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -631,9 +632,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "base.md5",
     lib_dir = "",
-    include_dir = "_opam/lib/base/md5",
-    native_lib = "_opam/lib/base/md5/md5_lib.cmxa",
-    bytecode_lib = "_opam/lib/base/md5/md5_lib.cma",
+    include_dir = "opam/lib/base/md5",
+    native_lib = "opam/lib/base/md5/md5_lib.cmxa",
+    bytecode_lib = "opam/lib/base/md5/md5_lib.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -647,7 +648,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "base.md5.md5_lib-plugin",
-    src = "_opam/lib/base/md5/md5_lib.cmxs",
+    src = "opam/lib/base/md5/md5_lib.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -658,9 +659,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "base.shadow_stdlib",
     lib_dir = "",
-    include_dir = "_opam/lib/base/shadow_stdlib",
-    native_lib = "_opam/lib/base/shadow_stdlib/shadow_stdlib.cmxa",
-    bytecode_lib = "_opam/lib/base/shadow_stdlib/shadow_stdlib.cma",
+    include_dir = "opam/lib/base/shadow_stdlib",
+    native_lib = "opam/lib/base/shadow_stdlib/shadow_stdlib.cmxa",
+    bytecode_lib = "opam/lib/base/shadow_stdlib/shadow_stdlib.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -674,7 +675,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "base.shadow_stdlib.shadow_stdlib-plugin",
-    src = "_opam/lib/base/shadow_stdlib/shadow_stdlib.cmxs",
+    src = "opam/lib/base/shadow_stdlib/shadow_stdlib.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -685,7 +686,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "bytes",
     lib_dir = "",
-    include_dir = "_opam/lib/bytes",
+    include_dir = "opam/lib/bytes",
     c_libs = None,
     native_c_libs = [
     ],
@@ -704,9 +705,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "camlp-streams",
     lib_dir = "",
-    include_dir = "_opam/lib/camlp-streams",
-    native_lib = "_opam/lib/camlp-streams/camlp_streams.cmxa",
-    bytecode_lib = "_opam/lib/camlp-streams/camlp_streams.cma",
+    include_dir = "opam/lib/camlp-streams",
+    native_lib = "opam/lib/camlp-streams/camlp_streams.cmxa",
+    bytecode_lib = "opam/lib/camlp-streams/camlp_streams.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -720,7 +721,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "camlp-streams.camlp_streams-plugin",
-    src = "_opam/lib/camlp-streams/camlp_streams.cmxs",
+    src = "opam/lib/camlp-streams/camlp_streams.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -731,9 +732,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "chrome-trace",
     lib_dir = "",
-    include_dir = "_opam/lib/chrome-trace",
-    native_lib = "_opam/lib/chrome-trace/chrome_trace.cmxa",
-    bytecode_lib = "_opam/lib/chrome-trace/chrome_trace.cma",
+    include_dir = "opam/lib/chrome-trace",
+    native_lib = "opam/lib/chrome-trace/chrome_trace.cmxa",
+    bytecode_lib = "opam/lib/chrome-trace/chrome_trace.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -747,7 +748,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "chrome-trace.chrome_trace-plugin",
-    src = "_opam/lib/chrome-trace/chrome_trace.cmxs",
+    src = "opam/lib/chrome-trace/chrome_trace.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -758,9 +759,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "cmdliner",
     lib_dir = "",
-    include_dir = "_opam/lib/cmdliner",
-    native_lib = "_opam/lib/cmdliner/cmdliner.cmxa",
-    bytecode_lib = "_opam/lib/cmdliner/cmdliner.cma",
+    include_dir = "opam/lib/cmdliner",
+    native_lib = "opam/lib/cmdliner/cmdliner.cmxa",
+    bytecode_lib = "opam/lib/cmdliner/cmdliner.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -774,7 +775,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "cmdliner.cmdliner-plugin",
-    src = "_opam/lib/cmdliner/cmdliner.cmxs",
+    src = "opam/lib/cmdliner/cmdliner.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -785,7 +786,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "compiler-libs",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/compiler-libs",
+    include_dir = "opam/lib/ocaml/compiler-libs",
     c_libs = None,
     native_c_libs = [
     ],
@@ -804,9 +805,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "compiler-libs.bytecomp",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/compiler-libs",
-    native_lib = "_opam/lib/ocaml/compiler-libs/ocamlbytecomp.cmxa",
-    bytecode_lib = "_opam/lib/ocaml/compiler-libs/ocamlbytecomp.cma",
+    include_dir = "opam/lib/ocaml/compiler-libs",
+    native_lib = "opam/lib/ocaml/compiler-libs/ocamlbytecomp.cmxa",
+    bytecode_lib = "opam/lib/ocaml/compiler-libs/ocamlbytecomp.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -826,9 +827,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "compiler-libs.common",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/compiler-libs",
-    native_lib = "_opam/lib/ocaml/compiler-libs/ocamlcommon.cmxa",
-    bytecode_lib = "_opam/lib/ocaml/compiler-libs/ocamlcommon.cma",
+    include_dir = "opam/lib/ocaml/compiler-libs",
+    native_lib = "opam/lib/ocaml/compiler-libs/ocamlcommon.cmxa",
+    bytecode_lib = "opam/lib/ocaml/compiler-libs/ocamlcommon.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -848,8 +849,8 @@ prebuilt_ocaml_library(
     ],
     lib_name = "compiler-libs.native-toplevel",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/compiler-libs",
-    native_lib = "_opam/lib/ocaml/compiler-libs/ocamltoplevel.cmxa",
+    include_dir = "opam/lib/ocaml/compiler-libs",
+    native_lib = "opam/lib/ocaml/compiler-libs/ocamltoplevel.cmxa",
     c_libs = None,
     native_c_libs = [
     ],
@@ -870,9 +871,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "compiler-libs.optcomp",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/compiler-libs",
-    native_lib = "_opam/lib/ocaml/compiler-libs/ocamloptcomp.cmxa",
-    bytecode_lib = "_opam/lib/ocaml/compiler-libs/ocamloptcomp.cma",
+    include_dir = "opam/lib/ocaml/compiler-libs",
+    native_lib = "opam/lib/ocaml/compiler-libs/ocamloptcomp.cmxa",
+    bytecode_lib = "opam/lib/ocaml/compiler-libs/ocamloptcomp.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -892,8 +893,8 @@ prebuilt_ocaml_library(
     ],
     lib_name = "compiler-libs.toplevel",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/compiler-libs",
-    bytecode_lib = "_opam/lib/ocaml/compiler-libs/ocamltoplevel.cma",
+    include_dir = "opam/lib/ocaml/compiler-libs",
+    bytecode_lib = "opam/lib/ocaml/compiler-libs/ocamltoplevel.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -913,7 +914,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "cppo",
     lib_dir = "",
-    include_dir = "_opam/lib/cppo",
+    include_dir = "opam/lib/cppo",
     c_libs = None,
     native_c_libs = [
     ],
@@ -932,9 +933,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "csexp",
     lib_dir = "",
-    include_dir = "_opam/lib/csexp",
-    native_lib = "_opam/lib/csexp/csexp.cmxa",
-    bytecode_lib = "_opam/lib/csexp/csexp.cma",
+    include_dir = "opam/lib/csexp",
+    native_lib = "opam/lib/csexp/csexp.cmxa",
+    bytecode_lib = "opam/lib/csexp/csexp.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -948,7 +949,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "csexp.csexp-plugin",
-    src = "_opam/lib/csexp/csexp.cmxs",
+    src = "opam/lib/csexp/csexp.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -959,7 +960,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "dune",
     lib_dir = "",
-    include_dir = "_opam/lib/dune",
+    include_dir = "opam/lib/dune",
     c_libs = None,
     native_c_libs = [
     ],
@@ -978,9 +979,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "dune-build-info",
     lib_dir = "",
-    include_dir = "_opam/lib/dune-build-info",
-    native_lib = "_opam/lib/dune-build-info/build_info.cmxa",
-    bytecode_lib = "_opam/lib/dune-build-info/build_info.cma",
+    include_dir = "opam/lib/dune-build-info",
+    native_lib = "opam/lib/dune-build-info/build_info.cmxa",
+    bytecode_lib = "opam/lib/dune-build-info/build_info.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -994,7 +995,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "dune-build-info.build_info-plugin",
-    src = "_opam/lib/dune-build-info/build_info.cmxs",
+    src = "opam/lib/dune-build-info/build_info.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1005,9 +1006,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "dune-configurator",
     lib_dir = "",
-    include_dir = "_opam/lib/dune-configurator",
-    native_lib = "_opam/lib/dune-configurator/configurator.cmxa",
-    bytecode_lib = "_opam/lib/dune-configurator/configurator.cma",
+    include_dir = "opam/lib/dune-configurator",
+    native_lib = "opam/lib/dune-configurator/configurator.cmxa",
+    bytecode_lib = "opam/lib/dune-configurator/configurator.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1023,7 +1024,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "dune-configurator.configurator-plugin",
-    src = "_opam/lib/dune-configurator/configurator.cmxs",
+    src = "opam/lib/dune-configurator/configurator.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1034,9 +1035,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "dune-rpc",
     lib_dir = "",
-    include_dir = "_opam/lib/dune-rpc",
-    native_lib = "_opam/lib/dune-rpc/dune_rpc.cmxa",
-    bytecode_lib = "_opam/lib/dune-rpc/dune_rpc.cma",
+    include_dir = "opam/lib/dune-rpc",
+    native_lib = "opam/lib/dune-rpc/dune_rpc.cmxa",
+    bytecode_lib = "opam/lib/dune-rpc/dune_rpc.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1044,21 +1045,21 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":stdune",
-        ":ordering",
-        ":csexp",
-        ":stdune.filesystem_stubs",
-        ":dyn",
         ":pp",
-        ":dune-rpc.private",
+        ":dyn",
+        ":stdune.filesystem_stubs",
+        ":stdune",
         ":xdg",
+        ":csexp",
+        ":dune-rpc.private",
+        ":ordering",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "dune-rpc.dune_rpc-plugin",
-    src = "_opam/lib/dune-rpc/dune_rpc.cmxs",
+    src = "opam/lib/dune-rpc/dune_rpc.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1069,9 +1070,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "dune-rpc.private",
     lib_dir = "",
-    include_dir = "_opam/lib/dune-rpc/private",
-    native_lib = "_opam/lib/dune-rpc/private/dune_rpc_private.cmxa",
-    bytecode_lib = "_opam/lib/dune-rpc/private/dune_rpc_private.cma",
+    include_dir = "opam/lib/dune-rpc/private",
+    native_lib = "opam/lib/dune-rpc/private/dune_rpc_private.cmxa",
+    bytecode_lib = "opam/lib/dune-rpc/private/dune_rpc_private.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1079,41 +1080,21 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":stdune",
-        ":ordering",
-        ":csexp",
-        ":stdune.filesystem_stubs",
-        ":dyn",
         ":pp",
+        ":dyn",
+        ":stdune.filesystem_stubs",
         ":unix",
+        ":stdune",
         ":xdg",
+        ":csexp",
+        ":ordering",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "dune-rpc.private.dune_rpc_private-plugin",
-    src = "_opam/lib/dune-rpc/private/dune_rpc_private.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "dune.configurator",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "dune.configurator",
-    lib_dir = "",
-    include_dir = "_opam/lib/dune-configurator",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":dune-configurator",
-    ],
+    src = "opam/lib/dune-rpc/private/dune_rpc_private.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1124,9 +1105,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "dyn",
     lib_dir = "",
-    include_dir = "_opam/lib/dyn",
-    native_lib = "_opam/lib/dyn/dyn.cmxa",
-    bytecode_lib = "_opam/lib/dyn/dyn.cma",
+    include_dir = "opam/lib/dyn",
+    native_lib = "opam/lib/dyn/dyn.cmxa",
+    bytecode_lib = "opam/lib/dyn/dyn.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1142,7 +1123,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "dyn.dyn-plugin",
-    src = "_opam/lib/dyn/dyn.cmxs",
+    src = "opam/lib/dyn/dyn.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1153,9 +1134,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "dynlink",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/dynlink",
-    native_lib = "_opam/lib/ocaml/dynlink/dynlink.cmxa",
-    bytecode_lib = "_opam/lib/ocaml/dynlink/dynlink.cma",
+    include_dir = "opam/lib/ocaml/dynlink",
+    native_lib = "opam/lib/ocaml/dynlink/dynlink.cmxa",
+    bytecode_lib = "opam/lib/ocaml/dynlink/dynlink.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1174,9 +1155,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "either",
     lib_dir = "",
-    include_dir = "_opam/lib/either",
-    native_lib = "_opam/lib/either/either.cmxa",
-    bytecode_lib = "_opam/lib/either/either.cma",
+    include_dir = "opam/lib/either",
+    native_lib = "opam/lib/either/either.cmxa",
+    bytecode_lib = "opam/lib/either/either.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1190,7 +1171,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "either.either-plugin",
-    src = "_opam/lib/either/either.cmxs",
+    src = "opam/lib/either/either.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1201,9 +1182,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "fiber",
     lib_dir = "",
-    include_dir = "_opam/lib/fiber",
-    native_lib = "_opam/lib/fiber/fiber.cmxa",
-    bytecode_lib = "_opam/lib/fiber/fiber.cma",
+    include_dir = "opam/lib/fiber",
+    native_lib = "opam/lib/fiber/fiber.cmxa",
+    bytecode_lib = "opam/lib/fiber/fiber.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1211,18 +1192,18 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
+        ":pp",
+        ":dyn",
+        ":stdune.filesystem_stubs",
         ":stdune",
         ":ordering",
-        ":stdune.filesystem_stubs",
-        ":dyn",
-        ":pp",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "fiber.fiber-plugin",
-    src = "_opam/lib/fiber/fiber.cmxs",
+    src = "opam/lib/fiber/fiber.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1233,7 +1214,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "findlib",
     lib_dir = "",
-    include_dir = "_opam/lib/findlib",
+    include_dir = "opam/lib/findlib",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1253,9 +1234,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "findlib.dynload",
     lib_dir = "",
-    include_dir = "_opam/lib/findlib",
-    native_lib = "_opam/lib/findlib/findlib_dynload.cmxa",
-    bytecode_lib = "_opam/lib/findlib/findlib_dynload.cma",
+    include_dir = "opam/lib/findlib",
+    native_lib = "opam/lib/findlib/findlib_dynload.cmxa",
+    bytecode_lib = "opam/lib/findlib/findlib_dynload.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1271,7 +1252,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "findlib.dynload.findlib_dynload-plugin",
-    src = "_opam/lib/findlib/findlib_dynload.cmxs",
+    src = "opam/lib/findlib/findlib_dynload.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1282,9 +1263,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "findlib.internal",
     lib_dir = "",
-    include_dir = "_opam/lib/findlib",
-    native_lib = "_opam/lib/findlib/findlib.cmxa",
-    bytecode_lib = "_opam/lib/findlib/findlib.cma",
+    include_dir = "opam/lib/findlib",
+    native_lib = "opam/lib/findlib/findlib.cmxa",
+    bytecode_lib = "opam/lib/findlib/findlib.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1298,7 +1279,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "findlib.internal.findlib-plugin",
-    src = "_opam/lib/findlib/findlib.cmxs",
+    src = "opam/lib/findlib/findlib.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1309,9 +1290,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "findlib.top",
     lib_dir = "",
-    include_dir = "_opam/lib/findlib",
-    native_lib = "_opam/lib/findlib/findlib_top.cmxa",
-    bytecode_lib = "_opam/lib/findlib/findlib_top.cma",
+    include_dir = "opam/lib/findlib",
+    native_lib = "opam/lib/findlib/findlib_top.cmxa",
+    bytecode_lib = "opam/lib/findlib/findlib_top.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1331,9 +1312,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "fix",
     lib_dir = "",
-    include_dir = "_opam/lib/fix",
-    native_lib = "_opam/lib/fix/fix.cmxa",
-    bytecode_lib = "_opam/lib/fix/fix.cma",
+    include_dir = "opam/lib/fix",
+    native_lib = "opam/lib/fix/fix.cmxa",
+    bytecode_lib = "opam/lib/fix/fix.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1347,7 +1328,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "fix.fix-plugin",
-    src = "_opam/lib/fix/fix.cmxs",
+    src = "opam/lib/fix/fix.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1358,9 +1339,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "fmt",
     lib_dir = "",
-    include_dir = "_opam/lib/fmt",
-    native_lib = "_opam/lib/fmt/fmt.cmxa",
-    bytecode_lib = "_opam/lib/fmt/fmt.cma",
+    include_dir = "opam/lib/fmt",
+    native_lib = "opam/lib/fmt/fmt.cmxa",
+    bytecode_lib = "opam/lib/fmt/fmt.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1374,7 +1355,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "fmt.fmt-plugin",
-    src = "_opam/lib/fmt/fmt.cmxs",
+    src = "opam/lib/fmt/fmt.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1385,9 +1366,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "fmt.cli",
     lib_dir = "",
-    include_dir = "_opam/lib/fmt",
-    native_lib = "_opam/lib/fmt/fmt_cli.cmxa",
-    bytecode_lib = "_opam/lib/fmt/fmt_cli.cma",
+    include_dir = "opam/lib/fmt",
+    native_lib = "opam/lib/fmt/fmt_cli.cmxa",
+    bytecode_lib = "opam/lib/fmt/fmt_cli.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1395,15 +1376,15 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":cmdliner",
         ":fmt",
+        ":cmdliner",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "fmt.cli.fmt_cli-plugin",
-    src = "_opam/lib/fmt/fmt_cli.cmxs",
+    src = "opam/lib/fmt/fmt_cli.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1414,9 +1395,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "fmt.top",
     lib_dir = "",
-    include_dir = "_opam/lib/fmt",
-    native_lib = "_opam/lib/fmt/fmt_top.cmxa",
-    bytecode_lib = "_opam/lib/fmt/fmt_top.cma",
+    include_dir = "opam/lib/fmt",
+    native_lib = "opam/lib/fmt/fmt_top.cmxa",
+    bytecode_lib = "opam/lib/fmt/fmt_top.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1432,7 +1413,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "fmt.top.fmt_top-plugin",
-    src = "_opam/lib/fmt/fmt_top.cmxs",
+    src = "opam/lib/fmt/fmt_top.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1443,9 +1424,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "fmt.tty",
     lib_dir = "",
-    include_dir = "_opam/lib/fmt",
-    native_lib = "_opam/lib/fmt/fmt_tty.cmxa",
-    bytecode_lib = "_opam/lib/fmt/fmt_tty.cma",
+    include_dir = "opam/lib/fmt",
+    native_lib = "opam/lib/fmt/fmt_tty.cmxa",
+    bytecode_lib = "opam/lib/fmt/fmt_tty.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1461,7 +1442,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "fmt.tty.fmt_tty-plugin",
-    src = "_opam/lib/fmt/fmt_tty.cmxs",
+    src = "opam/lib/fmt/fmt_tty.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1472,9 +1453,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "fpath",
     lib_dir = "",
-    include_dir = "_opam/lib/fpath",
-    native_lib = "_opam/lib/fpath/fpath.cmxa",
-    bytecode_lib = "_opam/lib/fpath/fpath.cma",
+    include_dir = "opam/lib/fpath",
+    native_lib = "opam/lib/fpath/fpath.cmxa",
+    bytecode_lib = "opam/lib/fpath/fpath.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1489,7 +1470,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "fpath.fpath-plugin",
-    src = "_opam/lib/fpath/fpath.cmxs",
+    src = "opam/lib/fpath/fpath.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1500,9 +1481,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "fpath.top",
     lib_dir = "",
-    include_dir = "_opam/lib/fpath",
-    native_lib = "_opam/lib/fpath/fpath_top.cmxa",
-    bytecode_lib = "_opam/lib/fpath/fpath_top.cma",
+    include_dir = "opam/lib/fpath",
+    native_lib = "opam/lib/fpath/fpath_top.cmxa",
+    bytecode_lib = "opam/lib/fpath/fpath_top.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1518,7 +1499,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "fpath.top.fpath_top-plugin",
-    src = "_opam/lib/fpath/fpath_top.cmxs",
+    src = "opam/lib/fpath/fpath_top.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1529,7 +1510,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "menhir",
     lib_dir = "",
-    include_dir = "_opam/lib/menhir",
+    include_dir = "opam/lib/menhir",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1548,9 +1529,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "menhirLib",
     lib_dir = "",
-    include_dir = "_opam/lib/menhirLib",
-    native_lib = "_opam/lib/menhirLib/menhirLib.cmxa",
-    bytecode_lib = "_opam/lib/menhirLib/menhirLib.cma",
+    include_dir = "opam/lib/menhirLib",
+    native_lib = "opam/lib/menhirLib/menhirLib.cmxa",
+    bytecode_lib = "opam/lib/menhirLib/menhirLib.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1564,7 +1545,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "menhirLib.menhirLib-plugin",
-    src = "_opam/lib/menhirLib/menhirLib.cmxs",
+    src = "opam/lib/menhirLib/menhirLib.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1575,9 +1556,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "menhirSdk",
     lib_dir = "",
-    include_dir = "_opam/lib/menhirSdk",
-    native_lib = "_opam/lib/menhirSdk/menhirSdk.cmxa",
-    bytecode_lib = "_opam/lib/menhirSdk/menhirSdk.cma",
+    include_dir = "opam/lib/menhirSdk",
+    native_lib = "opam/lib/menhirSdk/menhirSdk.cmxa",
+    bytecode_lib = "opam/lib/menhirSdk/menhirSdk.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1591,7 +1572,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "menhirSdk.menhirSdk-plugin",
-    src = "_opam/lib/menhirSdk/menhirSdk.cmxs",
+    src = "opam/lib/menhirSdk/menhirSdk.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1602,7 +1583,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib",
+    include_dir = "opam/lib/merlin-lib",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1621,9 +1602,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.analysis",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/analysis",
-    native_lib = "_opam/lib/merlin-lib/analysis/merlin_analysis.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/analysis/merlin_analysis.cma",
+    include_dir = "opam/lib/merlin-lib/analysis",
+    native_lib = "opam/lib/merlin-lib/analysis/merlin_analysis.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/analysis/merlin_analysis.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1631,24 +1612,24 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
+        ":merlin-lib.extend",
+        ":merlin-lib.ocaml_merlin_specific",
         ":merlin-lib.config",
+        ":merlin-lib.query_protocol",
+        ":merlin-lib.kernel",
         ":merlin-lib.ocaml_typing",
         ":merlin-lib.ocaml_utils",
         ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.query_protocol",
-        ":str",
-        ":merlin-lib.kernel",
-        ":merlin-lib.utils",
-        ":merlin-lib.extend",
-        ":merlin-lib.ocaml_merlin_specific",
         ":merlin-lib.ocaml_preprocess",
+        ":merlin-lib.utils",
+        ":str",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.analysis.merlin_analysis-plugin",
-    src = "_opam/lib/merlin-lib/analysis/merlin_analysis.cmxs",
+    src = "opam/lib/merlin-lib/analysis/merlin_analysis.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1659,9 +1640,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.config",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/config",
-    native_lib = "_opam/lib/merlin-lib/config/merlin_config.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/config/merlin_config.cma",
+    include_dir = "opam/lib/merlin-lib/config",
+    native_lib = "opam/lib/merlin-lib/config/merlin_config.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/config/merlin_config.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1675,7 +1656,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.config.merlin_config-plugin",
-    src = "_opam/lib/merlin-lib/config/merlin_config.cmxs",
+    src = "opam/lib/merlin-lib/config/merlin_config.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1686,9 +1667,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.dot_protocol",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/dot_protocol",
-    native_lib = "_opam/lib/merlin-lib/dot_protocol/merlin_dot_protocol.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/dot_protocol/merlin_dot_protocol.cma",
+    include_dir = "opam/lib/merlin-lib/dot_protocol",
+    native_lib = "opam/lib/merlin-lib/dot_protocol/merlin_dot_protocol.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/dot_protocol/merlin_dot_protocol.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1704,7 +1685,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.dot_protocol.merlin_dot_protocol-plugin",
-    src = "_opam/lib/merlin-lib/dot_protocol/merlin_dot_protocol.cmxs",
+    src = "opam/lib/merlin-lib/dot_protocol/merlin_dot_protocol.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1715,9 +1696,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.extend",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/extend",
-    native_lib = "_opam/lib/merlin-lib/extend/merlin_extend.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/extend/merlin_extend.cma",
+    include_dir = "opam/lib/merlin-lib/extend",
+    native_lib = "opam/lib/merlin-lib/extend/merlin_extend.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/extend/merlin_extend.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1725,17 +1706,17 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.ocaml_typing",
         ":unix",
+        ":merlin-lib.ocaml_typing",
         ":merlin-lib.ocaml_utils",
+        ":merlin-lib.ocaml_parsing",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.extend.merlin_extend-plugin",
-    src = "_opam/lib/merlin-lib/extend/merlin_extend.cmxs",
+    src = "opam/lib/merlin-lib/extend/merlin_extend.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1746,9 +1727,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.kernel",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/kernel",
-    native_lib = "_opam/lib/merlin-lib/kernel/merlin_kernel.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/kernel/merlin_kernel.cma",
+    include_dir = "opam/lib/merlin-lib/kernel",
+    native_lib = "opam/lib/merlin-lib/kernel/merlin_kernel.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/kernel/merlin_kernel.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1756,25 +1737,25 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":merlin-lib.config",
+        ":merlin-lib.extend",
+        ":merlin-lib.ocaml_merlin_specific",
         ":merlin-lib.dot_protocol",
+        ":merlin-lib.config",
+        ":merlin-lib.os_ipc",
         ":merlin-lib.ocaml_typing",
         ":merlin-lib.ocaml_utils",
         ":merlin-lib.ocaml_parsing",
-        ":str",
-        ":merlin-lib.utils",
-        ":merlin-lib.os_ipc",
-        ":merlin-lib.extend",
-        ":merlin-lib.ocaml_merlin_specific",
-        ":unix",
         ":merlin-lib.ocaml_preprocess",
+        ":unix",
+        ":merlin-lib.utils",
+        ":str",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.kernel.merlin_kernel-plugin",
-    src = "_opam/lib/merlin-lib/kernel/merlin_kernel.cmxs",
+    src = "opam/lib/merlin-lib/kernel/merlin_kernel.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1785,9 +1766,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.ocaml_merlin_specific",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/ocaml_merlin_specific",
-    native_lib = "_opam/lib/merlin-lib/ocaml_merlin_specific/merlin_specific.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/ocaml_merlin_specific/merlin_specific.cma",
+    include_dir = "opam/lib/merlin-lib/ocaml_merlin_specific",
+    native_lib = "opam/lib/merlin-lib/ocaml_merlin_specific/merlin_specific.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/ocaml_merlin_specific/merlin_specific.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1798,15 +1779,15 @@ prebuilt_ocaml_library(
         ":merlin-lib.ocaml_typing",
         ":merlin-lib.ocaml_utils",
         ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.utils",
         ":merlin-lib.ocaml_preprocess",
+        ":merlin-lib.utils",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.ocaml_merlin_specific.merlin_specific-plugin",
-    src = "_opam/lib/merlin-lib/ocaml_merlin_specific/merlin_specific.cmxs",
+    src = "opam/lib/merlin-lib/ocaml_merlin_specific/merlin_specific.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1817,9 +1798,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.ocaml_parsing",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/ocaml_parsing",
-    native_lib = "_opam/lib/merlin-lib/ocaml_parsing/ocaml_parsing.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/ocaml_parsing/ocaml_parsing.cma",
+    include_dir = "opam/lib/merlin-lib/ocaml_parsing",
+    native_lib = "opam/lib/merlin-lib/ocaml_parsing/ocaml_parsing.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/ocaml_parsing/ocaml_parsing.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1835,7 +1816,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.ocaml_parsing.ocaml_parsing-plugin",
-    src = "_opam/lib/merlin-lib/ocaml_parsing/ocaml_parsing.cmxs",
+    src = "opam/lib/merlin-lib/ocaml_parsing/ocaml_parsing.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1846,9 +1827,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.ocaml_preprocess",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/ocaml_preprocess",
-    native_lib = "_opam/lib/merlin-lib/ocaml_preprocess/ocaml_preprocess.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/ocaml_preprocess/ocaml_preprocess.cma",
+    include_dir = "opam/lib/merlin-lib/ocaml_preprocess",
+    native_lib = "opam/lib/merlin-lib/ocaml_preprocess/ocaml_preprocess.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/ocaml_preprocess/ocaml_preprocess.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1856,16 +1837,16 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":merlin-lib.ocaml_parsing",
         ":merlin-lib.utils",
         ":merlin-lib.ocaml_utils",
+        ":merlin-lib.ocaml_parsing",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.ocaml_preprocess.ocaml_preprocess-plugin",
-    src = "_opam/lib/merlin-lib/ocaml_preprocess/ocaml_preprocess.cmxs",
+    src = "opam/lib/merlin-lib/ocaml_preprocess/ocaml_preprocess.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1876,9 +1857,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.ocaml_typing",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/ocaml_typing",
-    native_lib = "_opam/lib/merlin-lib/ocaml_typing/ocaml_typing.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/ocaml_typing/ocaml_typing.cma",
+    include_dir = "opam/lib/merlin-lib/ocaml_typing",
+    native_lib = "opam/lib/merlin-lib/ocaml_typing/ocaml_typing.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/ocaml_typing/ocaml_typing.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1886,16 +1867,16 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":merlin-lib.ocaml_parsing",
         ":merlin-lib.utils",
         ":merlin-lib.ocaml_utils",
+        ":merlin-lib.ocaml_parsing",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.ocaml_typing.ocaml_typing-plugin",
-    src = "_opam/lib/merlin-lib/ocaml_typing/ocaml_typing.cmxs",
+    src = "opam/lib/merlin-lib/ocaml_typing/ocaml_typing.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1906,9 +1887,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.ocaml_utils",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/ocaml_utils",
-    native_lib = "_opam/lib/merlin-lib/ocaml_utils/ocaml_utils.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/ocaml_utils/ocaml_utils.cma",
+    include_dir = "opam/lib/merlin-lib/ocaml_utils",
+    native_lib = "opam/lib/merlin-lib/ocaml_utils/ocaml_utils.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/ocaml_utils/ocaml_utils.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1916,15 +1897,15 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":merlin-lib.config",
         ":merlin-lib.utils",
+        ":merlin-lib.config",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.ocaml_utils.ocaml_utils-plugin",
-    src = "_opam/lib/merlin-lib/ocaml_utils/ocaml_utils.cmxs",
+    src = "opam/lib/merlin-lib/ocaml_utils/ocaml_utils.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1935,15 +1916,15 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.os_ipc",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/os_ipc",
-    native_lib = "_opam/lib/merlin-lib/os_ipc/os_ipc.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/os_ipc/os_ipc.cma",
+    include_dir = "opam/lib/merlin-lib/os_ipc",
+    native_lib = "opam/lib/merlin-lib/os_ipc/os_ipc.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/os_ipc/os_ipc.cma",
     c_libs = None,
     native_c_libs = [
-        "_opam/lib/merlin-lib/os_ipc/libos_ipc_stubs.a",
+        "opam/lib/merlin-lib/os_ipc/libos_ipc_stubs.a",
     ],
     bytecode_c_libs = [
-        "_opam/lib/merlin-lib/os_ipc/libos_ipc_stubs.a",
+        "opam/lib/merlin-lib/os_ipc/libos_ipc_stubs.a",
     ],
     bytecode_only = True,
     deps = [
@@ -1953,7 +1934,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.os_ipc.os_ipc-plugin",
-    src = "_opam/lib/merlin-lib/os_ipc/os_ipc.cmxs",
+    src = "opam/lib/merlin-lib/os_ipc/os_ipc.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1964,9 +1945,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.query_commands",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/query_commands",
-    native_lib = "_opam/lib/merlin-lib/query_commands/query_commands.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/query_commands/query_commands.cma",
+    include_dir = "opam/lib/merlin-lib/query_commands",
+    native_lib = "opam/lib/merlin-lib/query_commands/query_commands.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/query_commands/query_commands.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -1974,23 +1955,23 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":merlin-lib.analysis",
+        ":merlin-lib.ocaml_merlin_specific",
         ":merlin-lib.config",
+        ":merlin-lib.query_protocol",
+        ":merlin-lib.kernel",
         ":merlin-lib.ocaml_typing",
         ":merlin-lib.ocaml_utils",
         ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.query_protocol",
-        ":str",
-        ":merlin-lib.kernel",
         ":merlin-lib.utils",
-        ":merlin-lib.ocaml_merlin_specific",
+        ":merlin-lib.analysis",
+        ":str",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.query_commands.query_commands-plugin",
-    src = "_opam/lib/merlin-lib/query_commands/query_commands.cmxs",
+    src = "opam/lib/merlin-lib/query_commands/query_commands.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2001,9 +1982,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.query_protocol",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/query_protocol",
-    native_lib = "_opam/lib/merlin-lib/query_protocol/query_protocol.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/query_protocol/query_protocol.cma",
+    include_dir = "opam/lib/merlin-lib/query_protocol",
+    native_lib = "opam/lib/merlin-lib/query_protocol/query_protocol.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/query_protocol/query_protocol.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2012,15 +1993,15 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
         ":merlin-lib.kernel",
-        ":merlin-lib.ocaml_parsing",
         ":merlin-lib.utils",
+        ":merlin-lib.ocaml_parsing",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.query_protocol.query_protocol-plugin",
-    src = "_opam/lib/merlin-lib/query_protocol/query_protocol.cmxs",
+    src = "opam/lib/merlin-lib/query_protocol/query_protocol.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2031,15 +2012,15 @@ prebuilt_ocaml_library(
     ],
     lib_name = "merlin-lib.utils",
     lib_dir = "",
-    include_dir = "_opam/lib/merlin-lib/utils",
-    native_lib = "_opam/lib/merlin-lib/utils/merlin_utils.cmxa",
-    bytecode_lib = "_opam/lib/merlin-lib/utils/merlin_utils.cma",
+    include_dir = "opam/lib/merlin-lib/utils",
+    native_lib = "opam/lib/merlin-lib/utils/merlin_utils.cmxa",
+    bytecode_lib = "opam/lib/merlin-lib/utils/merlin_utils.cma",
     c_libs = None,
     native_c_libs = [
-        "_opam/lib/merlin-lib/utils/libmerlin_utils_stubs.a",
+        "opam/lib/merlin-lib/utils/libmerlin_utils_stubs.a",
     ],
     bytecode_c_libs = [
-        "_opam/lib/merlin-lib/utils/libmerlin_utils_stubs.a",
+        "opam/lib/merlin-lib/utils/libmerlin_utils_stubs.a",
     ],
     bytecode_only = True,
     deps = [
@@ -2051,7 +2032,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "merlin-lib.utils.merlin_utils-plugin",
-    src = "_opam/lib/merlin-lib/utils/merlin_utils.cmxs",
+    src = "opam/lib/merlin-lib/utils/merlin_utils.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2062,7 +2043,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocaml-lsp-server",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml-lsp-server",
+    include_dir = "opam/lib/ocaml-lsp-server",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2081,7 +2062,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocaml-syntax-shims",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml-syntax-shims",
+    include_dir = "opam/lib/ocaml-syntax-shims",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2100,9 +2081,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocaml-version",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml-version",
-    native_lib = "_opam/lib/ocaml-version/ocaml_version.cmxa",
-    bytecode_lib = "_opam/lib/ocaml-version/ocaml_version.cma",
+    include_dir = "opam/lib/ocaml-version",
+    native_lib = "opam/lib/ocaml-version/ocaml_version.cmxa",
+    bytecode_lib = "opam/lib/ocaml-version/ocaml_version.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2116,7 +2097,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocaml-version.ocaml_version-plugin",
-    src = "_opam/lib/ocaml-version/ocaml_version.cmxs",
+    src = "opam/lib/ocaml-version/ocaml_version.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2127,9 +2108,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlbuild",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlbuild",
-    native_lib = "_opam/lib/ocamlbuild/ocamlbuildlib.cmxa",
-    bytecode_lib = "_opam/lib/ocamlbuild/ocamlbuildlib.cma",
+    include_dir = "opam/lib/ocamlbuild",
+    native_lib = "opam/lib/ocamlbuild/ocamlbuildlib.cmxa",
+    bytecode_lib = "opam/lib/ocamlbuild/ocamlbuildlib.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2149,9 +2130,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlc-loc",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlc-loc",
-    native_lib = "_opam/lib/ocamlc-loc/ocamlc_loc.cmxa",
-    bytecode_lib = "_opam/lib/ocamlc-loc/ocamlc_loc.cma",
+    include_dir = "opam/lib/ocamlc-loc",
+    native_lib = "opam/lib/ocamlc-loc/ocamlc_loc.cmxa",
+    bytecode_lib = "opam/lib/ocamlc-loc/ocamlc_loc.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2166,7 +2147,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlc-loc.ocamlc_loc-plugin",
-    src = "_opam/lib/ocamlc-loc/ocamlc_loc.cmxs",
+    src = "opam/lib/ocamlc-loc/ocamlc_loc.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2177,7 +2158,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamldoc",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/ocamldoc",
+    include_dir = "opam/lib/ocaml/ocamldoc",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2197,7 +2178,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat",
+    include_dir = "opam/lib/ocamlformat",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2216,9 +2197,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat-lib",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat-lib",
-    native_lib = "_opam/lib/ocamlformat-lib/ocamlformat_lib.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat-lib/ocamlformat_lib.cma",
+    include_dir = "opam/lib/ocamlformat-lib",
+    native_lib = "opam/lib/ocamlformat-lib/ocamlformat_lib.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat-lib/ocamlformat_lib.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2226,24 +2207,24 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":dune-build-info",
-        ":ocp-indent.lib",
-        ":ocamlformat-lib.odoc_parser",
+        ":ocamlformat-lib.ocamlformat_stdlib",
         ":ocaml-version",
+        ":ocamlformat-lib.parser_extended",
+        ":ocp-indent.lib",
+        ":ocamlformat-lib.format_",
+        ":dune-build-info",
+        ":ocamlformat-lib.odoc_parser",
+        ":ocamlformat-lib.result",
         ":uuseg.string",
         ":ocamlformat-lib.ocaml_common",
-        ":ocamlformat-lib.result",
         ":ocamlformat-lib.parser_standard",
-        ":ocamlformat-lib.ocamlformat_stdlib",
-        ":ocamlformat-lib.format_",
-        ":ocamlformat-lib.parser_extended",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat-lib.ocamlformat_lib-plugin",
-    src = "_opam/lib/ocamlformat-lib/ocamlformat_lib.cmxs",
+    src = "opam/lib/ocamlformat-lib/ocamlformat_lib.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2254,9 +2235,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat-lib.format_",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat-lib/format_",
-    native_lib = "_opam/lib/ocamlformat-lib/format_/format_.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat-lib/format_/format_.cma",
+    include_dir = "opam/lib/ocamlformat-lib/format_",
+    native_lib = "opam/lib/ocamlformat-lib/format_/format_.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat-lib/format_/format_.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2272,7 +2253,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat-lib.format_.format_-plugin",
-    src = "_opam/lib/ocamlformat-lib/format_/format_.cmxs",
+    src = "opam/lib/ocamlformat-lib/format_/format_.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2283,9 +2264,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat-lib.ocaml_common",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat-lib/ocaml_common",
-    native_lib = "_opam/lib/ocamlformat-lib/ocaml_common/ocaml_common.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat-lib/ocaml_common/ocaml_common.cma",
+    include_dir = "opam/lib/ocamlformat-lib/ocaml_common",
+    native_lib = "opam/lib/ocamlformat-lib/ocaml_common/ocaml_common.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat-lib/ocaml_common/ocaml_common.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2300,7 +2281,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat-lib.ocaml_common.ocaml_common-plugin",
-    src = "_opam/lib/ocamlformat-lib/ocaml_common/ocaml_common.cmxs",
+    src = "opam/lib/ocamlformat-lib/ocaml_common/ocaml_common.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2311,9 +2292,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat-lib.ocamlformat_stdlib",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat-lib/ocamlformat_stdlib",
-    native_lib = "_opam/lib/ocamlformat-lib/ocamlformat_stdlib/ocamlformat_stdlib.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat-lib/ocamlformat_stdlib/ocamlformat_stdlib.cma",
+    include_dir = "opam/lib/ocamlformat-lib/ocamlformat_stdlib",
+    native_lib = "opam/lib/ocamlformat-lib/ocamlformat_stdlib/ocamlformat_stdlib.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat-lib/ocamlformat_stdlib/ocamlformat_stdlib.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2322,17 +2303,17 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
         ":cmdliner",
-        ":fpath",
-        ":base",
-        ":ocamlformat-lib.ocaml_common",
         ":stdio",
+        ":ocamlformat-lib.ocaml_common",
+        ":base",
+        ":fpath",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat-lib.ocamlformat_stdlib.ocamlformat_stdlib-plugin",
-    src = "_opam/lib/ocamlformat-lib/ocamlformat_stdlib/ocamlformat_stdlib.cmxs",
+    src = "opam/lib/ocamlformat-lib/ocamlformat_stdlib/ocamlformat_stdlib.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2343,9 +2324,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat-lib.odoc_parser",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat-lib/odoc_parser",
-    native_lib = "_opam/lib/ocamlformat-lib/odoc_parser/odoc_parser.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat-lib/odoc_parser/odoc_parser.cma",
+    include_dir = "opam/lib/ocamlformat-lib/odoc_parser",
+    native_lib = "opam/lib/ocamlformat-lib/odoc_parser/odoc_parser.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat-lib/odoc_parser/odoc_parser.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2353,8 +2334,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":camlp-streams",
         ":result",
+        ":camlp-streams",
         ":astring",
     ],
 ) if not host_info().os.is_windows else None
@@ -2362,7 +2343,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat-lib.odoc_parser.odoc_parser-plugin",
-    src = "_opam/lib/ocamlformat-lib/odoc_parser/odoc_parser.cmxs",
+    src = "opam/lib/ocamlformat-lib/odoc_parser/odoc_parser.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2373,9 +2354,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat-lib.parser_extended",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat-lib/parser_extended",
-    native_lib = "_opam/lib/ocamlformat-lib/parser_extended/parser_extended.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat-lib/parser_extended/parser_extended.cma",
+    include_dir = "opam/lib/ocamlformat-lib/parser_extended",
+    native_lib = "opam/lib/ocamlformat-lib/parser_extended/parser_extended.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat-lib/parser_extended/parser_extended.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2383,17 +2364,17 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ocamlformat-lib.parser_shims",
+        ":compiler-libs.common",
         ":menhirLib",
         ":ocamlformat-lib.ocaml_common",
-        ":compiler-libs.common",
+        ":ocamlformat-lib.parser_shims",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat-lib.parser_extended.parser_extended-plugin",
-    src = "_opam/lib/ocamlformat-lib/parser_extended/parser_extended.cmxs",
+    src = "opam/lib/ocamlformat-lib/parser_extended/parser_extended.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2404,9 +2385,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat-lib.parser_shims",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat-lib/parser_shims",
-    native_lib = "_opam/lib/ocamlformat-lib/parser_shims/parser_shims.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat-lib/parser_shims/parser_shims.cma",
+    include_dir = "opam/lib/ocamlformat-lib/parser_shims",
+    native_lib = "opam/lib/ocamlformat-lib/parser_shims/parser_shims.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat-lib/parser_shims/parser_shims.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2421,7 +2402,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat-lib.parser_shims.parser_shims-plugin",
-    src = "_opam/lib/ocamlformat-lib/parser_shims/parser_shims.cmxs",
+    src = "opam/lib/ocamlformat-lib/parser_shims/parser_shims.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2432,9 +2413,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat-lib.parser_standard",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat-lib/parser_standard",
-    native_lib = "_opam/lib/ocamlformat-lib/parser_standard/parser_standard.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat-lib/parser_standard/parser_standard.cma",
+    include_dir = "opam/lib/ocamlformat-lib/parser_standard",
+    native_lib = "opam/lib/ocamlformat-lib/parser_standard/parser_standard.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat-lib/parser_standard/parser_standard.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2442,17 +2423,17 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ocamlformat-lib.parser_shims",
+        ":compiler-libs.common",
         ":menhirLib",
         ":ocamlformat-lib.ocaml_common",
-        ":compiler-libs.common",
+        ":ocamlformat-lib.parser_shims",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat-lib.parser_standard.parser_standard-plugin",
-    src = "_opam/lib/ocamlformat-lib/parser_standard/parser_standard.cmxs",
+    src = "opam/lib/ocamlformat-lib/parser_standard/parser_standard.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2463,9 +2444,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat-lib.result",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat-lib/result",
-    native_lib = "_opam/lib/ocamlformat-lib/result/ocamlformat_result.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat-lib/result/ocamlformat_result.cma",
+    include_dir = "opam/lib/ocamlformat-lib/result",
+    native_lib = "opam/lib/ocamlformat-lib/result/ocamlformat_result.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat-lib/result/ocamlformat_result.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2479,7 +2460,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat-lib.result.ocamlformat_result-plugin",
-    src = "_opam/lib/ocamlformat-lib/result/ocamlformat_result.cmxs",
+    src = "opam/lib/ocamlformat-lib/result/ocamlformat_result.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2490,9 +2471,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat-rpc-lib",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat-rpc-lib",
-    native_lib = "_opam/lib/ocamlformat-rpc-lib/ocamlformat_rpc_lib.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat-rpc-lib/ocamlformat_rpc_lib.cma",
+    include_dir = "opam/lib/ocamlformat-rpc-lib",
+    native_lib = "opam/lib/ocamlformat-rpc-lib/ocamlformat_rpc_lib.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat-rpc-lib/ocamlformat_rpc_lib.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2507,7 +2488,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat-rpc-lib.ocamlformat_rpc_lib-plugin",
-    src = "_opam/lib/ocamlformat-rpc-lib/ocamlformat_rpc_lib.cmxs",
+    src = "opam/lib/ocamlformat-rpc-lib/ocamlformat_rpc_lib.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2518,9 +2499,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat.bin_conf",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat/bin_conf",
-    native_lib = "_opam/lib/ocamlformat/bin_conf/bin_conf.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat/bin_conf/bin_conf.cma",
+    include_dir = "opam/lib/ocamlformat/bin_conf",
+    native_lib = "opam/lib/ocamlformat/bin_conf/bin_conf.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat/bin_conf/bin_conf.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2536,7 +2517,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat.bin_conf.bin_conf-plugin",
-    src = "_opam/lib/ocamlformat/bin_conf/bin_conf.cmxs",
+    src = "opam/lib/ocamlformat/bin_conf/bin_conf.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2547,9 +2528,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat.rpc",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat/rpc",
-    native_lib = "_opam/lib/ocamlformat/rpc/ocamlformat_rpc.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat/rpc/ocamlformat_rpc.cma",
+    include_dir = "opam/lib/ocamlformat/rpc",
+    native_lib = "opam/lib/ocamlformat/rpc/ocamlformat_rpc.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat/rpc/ocamlformat_rpc.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2557,8 +2538,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ocamlformat.rpc_lib_protocol",
         ":ocamlformat.bin_conf",
+        ":ocamlformat.rpc_lib_protocol",
         ":ocamlformat-lib",
     ],
 ) if not host_info().os.is_windows else None
@@ -2566,7 +2547,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat.rpc.ocamlformat_rpc-plugin",
-    src = "_opam/lib/ocamlformat/rpc/ocamlformat_rpc.cmxs",
+    src = "opam/lib/ocamlformat/rpc/ocamlformat_rpc.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2577,9 +2558,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocamlformat.rpc_lib_protocol",
     lib_dir = "",
-    include_dir = "_opam/lib/ocamlformat/rpc_lib_protocol",
-    native_lib = "_opam/lib/ocamlformat/rpc_lib_protocol/ocamlformat_rpc_lib_protocol.cmxa",
-    bytecode_lib = "_opam/lib/ocamlformat/rpc_lib_protocol/ocamlformat_rpc_lib_protocol.cma",
+    include_dir = "opam/lib/ocamlformat/rpc_lib_protocol",
+    native_lib = "opam/lib/ocamlformat/rpc_lib_protocol/ocamlformat_rpc_lib_protocol.cmxa",
+    bytecode_lib = "opam/lib/ocamlformat/rpc_lib_protocol/ocamlformat_rpc_lib_protocol.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2594,7 +2575,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocamlformat.rpc_lib_protocol.ocamlformat_rpc_lib_protocol-plugin",
-    src = "_opam/lib/ocamlformat/rpc_lib_protocol/ocamlformat_rpc_lib_protocol.cmxs",
+    src = "opam/lib/ocamlformat/rpc_lib_protocol/ocamlformat_rpc_lib_protocol.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2605,7 +2586,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocp-indent",
     lib_dir = "",
-    include_dir = "_opam/lib/ocp-indent",
+    include_dir = "opam/lib/ocp-indent",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2624,9 +2605,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocp-indent.dynlink",
     lib_dir = "",
-    include_dir = "_opam/lib/ocp-indent/dynlink",
-    native_lib = "_opam/lib/ocp-indent/dynlink/ocp_indent_dynlink.cmxa",
-    bytecode_lib = "_opam/lib/ocp-indent/dynlink/ocp_indent_dynlink.cma",
+    include_dir = "opam/lib/ocp-indent/dynlink",
+    native_lib = "opam/lib/ocp-indent/dynlink/ocp_indent_dynlink.cmxa",
+    bytecode_lib = "opam/lib/ocp-indent/dynlink/ocp_indent_dynlink.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2636,15 +2617,15 @@ prebuilt_ocaml_library(
     deps = [
         ":findlib",
         ":ocp-indent.lexer",
-        ":dynlink",
         ":ocp-indent.utils",
+        ":dynlink",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "ocp-indent.dynlink.ocp_indent_dynlink-plugin",
-    src = "_opam/lib/ocp-indent/dynlink/ocp_indent_dynlink.cmxs",
+    src = "opam/lib/ocp-indent/dynlink/ocp_indent_dynlink.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2655,9 +2636,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocp-indent.lexer",
     lib_dir = "",
-    include_dir = "_opam/lib/ocp-indent/lexer",
-    native_lib = "_opam/lib/ocp-indent/lexer/ocp_indent_lexer.cmxa",
-    bytecode_lib = "_opam/lib/ocp-indent/lexer/ocp_indent_lexer.cma",
+    include_dir = "opam/lib/ocp-indent/lexer",
+    native_lib = "opam/lib/ocp-indent/lexer/ocp_indent_lexer.cmxa",
+    bytecode_lib = "opam/lib/ocp-indent/lexer/ocp_indent_lexer.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2671,7 +2652,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocp-indent.lexer.ocp_indent_lexer-plugin",
-    src = "_opam/lib/ocp-indent/lexer/ocp_indent_lexer.cmxs",
+    src = "opam/lib/ocp-indent/lexer/ocp_indent_lexer.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2682,9 +2663,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocp-indent.lib",
     lib_dir = "",
-    include_dir = "_opam/lib/ocp-indent/lib",
-    native_lib = "_opam/lib/ocp-indent/lib/ocp_indent_lib.cmxa",
-    bytecode_lib = "_opam/lib/ocp-indent/lib/ocp_indent_lib.cma",
+    include_dir = "opam/lib/ocp-indent/lib",
+    native_lib = "opam/lib/ocp-indent/lib/ocp_indent_lib.cmxa",
+    bytecode_lib = "opam/lib/ocp-indent/lib/ocp_indent_lib.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2699,7 +2680,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ocp-indent.lib.ocp_indent_lib-plugin",
-    src = "_opam/lib/ocp-indent/lib/ocp_indent_lib.cmxs",
+    src = "opam/lib/ocp-indent/lib/ocp_indent_lib.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2710,9 +2691,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ocp-indent.utils",
     lib_dir = "",
-    include_dir = "_opam/lib/ocp-indent/utils",
-    native_lib = "_opam/lib/ocp-indent/utils/ocp_indent_utils.cmxa",
-    bytecode_lib = "_opam/lib/ocp-indent/utils/ocp_indent_utils.cma",
+    include_dir = "opam/lib/ocp-indent/utils",
+    native_lib = "opam/lib/ocp-indent/utils/ocp_indent_utils.cmxa",
+    bytecode_lib = "opam/lib/ocp-indent/utils/ocp_indent_utils.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2720,15 +2701,15 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ocp-indent.lexer",
         ":bytes",
+        ":ocp-indent.lexer",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "ocp-indent.utils.ocp_indent_utils-plugin",
-    src = "_opam/lib/ocp-indent/utils/ocp_indent_utils.cmxs",
+    src = "opam/lib/ocp-indent/utils/ocp_indent_utils.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2739,9 +2720,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "odoc-parser",
     lib_dir = "",
-    include_dir = "_opam/lib/odoc-parser",
-    native_lib = "_opam/lib/odoc-parser/odoc_parser.cmxa",
-    bytecode_lib = "_opam/lib/odoc-parser/odoc_parser.cma",
+    include_dir = "opam/lib/odoc-parser",
+    native_lib = "opam/lib/odoc-parser/odoc_parser.cmxa",
+    bytecode_lib = "opam/lib/odoc-parser/odoc_parser.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2749,8 +2730,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":camlp-streams",
         ":result",
+        ":camlp-streams",
         ":astring",
     ],
 ) if not host_info().os.is_windows else None
@@ -2758,7 +2739,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "odoc-parser.odoc_parser-plugin",
-    src = "_opam/lib/odoc-parser/odoc_parser.cmxs",
+    src = "opam/lib/odoc-parser/odoc_parser.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2769,9 +2750,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ordering",
     lib_dir = "",
-    include_dir = "_opam/lib/ordering",
-    native_lib = "_opam/lib/ordering/ordering.cmxa",
-    bytecode_lib = "_opam/lib/ordering/ordering.cma",
+    include_dir = "opam/lib/ordering",
+    native_lib = "opam/lib/ordering/ordering.cmxa",
+    bytecode_lib = "opam/lib/ordering/ordering.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2785,7 +2766,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ordering.ordering-plugin",
-    src = "_opam/lib/ordering/ordering.cmxs",
+    src = "opam/lib/ordering/ordering.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2796,9 +2777,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "pp",
     lib_dir = "",
-    include_dir = "_opam/lib/pp",
-    native_lib = "_opam/lib/pp/pp.cmxa",
-    bytecode_lib = "_opam/lib/pp/pp.cma",
+    include_dir = "opam/lib/pp",
+    native_lib = "opam/lib/pp/pp.cmxa",
+    bytecode_lib = "opam/lib/pp/pp.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2812,7 +2793,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "pp.pp-plugin",
-    src = "_opam/lib/pp/pp.cmxs",
+    src = "opam/lib/pp/pp.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2823,9 +2804,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "ppx_yojson_conv_lib",
     lib_dir = "",
-    include_dir = "_opam/lib/ppx_yojson_conv_lib",
-    native_lib = "_opam/lib/ppx_yojson_conv_lib/ppx_yojson_conv_lib.cmxa",
-    bytecode_lib = "_opam/lib/ppx_yojson_conv_lib/ppx_yojson_conv_lib.cma",
+    include_dir = "opam/lib/ppx_yojson_conv_lib",
+    native_lib = "opam/lib/ppx_yojson_conv_lib/ppx_yojson_conv_lib.cmxa",
+    bytecode_lib = "opam/lib/ppx_yojson_conv_lib/ppx_yojson_conv_lib.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2840,7 +2821,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "ppx_yojson_conv_lib.ppx_yojson_conv_lib-plugin",
-    src = "_opam/lib/ppx_yojson_conv_lib/ppx_yojson_conv_lib.cmxs",
+    src = "opam/lib/ppx_yojson_conv_lib/ppx_yojson_conv_lib.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2851,9 +2832,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "qcheck-alcotest",
     lib_dir = "",
-    include_dir = "_opam/lib/qcheck-alcotest",
-    native_lib = "_opam/lib/qcheck-alcotest/qcheck_alcotest.cmxa",
-    bytecode_lib = "_opam/lib/qcheck-alcotest/qcheck_alcotest.cma",
+    include_dir = "opam/lib/qcheck-alcotest",
+    native_lib = "opam/lib/qcheck-alcotest/qcheck_alcotest.cmxa",
+    bytecode_lib = "opam/lib/qcheck-alcotest/qcheck_alcotest.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2861,18 +2842,18 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":bytes",
         ":alcotest",
         ":qcheck-core",
-        ":qcheck-core.runner",
         ":unix",
+        ":qcheck-core.runner",
+        ":bytes",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "qcheck-alcotest.qcheck_alcotest-plugin",
-    src = "_opam/lib/qcheck-alcotest/qcheck_alcotest.cmxs",
+    src = "opam/lib/qcheck-alcotest/qcheck_alcotest.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2883,9 +2864,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "qcheck-core",
     lib_dir = "",
-    include_dir = "_opam/lib/qcheck-core",
-    native_lib = "_opam/lib/qcheck-core/qcheck_core.cmxa",
-    bytecode_lib = "_opam/lib/qcheck-core/qcheck_core.cma",
+    include_dir = "opam/lib/qcheck-core",
+    native_lib = "opam/lib/qcheck-core/qcheck_core.cmxa",
+    bytecode_lib = "opam/lib/qcheck-core/qcheck_core.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2893,15 +2874,15 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":unix",
         ":bytes",
+        ":unix",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "qcheck-core.qcheck_core-plugin",
-    src = "_opam/lib/qcheck-core/qcheck_core.cmxs",
+    src = "opam/lib/qcheck-core/qcheck_core.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2912,9 +2893,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "qcheck-core.runner",
     lib_dir = "",
-    include_dir = "_opam/lib/qcheck-core/runner",
-    native_lib = "_opam/lib/qcheck-core/runner/qcheck_runner.cmxa",
-    bytecode_lib = "_opam/lib/qcheck-core/runner/qcheck_runner.cma",
+    include_dir = "opam/lib/qcheck-core/runner",
+    native_lib = "opam/lib/qcheck-core/runner/qcheck_runner.cmxa",
+    bytecode_lib = "opam/lib/qcheck-core/runner/qcheck_runner.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2929,7 +2910,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "qcheck-core.runner.qcheck_runner-plugin",
-    src = "_opam/lib/qcheck-core/runner/qcheck_runner.cmxs",
+    src = "opam/lib/qcheck-core/runner/qcheck_runner.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2940,9 +2921,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "re",
     lib_dir = "",
-    include_dir = "_opam/lib/re",
-    native_lib = "_opam/lib/re/re.cmxa",
-    bytecode_lib = "_opam/lib/re/re.cma",
+    include_dir = "opam/lib/re",
+    native_lib = "opam/lib/re/re.cmxa",
+    bytecode_lib = "opam/lib/re/re.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2957,7 +2938,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "re.re-plugin",
-    src = "_opam/lib/re/re.cmxs",
+    src = "opam/lib/re/re.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2968,9 +2949,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "re.emacs",
     lib_dir = "",
-    include_dir = "_opam/lib/re/emacs",
-    native_lib = "_opam/lib/re/emacs/re_emacs.cmxa",
-    bytecode_lib = "_opam/lib/re/emacs/re_emacs.cma",
+    include_dir = "opam/lib/re/emacs",
+    native_lib = "opam/lib/re/emacs/re_emacs.cmxa",
+    bytecode_lib = "opam/lib/re/emacs/re_emacs.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -2985,7 +2966,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "re.emacs.re_emacs-plugin",
-    src = "_opam/lib/re/emacs/re_emacs.cmxs",
+    src = "opam/lib/re/emacs/re_emacs.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2996,9 +2977,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "re.glob",
     lib_dir = "",
-    include_dir = "_opam/lib/re/glob",
-    native_lib = "_opam/lib/re/glob/re_glob.cmxa",
-    bytecode_lib = "_opam/lib/re/glob/re_glob.cma",
+    include_dir = "opam/lib/re/glob",
+    native_lib = "opam/lib/re/glob/re_glob.cmxa",
+    bytecode_lib = "opam/lib/re/glob/re_glob.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3013,7 +2994,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "re.glob.re_glob-plugin",
-    src = "_opam/lib/re/glob/re_glob.cmxs",
+    src = "opam/lib/re/glob/re_glob.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3024,9 +3005,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "re.pcre",
     lib_dir = "",
-    include_dir = "_opam/lib/re/pcre",
-    native_lib = "_opam/lib/re/pcre/re_pcre.cmxa",
-    bytecode_lib = "_opam/lib/re/pcre/re_pcre.cma",
+    include_dir = "opam/lib/re/pcre",
+    native_lib = "opam/lib/re/pcre/re_pcre.cmxa",
+    bytecode_lib = "opam/lib/re/pcre/re_pcre.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3041,7 +3022,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "re.pcre.re_pcre-plugin",
-    src = "_opam/lib/re/pcre/re_pcre.cmxs",
+    src = "opam/lib/re/pcre/re_pcre.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3052,9 +3033,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "re.perl",
     lib_dir = "",
-    include_dir = "_opam/lib/re/perl",
-    native_lib = "_opam/lib/re/perl/re_perl.cmxa",
-    bytecode_lib = "_opam/lib/re/perl/re_perl.cma",
+    include_dir = "opam/lib/re/perl",
+    native_lib = "opam/lib/re/perl/re_perl.cmxa",
+    bytecode_lib = "opam/lib/re/perl/re_perl.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3069,7 +3050,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "re.perl.re_perl-plugin",
-    src = "_opam/lib/re/perl/re_perl.cmxs",
+    src = "opam/lib/re/perl/re_perl.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3080,9 +3061,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "re.posix",
     lib_dir = "",
-    include_dir = "_opam/lib/re/posix",
-    native_lib = "_opam/lib/re/posix/re_posix.cmxa",
-    bytecode_lib = "_opam/lib/re/posix/re_posix.cma",
+    include_dir = "opam/lib/re/posix",
+    native_lib = "opam/lib/re/posix/re_posix.cmxa",
+    bytecode_lib = "opam/lib/re/posix/re_posix.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3097,7 +3078,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "re.posix.re_posix-plugin",
-    src = "_opam/lib/re/posix/re_posix.cmxs",
+    src = "opam/lib/re/posix/re_posix.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3108,9 +3089,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "re.str",
     lib_dir = "",
-    include_dir = "_opam/lib/re/str",
-    native_lib = "_opam/lib/re/str/re_str.cmxa",
-    bytecode_lib = "_opam/lib/re/str/re_str.cma",
+    include_dir = "opam/lib/re/str",
+    native_lib = "opam/lib/re/str/re_str.cmxa",
+    bytecode_lib = "opam/lib/re/str/re_str.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3125,7 +3106,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "re.str.re_str-plugin",
-    src = "_opam/lib/re/str/re_str.cmxs",
+    src = "opam/lib/re/str/re_str.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3136,9 +3117,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "result",
     lib_dir = "",
-    include_dir = "_opam/lib/result",
-    native_lib = "_opam/lib/result/result.cmxa",
-    bytecode_lib = "_opam/lib/result/result.cma",
+    include_dir = "opam/lib/result",
+    native_lib = "opam/lib/result/result.cmxa",
+    bytecode_lib = "opam/lib/result/result.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3152,7 +3133,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "result.result-plugin",
-    src = "_opam/lib/result/result.cmxs",
+    src = "opam/lib/result/result.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3163,9 +3144,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "runtime_events",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/runtime_events",
-    native_lib = "_opam/lib/ocaml/runtime_events/runtime_events.cmxa",
-    bytecode_lib = "_opam/lib/ocaml/runtime_events/runtime_events.cma",
+    include_dir = "opam/lib/ocaml/runtime_events",
+    native_lib = "opam/lib/ocaml/runtime_events/runtime_events.cmxa",
+    bytecode_lib = "opam/lib/ocaml/runtime_events/runtime_events.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3179,7 +3160,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "runtime_events.runtime_events-plugin",
-    src = "_opam/lib/ocaml/runtime_events/runtime_events.cmxs",
+    src = "opam/lib/ocaml/runtime_events/runtime_events.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3190,7 +3171,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "seq",
     lib_dir = "",
-    include_dir = "_opam/lib/seq",
+    include_dir = "opam/lib/seq",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3209,9 +3190,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "sexplib0",
     lib_dir = "",
-    include_dir = "_opam/lib/sexplib0",
-    native_lib = "_opam/lib/sexplib0/sexplib0.cmxa",
-    bytecode_lib = "_opam/lib/sexplib0/sexplib0.cma",
+    include_dir = "opam/lib/sexplib0",
+    native_lib = "opam/lib/sexplib0/sexplib0.cmxa",
+    bytecode_lib = "opam/lib/sexplib0/sexplib0.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3225,7 +3206,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "sexplib0.sexplib0-plugin",
-    src = "_opam/lib/sexplib0/sexplib0.cmxs",
+    src = "opam/lib/sexplib0/sexplib0.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3236,15 +3217,15 @@ prebuilt_ocaml_library(
     ],
     lib_name = "spawn",
     lib_dir = "",
-    include_dir = "_opam/lib/spawn",
-    native_lib = "_opam/lib/spawn/spawn.cmxa",
-    bytecode_lib = "_opam/lib/spawn/spawn.cma",
+    include_dir = "opam/lib/spawn",
+    native_lib = "opam/lib/spawn/spawn.cmxa",
+    bytecode_lib = "opam/lib/spawn/spawn.cma",
     c_libs = None,
     native_c_libs = [
-        "_opam/lib/spawn/libspawn_stubs.a",
+        "opam/lib/spawn/libspawn_stubs.a",
     ],
     bytecode_c_libs = [
-        "_opam/lib/spawn/libspawn_stubs.a",
+        "opam/lib/spawn/libspawn_stubs.a",
     ],
     bytecode_only = True,
     deps = [
@@ -3256,7 +3237,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "spawn.spawn-plugin",
-    src = "_opam/lib/spawn/spawn.cmxs",
+    src = "opam/lib/spawn/spawn.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3267,9 +3248,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "stdio",
     lib_dir = "",
-    include_dir = "_opam/lib/stdio",
-    native_lib = "_opam/lib/stdio/stdio.cmxa",
-    bytecode_lib = "_opam/lib/stdio/stdio.cma",
+    include_dir = "opam/lib/stdio",
+    native_lib = "opam/lib/stdio/stdio.cmxa",
+    bytecode_lib = "opam/lib/stdio/stdio.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3284,7 +3265,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "stdio.stdio-plugin",
-    src = "_opam/lib/stdio/stdio.cmxs",
+    src = "opam/lib/stdio/stdio.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3295,7 +3276,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "stdlib",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml",
+    include_dir = "opam/lib/ocaml",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3314,9 +3295,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "stdlib-shims",
     lib_dir = "",
-    include_dir = "_opam/lib/stdlib-shims",
-    native_lib = "_opam/lib/stdlib-shims/stdlib_shims.cmxa",
-    bytecode_lib = "_opam/lib/stdlib-shims/stdlib_shims.cma",
+    include_dir = "opam/lib/stdlib-shims",
+    native_lib = "opam/lib/stdlib-shims/stdlib_shims.cmxa",
+    bytecode_lib = "opam/lib/stdlib-shims/stdlib_shims.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3330,7 +3311,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "stdlib-shims.stdlib_shims-plugin",
-    src = "_opam/lib/stdlib-shims/stdlib_shims.cmxs",
+    src = "opam/lib/stdlib-shims/stdlib_shims.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3341,31 +3322,31 @@ prebuilt_ocaml_library(
     ],
     lib_name = "stdune",
     lib_dir = "",
-    include_dir = "_opam/lib/stdune",
-    native_lib = "_opam/lib/stdune/stdune.cmxa",
-    bytecode_lib = "_opam/lib/stdune/stdune.cma",
+    include_dir = "opam/lib/stdune",
+    native_lib = "opam/lib/stdune/stdune.cmxa",
+    bytecode_lib = "opam/lib/stdune/stdune.cma",
     c_libs = None,
     native_c_libs = [
-        "_opam/lib/stdune/libstdune_stubs.a",
+        "opam/lib/stdune/libstdune_stubs.a",
     ],
     bytecode_c_libs = [
-        "_opam/lib/stdune/libstdune_stubs.a",
+        "opam/lib/stdune/libstdune_stubs.a",
     ],
     bytecode_only = True,
     deps = [
-        ":ordering",
-        ":stdune.filesystem_stubs",
-        ":csexp",
-        ":dyn",
         ":pp",
+        ":dyn",
+        ":stdune.filesystem_stubs",
         ":unix",
+        ":csexp",
+        ":ordering",
     ],
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
 export_file(
     name = "stdune.stdune-plugin",
-    src = "_opam/lib/stdune/stdune.cmxs",
+    src = "opam/lib/stdune/stdune.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3376,15 +3357,15 @@ prebuilt_ocaml_library(
     ],
     lib_name = "stdune.filesystem_stubs",
     lib_dir = "",
-    include_dir = "_opam/lib/stdune/filesystem_stubs",
-    native_lib = "_opam/lib/stdune/filesystem_stubs/dune_filesystem_stubs.cmxa",
-    bytecode_lib = "_opam/lib/stdune/filesystem_stubs/dune_filesystem_stubs.cma",
+    include_dir = "opam/lib/stdune/filesystem_stubs",
+    native_lib = "opam/lib/stdune/filesystem_stubs/dune_filesystem_stubs.cmxa",
+    bytecode_lib = "opam/lib/stdune/filesystem_stubs/dune_filesystem_stubs.cma",
     c_libs = None,
     native_c_libs = [
-        "_opam/lib/stdune/filesystem_stubs/libdune_filesystem_stubs_stubs.a",
+        "opam/lib/stdune/filesystem_stubs/libdune_filesystem_stubs_stubs.a",
     ],
     bytecode_c_libs = [
-        "_opam/lib/stdune/filesystem_stubs/libdune_filesystem_stubs_stubs.a",
+        "opam/lib/stdune/filesystem_stubs/libdune_filesystem_stubs_stubs.a",
     ],
     bytecode_only = True,
     deps = [
@@ -3395,7 +3376,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "stdune.filesystem_stubs.dune_filesystem_stubs-plugin",
-    src = "_opam/lib/stdune/filesystem_stubs/dune_filesystem_stubs.cmxs",
+    src = "opam/lib/stdune/filesystem_stubs/dune_filesystem_stubs.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3406,9 +3387,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "str",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/str",
-    native_lib = "_opam/lib/ocaml/str/str.cmxa",
-    bytecode_lib = "_opam/lib/ocaml/str/str.cma",
+    include_dir = "opam/lib/ocaml/str",
+    native_lib = "opam/lib/ocaml/str/str.cmxa",
+    bytecode_lib = "opam/lib/ocaml/str/str.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3422,7 +3403,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "str.str-plugin",
-    src = "_opam/lib/ocaml/str/str.cmxs",
+    src = "opam/lib/ocaml/str/str.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3433,9 +3414,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "threads",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/threads",
-    native_lib = "_opam/lib/ocaml/threads/threads.cmxa",
-    bytecode_lib = "_opam/lib/ocaml/threads/threads.cma",
+    include_dir = "opam/lib/ocaml/threads",
+    native_lib = "opam/lib/ocaml/threads/threads.cmxa",
+    bytecode_lib = "opam/lib/ocaml/threads/threads.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3455,7 +3436,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "threads.posix",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/threads",
+    include_dir = "opam/lib/ocaml/threads",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3475,9 +3456,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "topkg",
     lib_dir = "",
-    include_dir = "_opam/lib/topkg",
-    native_lib = "_opam/lib/topkg/topkg.cmxa",
-    bytecode_lib = "_opam/lib/topkg/topkg.cma",
+    include_dir = "opam/lib/topkg",
+    native_lib = "opam/lib/topkg/topkg.cmxa",
+    bytecode_lib = "opam/lib/topkg/topkg.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3491,7 +3472,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "topkg.topkg-plugin",
-    src = "_opam/lib/topkg/topkg.cmxs",
+    src = "opam/lib/topkg/topkg.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3502,9 +3483,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "unix",
     lib_dir = "",
-    include_dir = "_opam/lib/ocaml/unix",
-    native_lib = "_opam/lib/ocaml/unix/unix.cmxa",
-    bytecode_lib = "_opam/lib/ocaml/unix/unix.cma",
+    include_dir = "opam/lib/ocaml/unix",
+    native_lib = "opam/lib/ocaml/unix/unix.cmxa",
+    bytecode_lib = "opam/lib/ocaml/unix/unix.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3518,7 +3499,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "unix.unix-plugin",
-    src = "_opam/lib/ocaml/unix/unix.cmxs",
+    src = "opam/lib/ocaml/unix/unix.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3529,9 +3510,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "uucp",
     lib_dir = "",
-    include_dir = "_opam/lib/uucp",
-    native_lib = "_opam/lib/uucp/uucp.cmxa",
-    bytecode_lib = "_opam/lib/uucp/uucp.cma",
+    include_dir = "opam/lib/uucp",
+    native_lib = "opam/lib/uucp/uucp.cmxa",
+    bytecode_lib = "opam/lib/uucp/uucp.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3545,7 +3526,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "uucp.uucp-plugin",
-    src = "_opam/lib/uucp/uucp.cmxs",
+    src = "opam/lib/uucp/uucp.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3556,9 +3537,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "uuseg",
     lib_dir = "",
-    include_dir = "_opam/lib/uuseg",
-    native_lib = "_opam/lib/uuseg/uuseg.cmxa",
-    bytecode_lib = "_opam/lib/uuseg/uuseg.cma",
+    include_dir = "opam/lib/uuseg",
+    native_lib = "opam/lib/uuseg/uuseg.cmxa",
+    bytecode_lib = "opam/lib/uuseg/uuseg.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3573,7 +3554,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "uuseg.uuseg-plugin",
-    src = "_opam/lib/uuseg/uuseg.cmxs",
+    src = "opam/lib/uuseg/uuseg.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3584,7 +3565,7 @@ prebuilt_ocaml_library(
     ],
     lib_name = "uuseg.string",
     lib_dir = "",
-    include_dir = "_opam/lib/uuseg",
+    include_dir = "opam/lib/uuseg",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3604,9 +3585,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "uutf",
     lib_dir = "",
-    include_dir = "_opam/lib/uutf",
-    native_lib = "_opam/lib/uutf/uutf.cmxa",
-    bytecode_lib = "_opam/lib/uutf/uutf.cma",
+    include_dir = "opam/lib/uutf",
+    native_lib = "opam/lib/uutf/uutf.cmxa",
+    bytecode_lib = "opam/lib/uutf/uutf.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3620,7 +3601,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "uutf.uutf-plugin",
-    src = "_opam/lib/uutf/uutf.cmxs",
+    src = "opam/lib/uutf/uutf.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3631,15 +3612,15 @@ prebuilt_ocaml_library(
     ],
     lib_name = "xdg",
     lib_dir = "",
-    include_dir = "_opam/lib/xdg",
-    native_lib = "_opam/lib/xdg/xdg.cmxa",
-    bytecode_lib = "_opam/lib/xdg/xdg.cma",
+    include_dir = "opam/lib/xdg",
+    native_lib = "opam/lib/xdg/xdg.cmxa",
+    bytecode_lib = "opam/lib/xdg/xdg.cma",
     c_libs = None,
     native_c_libs = [
-        "_opam/lib/xdg/libxdg_stubs.a",
+        "opam/lib/xdg/libxdg_stubs.a",
     ],
     bytecode_c_libs = [
-        "_opam/lib/xdg/libxdg_stubs.a",
+        "opam/lib/xdg/libxdg_stubs.a",
     ],
     bytecode_only = True,
     deps = [
@@ -3649,7 +3630,7 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "xdg.xdg-plugin",
-    src = "_opam/lib/xdg/xdg.cmxs",
+    src = "opam/lib/xdg/xdg.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3660,9 +3641,9 @@ prebuilt_ocaml_library(
     ],
     lib_name = "yojson",
     lib_dir = "",
-    include_dir = "_opam/lib/yojson",
-    native_lib = "_opam/lib/yojson/yojson.cmxa",
-    bytecode_lib = "_opam/lib/yojson/yojson.cma",
+    include_dir = "opam/lib/yojson",
+    native_lib = "opam/lib/yojson/yojson.cmxa",
+    bytecode_lib = "opam/lib/yojson/yojson.cma",
     c_libs = None,
     native_c_libs = [
     ],
@@ -3677,5 +3658,6 @@ prebuilt_ocaml_library(
 # buildifier: disable=no-effect
 export_file(
     name = "yojson.yojson-plugin",
-    src = "_opam/lib/yojson/yojson.cmxs",
+    src = "opam/lib/yojson/yojson.cmxs",
 ) if not host_info().os.is_windows else None
+
