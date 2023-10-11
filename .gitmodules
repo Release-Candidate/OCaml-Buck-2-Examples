@@ -4,3 +4,6 @@
 [submodule "ocamllex_menhir_example/prelude"]
 	path = ocamllex_menhir_example/prelude
 	url = https://github.com/facebook/buck2-prelude.git
+[submodule "ppx_usage_example/prelude"]
+	path = ppx_usage_example/prelude
+	url = https://github.com/facebook/buck2-prelude.git
