@@ -8,3 +8,6 @@
    ============================================================================= *)
 
 module Interpreter = Interpreter
+module Parser = Parser_ex
+module Lexer = Lexer_ex
+module Ast = Ast

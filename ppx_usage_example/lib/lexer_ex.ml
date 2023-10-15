@@ -1,4 +1,4 @@
-open Parser
+open Parser_ex
 
 let digit = [%sedlex.regexp? '0' .. '9']
 let int_token = [%sedlex.regexp? Plus digit]

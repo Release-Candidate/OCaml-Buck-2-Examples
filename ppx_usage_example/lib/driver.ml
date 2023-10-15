@@ -3,11 +3,9 @@
    SPDX-License-Identifier: MIT
 
    Project:  OCaml-Buck-2-Examples
-   File:     ocamllex_menhir_example.ml
+   File:     driver.ml
    Date:     15.Oct.2023
 
    ============================================================================= *)
-module Interpreter = Interpreter
-module Parser = Parser_ex
-module Lexer = Lexer_ex
-module Ast = Ast
+
+let () = Ppxlib.Driver.standalone ()

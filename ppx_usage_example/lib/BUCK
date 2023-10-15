@@ -10,6 +10,20 @@ export_file(
 )
 
 # buildifier: disable=no-effect
+ocaml_binary(
+    name = "ppx",
+    srcs = ["./driver.ml"],
+    compiler_flags = [
+        "-linkall",
+    ],
+    deps = [
+        "//third-party:sedlex",
+        "//third-party:sedlex.ppx",
+        "//third-party:menhirLib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
 ocaml_library(
     name = "ppx_usage_example__",
     srcs = [
@@ -27,13 +41,15 @@ ocaml_library(
 # buildifier: disable=no-effect
 ocaml_library(
     name = "ppx_usage_example",
-    srcs = ["./ast.ml", "./interpreter.ml", "./lexer.ml", "./parser.mly"],
+    srcs = ["./ast.ml", "./interpreter.ml", "./lexer_ex.ml", "./parser_ex.mly"],
     compiler_flags = [
         "-no-alias-deps",
         "-w",
         "-49",
         "-open",
         "Ppx_usage_example",
+        "-ppx",
+        "$(exe_target :ppx) --as-ppx",
     ],
     ocamldep_flags = [
         "-open",
@@ -41,6 +57,9 @@ ocaml_library(
         "-map",
         "$(location :ppx_usage_example.mli)",
     ],
-    deps = [":ppx_usage_example__"],
+    deps = [":ppx_usage_example__",
+        "//third-party:sedlex",
+        "//third-party:sedlex.ppx",
+        "//third-party:menhirLib"],
     visibility = ["PUBLIC"],
 ) if not host_info().os.is_windows else None
