@@ -1,0 +1,46 @@
+# A list of available rules and their signatures can be found here: https://buck2.build/docs/api/rules/
+
+export_file(
+    name = "ocamllex_menhir_example.mli",
+    src = "ocamllex_menhir_example.mli",
+    visibility = [
+        ":ocamllex_menhir_example",
+        ":basic_example__",
+    ],
+)
+
+# buildifier: disable=no-effect
+ocaml_library(
+    name = "ocamllex_menhir_example__",
+    srcs = [
+        "ocamllex_menhir_example.ml",
+        ":ocamllex_menhir_example.mli",
+    ],
+    compiler_flags = [
+        "-no-alias-deps",
+        "-w",
+        "-49",
+    ],
+    visibility = [":ocamllex_menhir_example"],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+ocaml_library(
+    name = "ocamllex_menhir_example",
+    srcs = ["./ast.ml", "./interpreter.ml", "./lexer.mll", "./parser.mly"],
+    compiler_flags = [
+        "-no-alias-deps",
+        "-w",
+        "-49",
+        "-open",
+        "Ocamllex_menhir_example",
+    ],
+    ocamldep_flags = [
+        "-open",
+        "Ocamllex_menhir_example",
+        "-map",
+        "$(location :ocamllex_menhir_example.mli)",
+    ],
+    deps = [":ocamllex_menhir_example__"],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None

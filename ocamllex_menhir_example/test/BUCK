@@ -1,0 +1,19 @@
+# A list of available rules and their signatures can be found here: https://buck2.build/docs/api/rules/
+
+# buildifier: disable=no-effect
+ocaml_binary(
+    name = "ocamllex_menhir_example",
+    srcs = ["./ocamllex_menhir_example_test.ml"],
+    deps = [
+        "//lib:ocamllex_menhir_example",
+        "//third-party:alcotest",
+        "//third-party:qcheck-alcotest"
+    ],
+    compiler_flags = [
+        "-cclib",
+        "-lunixbyt",
+        "-cclib",
+        "-lunixnat",
+    ],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None
