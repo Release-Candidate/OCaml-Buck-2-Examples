@@ -1,0 +1,46 @@
+# A list of available rules and their signatures can be found here: https://buck2.build/docs/api/rules/
+
+export_file(
+    name = "ppx_usage_example.mli",
+    src = "ppx_usage_example.mli",
+    visibility = [
+        ":ppx_usage_example",
+        ":ppx_usage_example__",
+    ],
+)
+
+# buildifier: disable=no-effect
+ocaml_library(
+    name = "ppx_usage_example__",
+    srcs = [
+        "ppx_usage_example.ml",
+        ":ppx_usage_example.mli",
+    ],
+    compiler_flags = [
+        "-no-alias-deps",
+        "-w",
+        "-49",
+    ],
+    visibility = [":ppx_usage_example"],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+ocaml_library(
+    name = "ppx_usage_example",
+    srcs = ["./ast.ml", "./interpreter.ml", "./lexer.ml", "./parser.mly"],
+    compiler_flags = [
+        "-no-alias-deps",
+        "-w",
+        "-49",
+        "-open",
+        "Ppx_usage_example",
+    ],
+    ocamldep_flags = [
+        "-open",
+        "Ppx_usage_example",
+        "-map",
+        "$(location :ppx_usage_example.mli)",
+    ],
+    deps = [":ppx_usage_example__"],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None

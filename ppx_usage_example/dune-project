@@ -4,6 +4,8 @@
 
 (generate_opam_files true)
 
+(using menhir 2.1)
+
 (source
  (github Release-Candidate/OCaml-Buck-2-Examples))
 
@@ -20,7 +22,7 @@
  (synopsis "Buck 2 Sedlex and Menhir example.")
  (description
   "Buck 2 Sedlex and Menhir example - shows the usage of PPX libraries with Buck 2. Contains a library, an executable that uses the library and tests.")
- (depends ocaml dune)
+ (depends ocaml dune sedlex menhir menhirlib)
  (tags (buck2)))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project

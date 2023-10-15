@@ -1,2 +1,3 @@
 (test
- (name ppx_usage_example))
+ (name ppx_usage_example_test)
+ (libraries alcotest qcheck-alcotest ppx_usage_example))
