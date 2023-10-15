@@ -1,2 +1,3 @@
 (test
- (name ocamllex_menhir_example))
+ (name ocamllex_menhir_example_test)
+ (libraries alcotest qcheck-alcotest ocamllex_menhir_example))
