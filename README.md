@@ -40,7 +40,7 @@ Each example project directory contains a `README.md` file explaining its Buck 2
 
 - [./basic_example/](./basic_example/) - a OCaml project which uses Opam package dependencies, but no PPX. Contains a library, an executable that uses the library and tests of the library.
 - [./ocamllex_menhir_example/](./ocamllex_menhir_example/) - a OCaml project which uses OCamlLex and Menhir to generate OCaml code. Contains a library, an executable that uses the library and tests of the library.
-- [./ppx_usage_example/](./ppx_usage_example/) - a OCaml project which uses Sedlex and Menhir as code generators and PPX for Sedlex and Alcotest to show the usage of PPX libraries. Contains a library, an executable that uses the library and tests of the library.
+- [./ppx_usage_example/](./ppx_usage_example/) - a OCaml project which uses Sedlex and Menhir as code generators and PPX for Sedlex to show the usage of PPX libraries. Contains a library, an executable that uses the library and tests of the library.
 
 All of these examples also use Dune configuration files, so you can compare them to the `BUCK` files.
 
