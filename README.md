@@ -24,7 +24,7 @@ You need the following:
 
 Install Buck 2 like documented at [Buck 2 - Getting Started](https://buck2.build/docs/getting_started/).
 
-Copy the script `dromedary.py` from the `ocaml-scripts` repository to some place you can use it in your project(s), no "real" installation needed.
+Copy the scripts `meta2json.py`, `rules.py` and `dromedary.py` from the `ocaml-scripts` repository to some place you can use it in your project(s), no "real" installation needed. But all three must be in the same directory.
 
 ### Optional Tools and Extensions
 
