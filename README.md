@@ -6,7 +6,7 @@ This contains documentation and examples on how to use Buck 2 to build OCaml pro
   - [Optional Tools and Extensions](#optional-tools-and-extensions)
 - [Usage](#usage)
 - [Examples](#examples)
-- [Other OCaml Examples using Buck 2](#other-ocaml-examples-using-buck-2)
+- [Other Buck 2 with OCaml Resources](#other-buck-2-with-ocaml-resources)
 - [Questions and Answers](#questions-and-answers)
   - [Does Buck2 support OCaml on Windows?](#does-buck2-support-ocaml-on-windows)
   - [Can I use Dune (or any other build system) too?](#can-i-use-dune-or-any-other-build-system-too)
@@ -44,9 +44,10 @@ Each example project directory contains a `README.md` file explaining its Buck 2
 
 All of these examples also use Dune configuration files, so you can compare them to the `BUCK` files.
 
-## Other OCaml Examples using Buck 2
+## Other Buck 2 with OCaml Resources
 
 - the official Facebook/Meta examples in the [Buck 2 GitHub Repo](https://github.com/facebook/buck2/tree/main/examples/with_prelude/ocaml).
+- ICFP 2023, **Shayne Fletcher Neil Mitchell**: [Buck2 for OCaml Users and Developers](https://ndmitchell.com/downloads/slides-buck2_for_ocaml_users_and_developers-09_sep_2023.pdf)
 
 ## Questions and Answers
 
