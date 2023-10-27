@@ -20,7 +20,7 @@ This contains documentation and examples on how to use Buck 2 to build OCaml pro
 You need the following:
 
 - Buck 2: [Buck2 Official Website](https://buck2.build/)
-- Facebook's/Meta's Python-scripts to handle dependencies on Opam packages and generate Buck 2 configuration files: [ocaml-scripts at GitHub](https://github.com/Release-Candidate/ocaml-scripts).
+- Facebook's/Meta's Python-scripts to handle dependencies on Opam packages and generate Buck 2 configuration files: [ocaml-scripts at GitHub](https://github.com/facebook/ocaml-scripts).
 
 Install Buck 2 like documented at [Buck 2 - Getting Started](https://buck2.build/docs/getting_started/).
 
