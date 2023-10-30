@@ -41,6 +41,7 @@ ocaml_library(
         "-map",
         "$(location :ocamllex_menhir_example.mli)",
     ],
-    deps = [":ocamllex_menhir_example__"],
+    deps = [":ocamllex_menhir_example__",
+            "//third-party:menhirLib"],
     visibility = ["PUBLIC"],
 ) if not host_info().os.is_windows else None

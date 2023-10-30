@@ -3,8 +3,17 @@
 This contains documentation and examples on how to use Buck 2 to build OCaml projects.
 
 - [Installation](#installation)
+  - [This Repository](#this-repository)
   - [Optional Tools and Extensions](#optional-tools-and-extensions)
-- [Usage](#usage)
+- [Buck 2 Usage with OCaml](#buck-2-usage-with-ocaml)
+  - [Initialize a Buck 2 Project](#initialize-a-buck-2-project)
+  - [Generate a New Opam Switch and Install Packages](#generate-a-new-opam-switch-and-install-packages)
+  - [Use the Packages of an Existing Opam Switch](#use-the-packages-of-an-existing-opam-switch)
+  - [Buck 2 Target Configuration](#buck-2-target-configuration)
+    - [Libraries](#libraries)
+    - [Executables](#executables)
+    - [PPX](#ppx)
+    - [Aliases](#aliases)
 - [Examples](#examples)
 - [Other Buck 2 with OCaml Resources](#other-buck-2-with-ocaml-resources)
 - [Questions and Answers](#questions-and-answers)
@@ -12,6 +21,7 @@ This contains documentation and examples on how to use Buck 2 to build OCaml pro
   - [Can I use Dune (or any other build system) too?](#can-i-use-dune-or-any-other-build-system-too)
   - [Why Buck 2 and not Dune (or other build systems)?](#why-buck-2-and-not-dune-or-other-build-systems)
   - [Why Buck 2 and not Bazel?](#why-buck-2-and-not-bazel)
+  - [Error Message "inconsistent assumptions over implementation"](#error-message-inconsistent-assumptions-over-implementation)
 - [Contributions](#contributions)
 - [License](#license)
 
@@ -20,11 +30,18 @@ This contains documentation and examples on how to use Buck 2 to build OCaml pro
 You need the following:
 
 - Buck 2: [Buck2 Official Website](https://buck2.build/)
-- Facebook's/Meta's Python-scripts to handle dependencies on Opam packages and generate Buck 2 configuration files: [ocaml-scripts at GitHub](https://github.com/facebook/ocaml-scripts).
+- Facebook's/Meta's Python scripts to handle dependencies on Opam packages and generate Buck 2 configuration files: [ocaml-scripts at GitHub](https://github.com/facebook/ocaml-scripts).
+- Python 3, Python 3.8 or newer.
 
 Install Buck 2 like documented at [Buck 2 - Getting Started](https://buck2.build/docs/getting_started/).
 
-Copy the scripts `meta2json.py`, `rules.py` and `dromedary.py` from the `ocaml-scripts` repository to some place you can use it in your project(s), no "real" installation needed. But all three must be in the same directory.
+Copy the scripts `meta2json.py`, `rules.py` and `dromedary.py` from the `ocaml-scripts` repository to some place you can use it in your project(s), no "real" installation needed. **Warning**: all three must be in the same directory.
+
+### This Repository
+
+To actually clone the Buck 2 prelude into the `prelude` subdirectories of this repository, you have to update them:
+
+- Run `git submodule update --init` in the root directory [./](./).
 
 ### Optional Tools and Extensions
 
@@ -32,13 +49,373 @@ Buck 2 has an integrated (Starlark) LSP, which can be started using `buck2 lsp` 
 
 - VS Code/VSCodium: [Buck2 LSP](https://marketplace.visualstudio.com/items?itemName=PeerStudios.buck2-lsp-adapter) GitHub: [Buck2 LSP - GitHub](https://github.com/PeerStudios/buck2-lsp-adapter)
 
-## Usage
+## Buck 2 Usage with OCaml
+
+To generate a new OCaml project with Buck 2:
+
+1. Generate the Buck 2 project structure using `buck2 init`
+2. Generate a new Opam switch (a sandbox) and a Buck 2 configuration file for the Opam packages, using `dromedary.py` and a **dromedary** configuration file from Meta's `ocaml-scripts`.
+3. Edit the Buck 2 configuration files for the build targets
+
+To use Buck 2 for an existing OCaml project:
+
+1. Generate the Buck 2 project structure using `buck2 init`
+2. Generate a Buck 2 configuration file for the Opam packages of an existing Opam switch (sandbox), using `dromedary.py` from Meta's `ocaml-scripts`.
+3. Edit the Buck 2 configuration files for the build targets
+
+### Initialize a Buck 2 Project
+
+The following steps are needed to setup a Buck 2 project. These are the same for new and already existing OCaml projects.
+
+- `buck2 init --git` to generate all needed files and directories and add the Buck 2 prelude directory as a git submodule, so you are able to update it using git. The [Prelude](https://github.com/facebook/buck2/tree/main/prelude) of Buck 2 contains the build rules for every language, for example the ones for [OCaml](https://github.com/facebook/buck2/tree/main/prelude/ocaml).
+- Building the generated default target using `buck2 build //..` should work without errors now:
+
+    ```text
+    % buck2 build //...
+
+    Build ID: a125ba60-835a-4afb-813f-cede508c833f
+    Jobs completed: 6. Time elapsed: 0.0s.
+    Cache hits: 0%. Commands: 1 (cached: 0, remote: 0, local: 1)
+    BUILD SUCCEEDED
+    ```
+
+- Add the needed toolchains to `./toolchains/BUCK`:. edit the file `./toolchains/BUCK` as follows, to include the Python and C++ toolchains, which are always needed, and the OCaml toolchain:
+
+```python
+load("@prelude//toolchains:cxx.bzl", "system_cxx_toolchain")
+load("@prelude//toolchains:genrule.bzl", "system_genrule_toolchain")
+load("@prelude//toolchains:ocaml.bzl", "system_ocaml_toolchain")
+load("@prelude//toolchains:python.bzl", "system_python_bootstrap_toolchain")
+
+system_cxx_toolchain(
+    name = "cxx",
+    visibility = ["PUBLIC"],
+)
+
+system_genrule_toolchain(
+    name = "genrule",
+    visibility = ["PUBLIC"],
+)
+
+system_ocaml_toolchain(
+    name = "ocaml",
+    visibility = ["PUBLIC"],
+)
+
+system_python_bootstrap_toolchain(
+    name = "python_bootstrap",
+    visibility = ["PUBLIC"],
+)
+
+```
+
+- Generate a subdirectory `./third-party` in the prohect root directory to hold the information about third-party packages. The name can be any you like, but `third-party` is the canonical one, that's also used in all examples. If you've chosen another one, substitute `third-party` with your directory name in all of the documentation.
+
+### Generate a New Opam Switch and Install Packages
+
+To generate a new switch and install Opam packages in this switch, do the following:
+
+- Edit the JSON configuration file `./third-party/dromedary.json`.
+- Fields, these are the arguments you would pass to `opam create`:
+  - `name`, a string: the path to the Opam sandbox or the name of the global Opam switch to create.
+  - `compiler`, a string: the name of the compiler to use.
+  - `packages`, a list of strings: the name and optionally versions of the packages to install in the Opam switch.
+- The only mandatory field is `packages`, the default for `name` is `./` and the default for `compiler` is `ocaml-variants`.
+
+- Example file `./third-party/dromedary.json`:
+
+  ```json
+  {
+      "name": "./",
+      "compiler": "ocaml-variants",
+      "packages": [
+          "menhirLib",
+          "sedlex=3.2",
+          "alcotest>=1.7.0"
+      ]
+  }
+  ```
+
+  results in the following opam command in the project root: `opam switch create ./third-party/ ocaml-variants 'menhirLib' 'sedlex=3.2' 'alcotest>=1.7.0'`
+
+- Run `python3 dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json`. Instead of `dromedary.py` you need to use the actual path to the Python script. Substitute `third-party` with the name you have chosen for your subdirectory.
+- The file `./third-party/BUCK` should now have been created.
+- The symlink `./third-party/opam` should link to the generated Opam switch.
+- Running `buck2 targets //third-party:` (or the name of your subdirectory instead of `third-party`) should now list all installed Opam packages of the switch.
+
+```text
+% buck2 targets //third-party:
+Build ID: ed8ad382-6848-44c7-842c-a537fa916411
+Jobs completed: 4. Time elapsed: 0.3s.
+root//third-party:alcotest
+root//third-party:alcotest.alcotest-plugin
+root//third-party:alcotest.engine
+root//third-party:alcotest.engine.alcotest_engine-plugin
+root//third-party:alcotest.runtime.js
+root//third-party:alcotest.stdlib_ext
+root//third-party:alcotest.stdlib_ext.alcotest_stdlib_ext-plugin
+root//third-party:astring
+root//third-party:astring.astring-plugin
+root//third-party:astring.top
+root//third-party:astring.top.astring_top-plugin
+root//third-party:base
+root//third-party:base.base-plugin
+...
+```
+
+### Use the Packages of an Existing Opam Switch
+
+To use all opam packages of an existing Opam switch (or sandbox) with name or directory `OPAM_SWITCH`, do the following:
+
+- Run `python3 dromedary.py --switch OPAM_SWITCH -o ./third-party/BUCK`. Instead of `dromedary.py` you need to use the actual path to the Python script. Substitute `third-party` with the name you have chosen for your subdirectory.
+- The file `./third-party/BUCK` should now have been created.
+- The symlink `./third-party/opam` should link to the path of the Opam switch.
+- Running `buck2 targets //third-party:` (or the name of your subdirectory instead of `third-party`) should now list all installed Opam packages of the switch.
+
+```text
+% buck2 targets //third-party:
+Build ID: ed8ad382-6848-44c7-842c-a537fa916411
+Jobs completed: 4. Time elapsed: 0.3s.
+root//third-party:alcotest
+root//third-party:alcotest.alcotest-plugin
+root//third-party:alcotest.engine
+root//third-party:alcotest.engine.alcotest_engine-plugin
+root//third-party:alcotest.runtime.js
+root//third-party:alcotest.stdlib_ext
+root//third-party:alcotest.stdlib_ext.alcotest_stdlib_ext-plugin
+root//third-party:astring
+root//third-party:astring.astring-plugin
+root//third-party:astring.top
+root//third-party:astring.top.astring_top-plugin
+root//third-party:base
+root//third-party:base.base-plugin
+...
+```
+
+### Buck 2 Target Configuration
+
+#### Libraries
+
+**File `./lib/BUCK`**
+
+This is the easiest case, just compile all `ml` files into a library named `my_project`. `deps` would hold library names the library depends on.
+
+```python
+ocaml_library(
+    name = "my_project",
+    srcs = ["./*.ml"],
+    deps = [],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None
+```
+
+But this library does not contain the files in a single module. For example the module `Bar` of the file `bar.ml` is named `Bar`, not `My_project.Bar`.
+
+To have all the files of the library contained in a parent module `My_project`, you need to do a mapping:
+
+**File `./lib/my_project.mli`**
+
+```ocaml
+(* for file foo.ml *)
+module Foo = Foo
+
+(* for file bar.ml *)
+module Bar = Bar
+```
+
+**File `./lib/my_project.ml`**
+
+```ocaml
+(* for file foo.ml *)
+module Foo = Foo
+
+(* for file bar.ml *)
+module Bar = Bar
+```
+
+**File `./lib/BUCK`**
+
+Give a `name` to the file `my_project.mli`, so we can use that in other rules.
+
+```python
+export_file(
+    name = "my_project.mli",
+    src = "my_project.mli",
+    visibility = [
+        ":my_project",
+        ":my_project__",
+    ],
+)
+```
+
+Add the mapping as an extra target.
+
+```python
+# buildifier: disable=no-effect
+ocaml_library(
+    name = "my_project__",
+    srcs = [
+        "my_project.ml",
+        ":my_project.mli",
+    ],
+    compiler_flags = [
+        "-no-alias-deps",
+    ],
+    visibility = [":my_project"],
+) if not host_info().os.is_windows else None
+```
+
+Compiler the library, using the mapping. `ocamldep_flags` are flags to be passed to `ocamldep`.
+
+```python
+# buildifier: disable=no-effect
+ocaml_library(
+    name = "my_project",
+    srcs = ["./foo.ml", "./bar.ml"],
+    compiler_flags = [
+        "-no-alias-deps",
+        "-open",
+        "My_project",
+    ],
+    ocamldep_flags = [
+        "-open",
+        "My_project",
+        "-map",
+        "$(location :my_project.mli)",
+    ],
+    deps = [":my_project__"],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None
+```
+
+#### Executables
+
+**File `./bin/BUCK`**
+
+This binary named `my_project` is contained in one source file, `./main.ml` and uses the "internal" library `my_project` located in the subdirectory `lib` of the project root.
+
+```python
+ocaml_binary(
+    name = "my_project",
+    srcs = ["./main.ml"],
+    deps = [
+        "//lib:my_project",
+    ],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None
+```
+
+**File `./test/BUCK`**
+
+This test binary named `my_project` is contained in one source file, `./my_project_test.ml` and uses the "internal" library `my_project` located in the subdirectory `lib` of the project root and the libraries `alcotest` and `qcheck-alcotest` from the `third-party` subdirectory.
+
+The binary is missing some libraries when linking, we have to pass `-cclib -lunixbyt -cclib -lunixnat` to the OCaml compiler.
+
+```python
+ocaml_binary(
+    name = "my_project",
+    srcs = ["./my_project_test.ml"],
+    deps = [
+        "//lib:my_project",
+        "//third-party:alcotest",
+        "//third-party:qcheck-alcotest"
+    ],
+    compiler_flags = [
+        "-cclib",
+        "-lunixbyt",
+        "-cclib",
+        "-lunixnat",
+    ],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None
+```
+
+#### PPX
+
+To compile a library using a PPX library, we have to first generate an executable from the PPX. Than use this executable to parse the the source file and generate the actual OCaml source file to be compiled by the OCaml compiler.
+
+**File `./lib/driver.ml`**
+
+This file (yes, that is all) is compiled to an executable, that later parses the source files containing the PPX syntax.
+
+```python
+let () = Ppxlib.Driver.standalone ()
+```
+
+**File `./lib/BUCK`**
+
+This rule generates the executable named `ppx` from the `./lib/driver.ml` source file and the PPX libraries.
+
+```python
+ocaml_binary(
+    name = "ppx",
+    srcs = ["./driver.ml"],
+    compiler_flags = [
+        "-linkall",
+    ],
+    deps = [
+        "//third-party:sedlex",
+        "//third-party:sedlex.ppx",
+    ],
+) if not host_info().os.is_windows else None
+```
+
+**File `./lib/BUCK`**
+
+Now we use the PPX executable named `ppx` from above to parse the PPX syntax. It is passed to the OCaml compiler using `-ppx $(exe_target :ppx) --as-ppx`.
+
+```python
+ocaml_library(
+    name = "my_project",
+    srcs = ["./ast.ml", "./interpreter.ml", "./lexer_ex.ml"],
+    compiler_flags = [
+        "-no-alias-deps",
+        "-ppx",
+        "$(exe_target :ppx) --as-ppx",
+    ],
+    deps = ["//third-party:sedlex",
+            "//third-party:sedlex.ppx"],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None
+```
+
+#### Aliases
+
+You can use aliases for targets, for example in subdirectories.
+
+If you have 3 subdirectories, `bin`, `lib` and `test`, and the target in each subdirectory has the name `my_project` defined in its `BUCK` file, you can define the following aliases:
+
+File `./BUCK` in the project root defines the aliases:
+
+```python
+alias(
+    name="bin",
+    actual="//bin:my_project",
+    visibility=["PUBLIC"],
+)
+
+alias(
+    name="lib",
+    actual="//lib:my_project",
+    visibility=["PUBLIC"],
+)
+
+alias(
+    name="test",
+    actual="//test:my_project",
+    visibility=["PUBLIC"],
+)
+```
+
+So, instead of `buck2 run //test:my_project` you can now use `buck2 run //:test`
+
+See [Examples](#examples).
 
 ## Examples
 
-Each example project directory contains a `README.md` file explaining its Buck 2 configuration files and how to generate them.
+Each example project directory contains a `README.md` file explaining its Buck 2 configuration files.
 
-- [./basic_example/](./basic_example/) - a OCaml project which uses Opam package dependencies, but no PPX. Contains a library, an executable that uses the library and tests of the library.
+- [./my_project/](./my_project/) - a OCaml project which uses Opam package dependencies, but no PPX. Contains a library, an executable that uses the library and tests of the library.
 - [./ocamllex_menhir_example/](./ocamllex_menhir_example/) - a OCaml project which uses OCamlLex and Menhir to generate OCaml code. Contains a library, an executable that uses the library and tests of the library.
 - [./ppx_usage_example/](./ppx_usage_example/) - a OCaml project which uses Sedlex and Menhir as code generators and PPX for Sedlex to show the usage of PPX libraries. Contains a library, an executable that uses the library and tests of the library.
 
@@ -47,7 +424,7 @@ All of these examples also use Dune configuration files, so you can compare them
 ## Other Buck 2 with OCaml Resources
 
 - the official Facebook/Meta examples in the [Buck 2 GitHub Repo](https://github.com/facebook/buck2/tree/main/examples/with_prelude/ocaml).
-- ICFP 2023, **Shayne Fletcher Neil Mitchell**: [Buck2 for OCaml Users and Developers](https://ndmitchell.com/downloads/slides-buck2_for_ocaml_users_and_developers-09_sep_2023.pdf)
+- ICFP 2023, **Shayne Fletcher, Neil Mitchell**: [Buck2 for OCaml Users and Developers](https://ndmitchell.com/downloads/slides-buck2_for_ocaml_users_and_developers-09_sep_2023.pdf)
 
 ## Questions and Answers
 
@@ -69,6 +446,18 @@ Buck2 has OCaml support from Meta itself, not a third party and it is written in
 But Bazel has more mature support as Buck 2 is much younger and less used.
 
 There is Bazel support for OCaml by [OBazl](https://github.com/obazl), documentation: [The OBazl Book](https://obazl.github.io/docs_obazl/). I have never tried Bazel (or the OCaml support), so I cannot say anything about it. Try it out for yourself.
+
+### Error Message "inconsistent assumptions over implementation"
+
+If you are getting an error message like
+
+```text
+Error: Files third-party/opam/lib/uutf/uutf.cmxa
+       and /Users/roland/.opam/5.0.0/lib/ocaml/stdlib.cmxa
+       make inconsistent assumptions over implementation Stdlib__String
+```
+
+The Opam environment of your shell and the one used by Buck 2 may be off. Set the Opam environment to the one of the right switch using `opam switch BUCK2_SWICH_NAME` and call `opam env` afterwards. The output of `opam switch BUCK2_SWICH_NAME` tells you how. Then clean your project: `buck2 clean` and rebuild everything: `buck2 build //...`
 
 ## Contributions
 

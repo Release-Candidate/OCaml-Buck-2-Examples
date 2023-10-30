@@ -74,15 +74,6 @@ export_file(
 
 # buildifier: disable=no-effect
 sh_binary(
-    name = "ocamllsp-exe",
-    main = "opam/bin/ocamllsp",
-    visibility = [
-        "PUBLIC",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-sh_binary(
     name = "ocamlprof-exe",
     main = "opam/bin/ocamlprof",
     visibility = [
@@ -110,26 +101,8 @@ sh_binary(
 
 # buildifier: disable=no-effect
 sh_binary(
-    name = "cppo-exe",
-    main = "opam/bin/cppo",
-    visibility = [
-        "PUBLIC",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-sh_binary(
     name = "ocamlruni-exe",
     main = "opam/bin/ocamlruni",
-    visibility = [
-        "PUBLIC",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-sh_binary(
-    name = "ydump-exe",
-    main = "opam/bin/ydump",
     visibility = [
         "PUBLIC",
     ],
@@ -338,11 +311,11 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":unix",
-        ":fmt.tty",
-        ":astring",
         ":fmt",
         ":alcotest.engine",
+        ":astring",
+        ":unix",
+        ":fmt.tty",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -376,14 +349,14 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":astring",
         ":fmt",
+        ":astring",
         ":stdlib-shims",
-        ":uutf",
-        ":fmt.cli",
-        ":alcotest.stdlib_ext",
-        ":re",
         ":cmdliner",
+        ":re",
+        ":alcotest.stdlib_ext",
+        ":fmt.cli",
+        ":uutf",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -411,9 +384,9 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":uutf",
-        ":astring",
         ":cmdliner",
+        ":astring",
+        ":uutf",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -495,60 +468,6 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
     ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "camlp-streams",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "camlp-streams",
-    lib_dir = "",
-    include_dir = "opam/lib/camlp-streams",
-    native_lib = "opam/lib/camlp-streams/camlp_streams.cmxa",
-    bytecode_lib = "opam/lib/camlp-streams/camlp_streams.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "camlp-streams.camlp_streams-plugin",
-    src = "opam/lib/camlp-streams/camlp_streams.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "chrome-trace",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "chrome-trace",
-    lib_dir = "",
-    include_dir = "opam/lib/chrome-trace",
-    native_lib = "opam/lib/chrome-trace/chrome_trace.cmxa",
-    bytecode_lib = "opam/lib/chrome-trace/chrome_trace.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "chrome-trace.chrome_trace-plugin",
-    src = "opam/lib/chrome-trace/chrome_trace.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -658,8 +577,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":dynlink",
         ":compiler-libs.optcomp",
+        ":dynlink",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -708,52 +627,6 @@ prebuilt_ocaml_library(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
-    name = "cppo",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "cppo",
-    lib_dir = "",
-    include_dir = "opam/lib/cppo",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "csexp",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "csexp",
-    lib_dir = "",
-    include_dir = "opam/lib/csexp",
-    native_lib = "opam/lib/csexp/csexp.cmxa",
-    bytecode_lib = "opam/lib/csexp/csexp.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "csexp.csexp-plugin",
-    src = "opam/lib/csexp/csexp.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
     name = "dune",
     visibility = [
         "PUBLIC",
@@ -769,132 +642,6 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
     ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "dune-build-info",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "dune-build-info",
-    lib_dir = "",
-    include_dir = "opam/lib/dune-build-info",
-    native_lib = "opam/lib/dune-build-info/build_info.cmxa",
-    bytecode_lib = "opam/lib/dune-build-info/build_info.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "dune-build-info.build_info-plugin",
-    src = "opam/lib/dune-build-info/build_info.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "dune-rpc",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "dune-rpc",
-    lib_dir = "",
-    include_dir = "opam/lib/dune-rpc",
-    native_lib = "opam/lib/dune-rpc/dune_rpc.cmxa",
-    bytecode_lib = "opam/lib/dune-rpc/dune_rpc.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":ordering",
-        ":csexp",
-        ":pp",
-        ":stdune",
-        ":dune-rpc.private",
-        ":xdg",
-        ":stdune.filesystem_stubs",
-        ":dyn",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "dune-rpc.dune_rpc-plugin",
-    src = "opam/lib/dune-rpc/dune_rpc.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "dune-rpc.private",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "dune-rpc.private",
-    lib_dir = "",
-    include_dir = "opam/lib/dune-rpc/private",
-    native_lib = "opam/lib/dune-rpc/private/dune_rpc_private.cmxa",
-    bytecode_lib = "opam/lib/dune-rpc/private/dune_rpc_private.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":unix",
-        ":ordering",
-        ":csexp",
-        ":stdune",
-        ":pp",
-        ":xdg",
-        ":stdune.filesystem_stubs",
-        ":dyn",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "dune-rpc.private.dune_rpc_private-plugin",
-    src = "opam/lib/dune-rpc/private/dune_rpc_private.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "dyn",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "dyn",
-    lib_dir = "",
-    include_dir = "opam/lib/dyn",
-    native_lib = "opam/lib/dyn/dyn.cmxa",
-    bytecode_lib = "opam/lib/dyn/dyn.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":pp",
-        ":ordering",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "dyn.dyn-plugin",
-    src = "opam/lib/dyn/dyn.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -916,38 +663,6 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
     ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "fiber",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "fiber",
-    lib_dir = "",
-    include_dir = "opam/lib/fiber",
-    native_lib = "opam/lib/fiber/fiber.cmxa",
-    bytecode_lib = "opam/lib/fiber/fiber.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":ordering",
-        ":stdune",
-        ":pp",
-        ":stdune.filesystem_stubs",
-        ":dyn",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "fiber.fiber-plugin",
-    src = "opam/lib/fiber/fiber.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -988,8 +703,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":dynlink",
         ":findlib",
+        ":dynlink",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -1093,8 +808,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":cmdliner",
         ":fmt",
+        ":cmdliner",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -1215,466 +930,6 @@ prebuilt_ocaml_library(
 export_file(
     name = "menhirLib.menhirLib-plugin",
     src = "opam/lib/menhirLib/menhirLib.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.analysis",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.analysis",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/analysis",
-    native_lib = "opam/lib/merlin-lib/analysis/merlin_analysis.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/analysis/merlin_analysis.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":merlin-lib.ocaml_preprocess",
-        ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.config",
-        ":merlin-lib.extend",
-        ":merlin-lib.ocaml_utils",
-        ":merlin-lib.utils",
-        ":merlin-lib.query_protocol",
-        ":merlin-lib.ocaml_merlin_specific",
-        ":merlin-lib.ocaml_typing",
-        ":str",
-        ":merlin-lib.kernel",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.analysis.merlin_analysis-plugin",
-    src = "opam/lib/merlin-lib/analysis/merlin_analysis.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.config",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.config",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/config",
-    native_lib = "opam/lib/merlin-lib/config/merlin_config.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/config/merlin_config.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.config.merlin_config-plugin",
-    src = "opam/lib/merlin-lib/config/merlin_config.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.dot_protocol",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.dot_protocol",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/dot_protocol",
-    native_lib = "opam/lib/merlin-lib/dot_protocol/merlin_dot_protocol.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/dot_protocol/merlin_dot_protocol.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":merlin-lib.utils",
-        ":csexp",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.dot_protocol.merlin_dot_protocol-plugin",
-    src = "opam/lib/merlin-lib/dot_protocol/merlin_dot_protocol.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.extend",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.extend",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/extend",
-    native_lib = "opam/lib/merlin-lib/extend/merlin_extend.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/extend/merlin_extend.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":unix",
-        ":merlin-lib.ocaml_typing",
-        ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.ocaml_utils",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.extend.merlin_extend-plugin",
-    src = "opam/lib/merlin-lib/extend/merlin_extend.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.kernel",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.kernel",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/kernel",
-    native_lib = "opam/lib/merlin-lib/kernel/merlin_kernel.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/kernel/merlin_kernel.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":unix",
-        ":merlin-lib.ocaml_preprocess",
-        ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.os_ipc",
-        ":merlin-lib.config",
-        ":merlin-lib.extend",
-        ":merlin-lib.ocaml_utils",
-        ":merlin-lib.utils",
-        ":merlin-lib.ocaml_merlin_specific",
-        ":merlin-lib.dot_protocol",
-        ":merlin-lib.ocaml_typing",
-        ":str",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.kernel.merlin_kernel-plugin",
-    src = "opam/lib/merlin-lib/kernel/merlin_kernel.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.ocaml_merlin_specific",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.ocaml_merlin_specific",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/ocaml_merlin_specific",
-    native_lib = "opam/lib/merlin-lib/ocaml_merlin_specific/merlin_specific.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/ocaml_merlin_specific/merlin_specific.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":merlin-lib.ocaml_preprocess",
-        ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.ocaml_utils",
-        ":merlin-lib.utils",
-        ":merlin-lib.ocaml_typing",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.ocaml_merlin_specific.merlin_specific-plugin",
-    src = "opam/lib/merlin-lib/ocaml_merlin_specific/merlin_specific.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.ocaml_parsing",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.ocaml_parsing",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/ocaml_parsing",
-    native_lib = "opam/lib/merlin-lib/ocaml_parsing/ocaml_parsing.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/ocaml_parsing/ocaml_parsing.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":merlin-lib.ocaml_utils",
-        ":merlin-lib.utils",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.ocaml_parsing.ocaml_parsing-plugin",
-    src = "opam/lib/merlin-lib/ocaml_parsing/ocaml_parsing.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.ocaml_preprocess",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.ocaml_preprocess",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/ocaml_preprocess",
-    native_lib = "opam/lib/merlin-lib/ocaml_preprocess/ocaml_preprocess.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/ocaml_preprocess/ocaml_preprocess.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":merlin-lib.ocaml_utils",
-        ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.utils",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.ocaml_preprocess.ocaml_preprocess-plugin",
-    src = "opam/lib/merlin-lib/ocaml_preprocess/ocaml_preprocess.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.ocaml_typing",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.ocaml_typing",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/ocaml_typing",
-    native_lib = "opam/lib/merlin-lib/ocaml_typing/ocaml_typing.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/ocaml_typing/ocaml_typing.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":merlin-lib.ocaml_utils",
-        ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.utils",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.ocaml_typing.ocaml_typing-plugin",
-    src = "opam/lib/merlin-lib/ocaml_typing/ocaml_typing.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.ocaml_utils",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.ocaml_utils",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/ocaml_utils",
-    native_lib = "opam/lib/merlin-lib/ocaml_utils/ocaml_utils.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/ocaml_utils/ocaml_utils.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":merlin-lib.config",
-        ":merlin-lib.utils",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.ocaml_utils.ocaml_utils-plugin",
-    src = "opam/lib/merlin-lib/ocaml_utils/ocaml_utils.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.os_ipc",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.os_ipc",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/os_ipc",
-    native_lib = "opam/lib/merlin-lib/os_ipc/os_ipc.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/os_ipc/os_ipc.cma",
-    c_libs = None,
-    native_c_libs = [
-        "opam/lib/merlin-lib/os_ipc/libos_ipc_stubs.a",
-    ],
-    bytecode_c_libs = [
-        "opam/lib/merlin-lib/os_ipc/libos_ipc_stubs.a",
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.os_ipc.os_ipc-plugin",
-    src = "opam/lib/merlin-lib/os_ipc/os_ipc.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.query_commands",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.query_commands",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/query_commands",
-    native_lib = "opam/lib/merlin-lib/query_commands/query_commands.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/query_commands/query_commands.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.analysis",
-        ":merlin-lib.config",
-        ":merlin-lib.ocaml_utils",
-        ":merlin-lib.utils",
-        ":merlin-lib.query_protocol",
-        ":merlin-lib.ocaml_merlin_specific",
-        ":merlin-lib.ocaml_typing",
-        ":str",
-        ":merlin-lib.kernel",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.query_commands.query_commands-plugin",
-    src = "opam/lib/merlin-lib/query_commands/query_commands.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.query_protocol",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.query_protocol",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/query_protocol",
-    native_lib = "opam/lib/merlin-lib/query_protocol/query_protocol.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/query_protocol/query_protocol.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":merlin-lib.ocaml_parsing",
-        ":merlin-lib.kernel",
-        ":merlin-lib.utils",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.query_protocol.query_protocol-plugin",
-    src = "opam/lib/merlin-lib/query_protocol/query_protocol.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "merlin-lib.utils",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "merlin-lib.utils",
-    lib_dir = "",
-    include_dir = "opam/lib/merlin-lib/utils",
-    native_lib = "opam/lib/merlin-lib/utils/merlin_utils.cmxa",
-    bytecode_lib = "opam/lib/merlin-lib/utils/merlin_utils.cma",
-    c_libs = None,
-    native_c_libs = [
-        "opam/lib/merlin-lib/utils/libmerlin_utils_stubs.a",
-    ],
-    bytecode_c_libs = [
-        "opam/lib/merlin-lib/utils/libmerlin_utils_stubs.a",
-    ],
-    bytecode_only = True,
-    deps = [
-        ":unix",
-        ":str",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "merlin-lib.utils.merlin_utils-plugin",
-    src = "opam/lib/merlin-lib/utils/merlin_utils.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1837,25 +1092,6 @@ export_file(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
-    name = "ocaml-lsp-server",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "ocaml-lsp-server",
-    lib_dir = "",
-    include_dir = "opam/lib/ocaml-lsp-server",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
     name = "ocaml-syntax-shims",
     visibility = [
         "PUBLIC",
@@ -1897,34 +1133,6 @@ prebuilt_ocaml_library(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
-    name = "ocamlc-loc",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "ocamlc-loc",
-    lib_dir = "",
-    include_dir = "opam/lib/ocamlc-loc",
-    native_lib = "opam/lib/ocamlc-loc/ocamlc_loc.cmxa",
-    bytecode_lib = "opam/lib/ocamlc-loc/ocamlc_loc.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":dyn",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "ocamlc-loc.ocamlc_loc-plugin",
-    src = "opam/lib/ocamlc-loc/ocamlc_loc.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
     name = "ocamldoc",
     visibility = [
         "PUBLIC",
@@ -1941,118 +1149,6 @@ prebuilt_ocaml_library(
     deps = [
         ":compiler-libs",
     ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "ocamlformat-rpc-lib",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "ocamlformat-rpc-lib",
-    lib_dir = "",
-    include_dir = "opam/lib/ocamlformat-rpc-lib",
-    native_lib = "opam/lib/ocamlformat-rpc-lib/ocamlformat_rpc_lib.cmxa",
-    bytecode_lib = "opam/lib/ocamlformat-rpc-lib/ocamlformat_rpc_lib.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":csexp",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "ocamlformat-rpc-lib.ocamlformat_rpc_lib-plugin",
-    src = "opam/lib/ocamlformat-rpc-lib/ocamlformat_rpc_lib.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "odoc-parser",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "odoc-parser",
-    lib_dir = "",
-    include_dir = "opam/lib/odoc-parser",
-    native_lib = "opam/lib/odoc-parser/odoc_parser.cmxa",
-    bytecode_lib = "opam/lib/odoc-parser/odoc_parser.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":astring",
-        ":result",
-        ":camlp-streams",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "odoc-parser.odoc_parser-plugin",
-    src = "opam/lib/odoc-parser/odoc_parser.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "ordering",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "ordering",
-    lib_dir = "",
-    include_dir = "opam/lib/ordering",
-    native_lib = "opam/lib/ordering/ordering.cmxa",
-    bytecode_lib = "opam/lib/ordering/ordering.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "ordering.ordering-plugin",
-    src = "opam/lib/ordering/ordering.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "pp",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "pp",
-    lib_dir = "",
-    include_dir = "opam/lib/pp",
-    native_lib = "opam/lib/pp/pp.cmxa",
-    bytecode_lib = "opam/lib/pp/pp.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "pp.pp-plugin",
-    src = "opam/lib/pp/pp.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -2084,34 +1180,6 @@ export_file(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
-    name = "ppx_yojson_conv_lib",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "ppx_yojson_conv_lib",
-    lib_dir = "",
-    include_dir = "opam/lib/ppx_yojson_conv_lib",
-    native_lib = "opam/lib/ppx_yojson_conv_lib/ppx_yojson_conv_lib.cmxa",
-    bytecode_lib = "opam/lib/ppx_yojson_conv_lib/ppx_yojson_conv_lib.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":yojson",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "ppx_yojson_conv_lib.ppx_yojson_conv_lib-plugin",
-    src = "opam/lib/ppx_yojson_conv_lib/ppx_yojson_conv_lib.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
     name = "ppxlib",
     visibility = [
         "PUBLIC",
@@ -2128,15 +1196,15 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ocaml-compiler-libs.shadow",
-        ":ppx_derivers",
-        ":ppxlib.traverse_builtins",
-        ":ppxlib.astlib",
-        ":stdlib-shims",
-        ":ppxlib.ast",
         ":ppxlib.stdppx",
         ":sexplib0",
+        ":ppx_derivers",
         ":ppxlib.print_diff",
+        ":ppxlib.astlib",
+        ":ppxlib.ast",
+        ":stdlib-shims",
+        ":ocaml-compiler-libs.shadow",
+        ":ppxlib.traverse_builtins",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -2222,11 +1290,11 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ppxlib.traverse_builtins",
-        ":ppxlib.astlib",
-        ":ppxlib.ast",
         ":ppxlib",
         ":ppxlib.metaquot_lifters",
+        ":ppxlib.astlib",
+        ":ppxlib.ast",
+        ":ppxlib.traverse_builtins",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -2274,11 +1342,11 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ppxlib.traverse_builtins",
-        ":stdlib-shims",
-        ":ppxlib.ast",
         ":ppxlib",
         ":ppxlib.stdppx",
+        ":stdlib-shims",
+        ":ppxlib.ast",
+        ":ppxlib.traverse_builtins",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -2333,8 +1401,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ppxlib",
         ":ppxlib.ast",
+        ":ppxlib",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -2362,8 +1430,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ppxlib",
         ":ppxlib.ast",
+        ":ppxlib",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -2391,8 +1459,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":sexplib0",
         ":stdlib-shims",
+        ":sexplib0",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -2420,11 +1488,11 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ppxlib.traverse_builtins",
-        ":stdlib-shims",
-        ":ppxlib.ast",
         ":ppxlib",
         ":ppxlib.stdppx",
+        ":stdlib-shims",
+        ":ppxlib.ast",
+        ":ppxlib.traverse_builtins",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -2498,11 +1566,11 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
+        ":qcheck-core",
         ":unix",
         ":bytes",
-        ":alcotest",
-        ":qcheck-core",
         ":qcheck-core.runner",
+        ":alcotest",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -2767,33 +1835,6 @@ export_file(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
-    name = "result",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "result",
-    lib_dir = "",
-    include_dir = "opam/lib/result",
-    native_lib = "opam/lib/result/result.cmxa",
-    bytecode_lib = "opam/lib/result/result.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "result.result-plugin",
-    src = "opam/lib/result/result.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
     name = "runtime_events",
     visibility = [
         "PUBLIC",
@@ -2865,10 +1906,10 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ppxlib",
         ":ppxlib.ast",
-        ":sedlex.utils",
         ":sedlex",
+        ":ppxlib",
+        ":sedlex.utils",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -2973,37 +2014,6 @@ export_file(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
-    name = "spawn",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "spawn",
-    lib_dir = "",
-    include_dir = "opam/lib/spawn",
-    native_lib = "opam/lib/spawn/spawn.cmxa",
-    bytecode_lib = "opam/lib/spawn/spawn.cma",
-    c_libs = None,
-    native_c_libs = [
-        "opam/lib/spawn/libspawn_stubs.a",
-    ],
-    bytecode_c_libs = [
-        "opam/lib/spawn/libspawn_stubs.a",
-    ],
-    bytecode_only = True,
-    deps = [
-        ":unix",
-        ":threads",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "spawn.spawn-plugin",
-    src = "opam/lib/spawn/spawn.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
     name = "stdlib",
     visibility = [
         "PUBLIC",
@@ -3046,71 +2056,6 @@ prebuilt_ocaml_library(
 export_file(
     name = "stdlib-shims.stdlib_shims-plugin",
     src = "opam/lib/stdlib-shims/stdlib_shims.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "stdune",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "stdune",
-    lib_dir = "",
-    include_dir = "opam/lib/stdune",
-    native_lib = "opam/lib/stdune/stdune.cmxa",
-    bytecode_lib = "opam/lib/stdune/stdune.cma",
-    c_libs = None,
-    native_c_libs = [
-        "opam/lib/stdune/libstdune_stubs.a",
-    ],
-    bytecode_c_libs = [
-        "opam/lib/stdune/libstdune_stubs.a",
-    ],
-    bytecode_only = True,
-    deps = [
-        ":unix",
-        ":ordering",
-        ":csexp",
-        ":pp",
-        ":stdune.filesystem_stubs",
-        ":dyn",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "stdune.stdune-plugin",
-    src = "opam/lib/stdune/stdune.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "stdune.filesystem_stubs",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "stdune.filesystem_stubs",
-    lib_dir = "",
-    include_dir = "opam/lib/stdune/filesystem_stubs",
-    native_lib = "opam/lib/stdune/filesystem_stubs/dune_filesystem_stubs.cmxa",
-    bytecode_lib = "opam/lib/stdune/filesystem_stubs/dune_filesystem_stubs.cma",
-    c_libs = None,
-    native_c_libs = [
-        "opam/lib/stdune/filesystem_stubs/libdune_filesystem_stubs_stubs.a",
-    ],
-    bytecode_c_libs = [
-        "opam/lib/stdune/filesystem_stubs/libdune_filesystem_stubs_stubs.a",
-    ],
-    bytecode_only = True,
-    deps = [
-        ":unix",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "stdune.filesystem_stubs.dune_filesystem_stubs-plugin",
-    src = "opam/lib/stdune/filesystem_stubs/dune_filesystem_stubs.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -3211,6 +2156,25 @@ export_file(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
+    name = "uchar",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "uchar",
+    lib_dir = "",
+    include_dir = "opam/lib/uchar",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
     name = "unix",
     visibility = [
         "PUBLIC",
@@ -3261,62 +2225,5 @@ prebuilt_ocaml_library(
 export_file(
     name = "uutf.uutf-plugin",
     src = "opam/lib/uutf/uutf.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "xdg",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "xdg",
-    lib_dir = "",
-    include_dir = "opam/lib/xdg",
-    native_lib = "opam/lib/xdg/xdg.cmxa",
-    bytecode_lib = "opam/lib/xdg/xdg.cma",
-    c_libs = None,
-    native_c_libs = [
-        "opam/lib/xdg/libxdg_stubs.a",
-    ],
-    bytecode_c_libs = [
-        "opam/lib/xdg/libxdg_stubs.a",
-    ],
-    bytecode_only = True,
-    deps = [
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "xdg.xdg-plugin",
-    src = "opam/lib/xdg/xdg.cmxs",
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-prebuilt_ocaml_library(
-    name = "yojson",
-    visibility = [
-        "PUBLIC",
-    ],
-    lib_name = "yojson",
-    lib_dir = "",
-    include_dir = "opam/lib/yojson",
-    native_lib = "opam/lib/yojson/yojson.cmxa",
-    bytecode_lib = "opam/lib/yojson/yojson.cma",
-    c_libs = None,
-    native_c_libs = [
-    ],
-    bytecode_c_libs = [
-    ],
-    bytecode_only = True,
-    deps = [
-        ":seq",
-    ],
-) if not host_info().os.is_windows else None
-
-# buildifier: disable=no-effect
-export_file(
-    name = "yojson.yojson-plugin",
-    src = "opam/lib/yojson/yojson.cmxs",
 ) if not host_info().os.is_windows else None
 

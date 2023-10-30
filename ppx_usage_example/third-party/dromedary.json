@@ -1,0 +1,10 @@
+{
+    "name": "./",
+    "compiler": "ocaml-base-compiler",
+    "packages": [
+        "sedlex",
+        "menhirLib",
+        "qcheck-alcotest",
+        "alcotest"
+    ]
+}
