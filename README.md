@@ -203,7 +203,7 @@ This is the easiest case, just compile all `ml` files into a library named `my_p
 ```python
 ocaml_library(
     name = "my_project",
-    srcs = ["./*.ml"],
+    srcs = glob(["./*.ml"]),
     deps = [],
     visibility = ["PUBLIC"],
 ) if not host_info().os.is_windows else None
