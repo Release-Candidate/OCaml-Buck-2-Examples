@@ -22,6 +22,7 @@ This contains documentation and examples on how to use Buck 2 to build OCaml pro
   - [Why Buck 2 and not Dune (or other build systems)?](#why-buck-2-and-not-dune-or-other-build-systems)
   - [Why Buck 2 and not Bazel?](#why-buck-2-and-not-bazel)
   - [Error Message "inconsistent assumptions over implementation"](#error-message-inconsistent-assumptions-over-implementation)
+- [Buck 2 Examples for other Languages](#buck-2-examples-for-other-languages)
 - [Contributions](#contributions)
 - [License](#license)
 
@@ -458,6 +459,10 @@ Error: Files third-party/opam/lib/uutf/uutf.cmxa
 ```
 
 The Opam environment of your shell and the one used by Buck 2 may be off. Set the Opam environment to the one of the right switch using `opam switch BUCK2_SWICH_NAME` and call `opam env` afterwards. The output of `opam switch BUCK2_SWICH_NAME` tells you how. Then clean your project: `buck2 clean` and rebuild everything: `buck2 build //...`
+
+## Buck 2 Examples for other Languages
+
+I've also made an example project using C++ with Conan (the C++ package manager) at [Cxx-Buck2-Examples](https://github.com/Release-Candidate/Cxx-Buck2-Examples).
 
 ## Contributions
 
