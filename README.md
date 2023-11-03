@@ -462,7 +462,7 @@ The Opam environment of your shell and the one used by Buck 2 may be off. Set th
 
 ## Buck 2 Examples for other Languages
 
-I've also made an example project using C++ with Conan (the C++ package manager) at [Cxx-Buck2-Conan-Examples](https://github.com/Release-Candidate/Cxx-Buck2-Conan-Examples).
+I've also made example projects using C++ with vcpkg  as package manager: [Cxx-Buck2-vcpkg-Examples](https://github.com/Release-Candidate/Cxx-Buck2-vcpkg-Examples) and with  Conan (the C++ package manager) at [Cxx-Buck2-Conan-Examples](https://github.com/Release-Candidate/Cxx-Buck2-Conan-Examples).
 
 ## Contributions
 
