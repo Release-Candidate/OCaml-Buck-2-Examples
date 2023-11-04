@@ -1,6 +1,6 @@
 # Inline Test Runners
 
-This shows how to build an OCaml project containing a library in [./lib/](./lib/) with Alcotest inline tests (`ppx_inline_alcotest`), a binary in [./bin/](./bin/) that uses the library and tests of the library in [./test/](./test/) using Buck 2.
+This shows how to build an OCaml project containing a library in [./lib/](./lib/) with Alcotest inline tests (`ppx_inline_alcotest`), a binary in [./bin/](./bin/) that uses the library and inline Alcotest tests of the library in [./test/](./test/) using Buck 2.
 
 - [Setup](#setup)
 - [Buck 2 Targets](#buck-2-targets)
@@ -45,7 +45,7 @@ buck2 run //:test
 - `buck2 build //...` - builds all targets.
 - `buck2 run //:bin` - run the generated executable. This is an alias for `buck2 run //bin:inline_test_runners`.
 - `buck2 run //:lib-inline-runner` - run the inline tests of the library. This is an alias for `buck2 run //lib:inline_runner`.
-- `buck2 run //:test` - run the generated executable. This is an alias for `buck2 run //test:inline_test_runners`.
+- `buck2 run //:test` - run the generated test executable of the inline tests. This is an alias for `buck2 run //test:inline_test_runners`.
 
 ### Examples
 
@@ -100,29 +100,30 @@ Test Successful in 0.001s. 2 tests run.
 Run the tests:
 
 ```text
-> buck2 run //:test
-Build ID: 6e716b79-1c5b-4ef3-90ea-f1a58933892e
-Jobs completed: 3. Time elapsed: 0.0s.
+> buck2 run :test
+Build ID: 4d666109-86fe-4d2d-b830-6afa9c9fc9cb
+Jobs completed: 5. Time elapsed: 0.0s.
 BUILD SUCCEEDED
-qcheck random seed: 514228815
-Testing `Fibonacci Tests'.
-This run has ID `9WQ30JBU'.
+Testing `./OCaml-Buck-2-Examples/inline_test_runners/buck-out/v2/gen/root/213ed1b7ab869379/test/__inline_test_runners__/inline_test_runners'.
+This run has ID `K79WIV7M'.
 
-  [OK]          Naive Fibonacci tests                     0   F0 is 0.
-  [OK]          Naive Fibonacci tests                     1   F1 is 1.
-  [OK]          Naive Fibonacci tests                     2   F2 is 1.
-  [OK]          Naive Fibonacci tests                     3   F3 is 2.
-  [OK]          Naive Fibonacci tests                     4   F4 is 3.
-  [OK]          Naive Fibonacci tests                     5   F5 is 5.
-  [OK]          Naive Fibonacci tests                     6   F6 is 8.
-  [OK]          Naive Fibonacci tests                     7   F7 is 13.
-  [OK]          Naive Fibonacci tests                     8   F8 is 21.
-  [OK]          Naive Fibonacci tests                     9   F9 is 34.
-  [OK]          Naive Fibonacci tests                    10   F10 is 55.
-  [OK]          Compare naive and tail recursive          0   Using Quickcheck.
+  [OK]          test/inline_test_runners_test.ml          0   F10 is 55.
+  [OK]          test/inline_test_runners_test.ml          1   F9 is 34.
+  [OK]          test/inline_test_runners_test.ml          2   F8 is 21.
+  [OK]          test/inline_test_runners_test.ml          3   F7 is 13.
+  [OK]          test/inline_test_runners_test.ml          4   F6 is 8.
+  [OK]          test/inline_test_runners_test.ml          5   F5 is 5.
+  [OK]          test/inline_test_runners_test.ml          6   F4 is 3.
+  [OK]          test/inline_test_runners_test.ml          7   F3 is 2.
+  [OK]          test/inline_test_runners_test.ml          8   F2 is 1.
+  [OK]          test/inline_test_runners_test.ml          9   F1 is 1.
+  [OK]          test/inline_test_runners_test.ml         10   F0 is 0.
+  [OK]          test/inline_test_runners_test.ml         11   F0 is 0.
+  [OK]          lib/fibonacci.ml                          0   fib 5 = fib_tailrec 5.
+  [OK]          lib/fibonacci.ml                          1   fib 2 = fib_tailrec 2.
 
-Full test results in `./OCaml-Buck-2-Examples/inline_test_runners/_build/_tests/Fibonacci Tests'.
-Test Successful in 0.882s. 12 tests run.
+Full test results in `./OCaml-Buck-2-Examples/inline_test_runners/_build/_tests/buck-out-v2-gen-root-213ed1b7ab869379-test-__inline_test_runners__-inline_test_runners'.
+Test Successful in 0.003s. 14 tests run.
 ```
 
 ## Buck 2 Files

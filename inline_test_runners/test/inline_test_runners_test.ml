@@ -13,37 +13,16 @@
 
 open Inline_test_runners.Fibonacci
 
-let () =
-  let open Alcotest in
-  let open QCheck_alcotest in
-  run
-    "Fibonacci Tests"
-    [ ( "Naive Fibonacci tests"
-      , [ test_case "F0 is 0" `Quick (fun () -> (check int) "same ints" 0 (fibonacci 0))
-        ; test_case "F1 is 1" `Quick (fun () -> (check int) "same ints" 1 (fibonacci 1))
-        ; test_case "F2 is 1" `Quick (fun () -> (check int) "same ints" 1 (fibonacci 2))
-        ; test_case "F3 is 2" `Quick (fun () -> (check int) "same ints" 2 (fibonacci 3))
-        ; test_case "F4 is 3" `Quick (fun () -> (check int) "same ints" 3 (fibonacci 4))
-        ; test_case "F5 is 5" `Quick (fun () -> (check int) "same ints" 5 (fibonacci 5))
-        ; test_case "F6 is 8" `Quick (fun () -> (check int) "same ints" 8 (fibonacci 6))
-        ; test_case "F7 is 13" `Quick (fun () -> (check int) "same ints" 13 (fibonacci 7))
-        ; test_case "F8 is 21" `Quick (fun () -> (check int) "same ints" 21 (fibonacci 8))
-        ; test_case "F9 is 34" `Quick (fun () -> (check int) "same ints" 34 (fibonacci 9))
-        ; test_case "F10 is 55" `Quick (fun () ->
-            (check int) "same ints" 55 (fibonacci 10))
-        ] )
-    ; ( "Compare naive and tail recursive"
-      , [ to_alcotest
-            ~colors:true
-            ~verbose:true
-            ~long:true
-            QCheck2.(
-              Test.make
-                ~name:"Using Quickcheck"
-                ~count:100
-                ~print:Print.(int)
-                Gen.(int_range 0 40)
-                (fun n -> fibonacci n = fibonacci_tailrec n))
-        ] )
-    ]
-;;
+let%test "F0 is 0" = Alcotest.(check int) "same ints" (fibonacci 5) (fibonacci_tailrec 5)
+let%test "F0 is 0" = Alcotest.(check int) "same ints" 0 (fibonacci 0)
+let%test "F1 is 1" = Alcotest.(check int) "same ints" 1 (fibonacci 1)
+let%test "F2 is 1" = Alcotest.(check int) "same ints" 1 (fibonacci 2)
+let%test "F3 is 2" = Alcotest.(check int) "same ints" 2 (fibonacci 3)
+let%test "F4 is 3" = Alcotest.(check int) "same ints" 3 (fibonacci 4)
+let%test "F5 is 5" = Alcotest.(check int) "same ints" 5 (fibonacci 5)
+let%test "F6 is 8" = Alcotest.(check int) "same ints" 8 (fibonacci 6)
+let%test "F7 is 13" = Alcotest.(check int) "same ints" 13 (fibonacci 7)
+let%test "F8 is 21" = Alcotest.(check int) "same ints" 21 (fibonacci 8)
+let%test "F9 is 34" = Alcotest.(check int) "same ints" 34 (fibonacci 9)
+let%test "F10 is 55" = Alcotest.(check int) "same ints" 55 (fibonacci 10)
+let () = Ppx_inline_alcotest_runner.run ()

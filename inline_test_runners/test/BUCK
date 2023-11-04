@@ -2,10 +2,23 @@
 
 # buildifier: disable=no-effect
 ocaml_binary(
+    name = "ppx",
+    srcs = ["./driver.ml"],
+    compiler_flags = [
+        "-linkall",
+    ],
+    deps = ["//third-party:ppx_inline_alcotest",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+ocaml_binary(
     name = "inline_test_runners",
     srcs = ["./inline_test_runners_test.ml"],
     deps = [
         "//lib:inline_test_runners",
+        "//third-party:ppx_inline_alcotest",
+        "//third-party:ppx_inline_alcotest.runner",
         "//third-party:alcotest",
         "//third-party:qcheck-alcotest"
     ],
@@ -14,6 +27,8 @@ ocaml_binary(
         "-lunixbyt",
         "-cclib",
         "-lunixnat",
+         "-ppx",
+        "$(exe_target :ppx) --as-ppx",
     ],
     visibility = ["PUBLIC"],
 ) if not host_info().os.is_windows else None

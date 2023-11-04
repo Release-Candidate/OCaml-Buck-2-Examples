@@ -14,7 +14,8 @@ This contains documentation and examples on how to use Buck 2 to build OCaml pro
     - [Executables](#executables)
     - [PPX](#ppx)
     - [Inline Tests (Runners)](#inline-tests-runners)
-      - [Alcotest Inline Runner](#alcotest-inline-runner)
+      - [Alcotest Inline Runner for a Library](#alcotest-inline-runner-for-a-library)
+      - [Alcotest Inline Runner for a Test Executable](#alcotest-inline-runner-for-a-test-executable)
     - [Aliases](#aliases)
 - [Examples](#examples)
 - [Other Buck 2 with OCaml Resources](#other-buck-2-with-ocaml-resources)
@@ -386,7 +387,7 @@ ocaml_library(
 
 To be able to use inline tests, we have to also compile a test runner executable for these to be called. This needs an extra `ocaml_binary` target to run the inline tests.
 
-##### Alcotest Inline Runner
+##### Alcotest Inline Runner for a Library
 
 **File `./lib/BUCK`**
 
@@ -409,12 +410,66 @@ ocaml_binary(
 ) if not host_info().os.is_windows else None
 ```
 
+The processing of the library's sources works the same as above, with a PPX driver executable `:ppx`.
+
 **File `./lib/inline_runner.ml`**
 
 The test runner executable's source.
 
 ```ocaml
 let () = Ppx_inline_alcotest_runner.run ()
+```
+
+##### Alcotest Inline Runner for a Test Executable
+
+**File `./test/BUCK`**
+
+We have to generate an inline test runner executable and link all libraries containing inline tests and the Alcotest inline runner library `ppx_inline_alcotest.runner` with it.
+
+ocaml_binary(
+    name = "ppx",
+    srcs = ["./driver.ml"],
+    compiler_flags = [
+        "-linkall",
+    ],
+    deps = ["//third-party:ppx_inline_alcotest",
+    ],
+) if not host_info().os.is_windows else None
+
+**File `./test/inline_tests.ml`**
+
+The test runner executable's source, add the stanza `let () = Ppx_inline_alcotest_runner.run ()` to run the inline tests.
+
+```ocaml
+(* ... *)
+
+let%test "1 is 1" = Alcotest.(check int) "same ints" 1 1
+
+let () = Ppx_inline_alcotest_runner.run ()
+```
+
+The processing of the executable's sources works the same as above, with a PPX driver executable `:ppx` and by adding the PPX driver to the test executable's config:
+
+```python
+ocaml_binary(
+    name = "inline_test_runner",
+    srcs = [YOUR_SOURCES],
+    deps = [
+        "//lib:LIBRARY_TO_TEST",
+        "//third-party:ppx_inline_alcotest",
+        "//third-party:ppx_inline_alcotest.runner",
+        "//third-party:alcotest"
+    ],
+    compiler_flags = [
+        "-cclib",
+        "-lunixbyt",
+        "-cclib",
+        "-lunixnat",
+         "-ppx",
+        "$(exe_target :ppx) --as-ppx",
+    ],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None
 ```
 
 #### Aliases
