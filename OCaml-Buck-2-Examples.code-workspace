@@ -29,7 +29,7 @@
 		],
 		"ocaml.sandbox": {
 			"kind": "opam",
-			"switch": "${workspaceFolder:OCaml-Buck-2-Examples}/ocamllex_menhir_example/third-party"
+			"switch": "5.0.0"
 		}
 	},
 	"extensions": {

@@ -1,0 +1,24 @@
+# A list of available rules and their signatures can be found here: https://buck2.build/docs/api/rules/
+alias(
+    name="bin",
+    actual="//bin:inline_test_runners",
+    visibility=["PUBLIC"],
+)
+
+alias(
+    name="lib",
+    actual="//lib:inline_test_runners",
+    visibility=["PUBLIC"],
+)
+
+alias(
+    name="lib-inline-runner",
+    actual="//lib:inline_runner",
+    visibility=["PUBLIC"],
+)
+
+alias(
+    name="test",
+    actual="//test:inline_test_runners",
+    visibility=["PUBLIC"],
+)

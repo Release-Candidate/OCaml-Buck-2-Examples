@@ -1,0 +1,17 @@
+# A list of available rules and their signatures can be found here: https://buck2.build/docs/api/rules/
+
+# buildifier: disable=no-effect
+ocaml_binary(
+    name = "inline_test_runners",
+    srcs = ["./main.ml"],
+    compiler_flags = [
+        "-cclib",
+        "-lunixbyt",
+        "-cclib",
+        "-lunixnat",
+    ],
+    deps = [
+        "//lib:inline_test_runners",
+    ],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None

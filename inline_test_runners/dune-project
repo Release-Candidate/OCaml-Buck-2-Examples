@@ -1,0 +1,26 @@
+(lang dune 3.11)
+
+(name inline_test_runners)
+
+(generate_opam_files true)
+
+(source
+ (github Release-Candidate/OCaml-Buck-2-Examples))
+
+(authors "Roland Csaszar")
+
+(maintainers "Roland Csaszar")
+
+(license MIT)
+
+(documentation https://github.com/Release-Candidate/OCaml-Buck-2-Examples)
+
+(package
+ (name inline_test_runners)
+ (synopsis "Buck 2 OCaml example using inline test runners.")
+ (description
+  "Buck 2 OCaml example using inline test runners. Contains a library, an executable that uses the library and tests which uses  Alcotest and Expect PPX inline test runners.")
+ (depends ocaml dune ppx_inline_alcotest)
+ (tags (buck2)))
+
+; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project

@@ -1,0 +1,3 @@
+(test
+ (name inline_test_runners_test)
+ (libraries alcotest qcheck-alcotest inline_test_runners))

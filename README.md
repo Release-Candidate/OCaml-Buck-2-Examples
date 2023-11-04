@@ -13,6 +13,8 @@ This contains documentation and examples on how to use Buck 2 to build OCaml pro
     - [Libraries](#libraries)
     - [Executables](#executables)
     - [PPX](#ppx)
+    - [Inline Tests (Runners)](#inline-tests-runners)
+      - [Alcotest Inline Runner](#alcotest-inline-runner)
     - [Aliases](#aliases)
 - [Examples](#examples)
 - [Other Buck 2 with OCaml Resources](#other-buck-2-with-ocaml-resources)
@@ -380,6 +382,41 @@ ocaml_library(
 ) if not host_info().os.is_windows else None
 ```
 
+#### Inline Tests (Runners)
+
+To be able to use inline tests, we have to also compile a test runner executable for these to be called. This needs an extra `ocaml_binary` target to run the inline tests.
+
+##### Alcotest Inline Runner
+
+**File `./lib/BUCK`**
+
+We have to generate an inline test runner executable and link all libraries containing inline tests and the Alcotest inline runner library `ppx_inline_alcotest.runner` with it.
+
+```ocaml
+ocaml_binary(
+    name = "inline_runner",
+    srcs = ["./inline_runner.ml"],
+    compiler_flags = [
+        "-linkall",
+        "-cclib",
+        "-lunixbyt",
+        "-cclib",
+        "-lunixnat",
+    ],
+    deps = [":inline_test_runners",
+            "//third-party:ppx_inline_alcotest.runner",],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None
+```
+
+**File `./lib/inline_runner.ml`**
+
+The test runner executable's source.
+
+```ocaml
+let () = Ppx_inline_alcotest_runner.run ()
+```
+
 #### Aliases
 
 You can use aliases for targets, for example in subdirectories.
@@ -419,6 +456,7 @@ Each example project directory contains a `README.md` file explaining its Buck 2
 - [./my_project/](./my_project/) - a OCaml project which uses Opam package dependencies, but no PPX. Contains a library, an executable that uses the library and tests of the library.
 - [./ocamllex_menhir_example/](./ocamllex_menhir_example/) - a OCaml project which uses OCamlLex and Menhir to generate OCaml code. Contains a library, an executable that uses the library and tests of the library.
 - [./ppx_usage_example/](./ppx_usage_example/) - a OCaml project which uses Sedlex and Menhir as code generators and PPX for Sedlex to show the usage of PPX libraries. Contains a library, an executable that uses the library and tests of the library.
+- [./inline_test_runners](./inline_test_runners/) - a OCaml project which uses PPX inline tests, the library uses  Alcotest inline PPX. Contains a library, an executable that uses the library and tests and inline tests of the library.
 
 All of these examples also use Dune configuration files, so you can compare them to the `BUCK` files.
 

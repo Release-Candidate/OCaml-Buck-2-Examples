@@ -1,0 +1,4 @@
+(executable
+ (public_name inline_test_runners)
+ (name main)
+ (libraries inline_test_runners))

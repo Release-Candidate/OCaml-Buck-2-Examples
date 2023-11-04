@@ -1,0 +1,9 @@
+{
+    "name": "./",
+    "compiler": "ocaml-base-compiler",
+    "packages": [
+        "qcheck-alcotest",
+        "alcotest",
+        "ppx_inline_alcotest"
+    ]
+}

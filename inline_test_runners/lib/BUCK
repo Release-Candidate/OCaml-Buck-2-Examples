@@ -1,0 +1,77 @@
+# A list of available rules and their signatures can be found here: https://buck2.build/docs/api/rules/
+
+export_file(
+    name = "inline_test_runners.mli",
+    src = "inline_test_runners.mli",
+    visibility = [
+        ":inline_test_runners",
+        ":inline_test_runners__",
+    ],
+)
+
+# buildifier: disable=no-effect
+ocaml_library(
+    name = "inline_test_runners__",
+    srcs = [
+        "inline_test_runners.ml",
+        ":inline_test_runners.mli",
+    ],
+    compiler_flags = [
+        "-no-alias-deps",
+        "-w",
+        "-49",
+    ],
+    visibility = [":inline_test_runners"],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+ocaml_binary(
+    name = "ppx",
+    srcs = ["./driver.ml"],
+    compiler_flags = [
+        "-linkall",
+    ],
+    deps = ["//third-party:ppx_inline_alcotest",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+ocaml_binary(
+    name = "inline_runner",
+    srcs = ["./inline_runner.ml"],
+    compiler_flags = [
+        "-linkall",
+        "-cclib",
+        "-lunixbyt",
+        "-cclib",
+        "-lunixnat",
+    ],
+    deps = [":inline_test_runners",
+            "//third-party:ppx_inline_alcotest.runner",],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+ocaml_library(
+    name = "inline_test_runners",
+    srcs = ["./fibonacci.ml"],
+    compiler_flags = [
+        "-no-alias-deps",
+        "-w",
+        "-49",
+        "-open",
+        "Inline_test_runners",
+        "-ppx",
+        "$(exe_target :ppx) --as-ppx",
+    ],
+    ocamldep_flags = [
+        "-open",
+        "Inline_test_runners",
+        "-map",
+        "$(location :inline_test_runners.mli)",
+    ],
+    deps = [":inline_test_runners__",
+            "//third-party:ppx_inline_alcotest",
+            "//third-party:ppx_inline_alcotest.runner"],
+    visibility = ["PUBLIC"],
+) if not host_info().os.is_windows else None

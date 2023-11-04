@@ -1,0 +1,5 @@
+(library
+ (name inline_test_runners)
+ (inline_tests)
+ (preprocess
+  (pps ppx_inline_alcotest)))
