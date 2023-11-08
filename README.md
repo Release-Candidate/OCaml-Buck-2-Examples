@@ -17,6 +17,7 @@ This contains documentation and examples on how to use Buck 2 to build OCaml pro
       - [Alcotest Inline Runner for a Library](#alcotest-inline-runner-for-a-library)
       - [Alcotest Inline Runner for a Test Executable](#alcotest-inline-runner-for-a-test-executable)
     - [Aliases](#aliases)
+- [Using Buck 2 with OCaml-LSP or Merlin](#using-buck-2-with-ocaml-lsp-or-merlin)
 - [Examples](#examples)
 - [Other Buck 2 with OCaml Resources](#other-buck-2-with-ocaml-resources)
 - [Questions and Answers](#questions-and-answers)
@@ -503,6 +504,43 @@ alias(
 So, instead of `buck2 run //test:my_project` you can now use `buck2 run //:test`
 
 See [Examples](#examples).
+
+## Using Buck 2 with OCaml-LSP or Merlin
+
+You need to generate a `.merlin` file containing the paths to the source and build directories, see [Merlin - Project Configuration](https://github.com/ocaml/merlin/wiki/project-configuration)
+
+Example:
+
+```text
+S bin/**
+S lib/**
+S test/**
+
+B ./buck-out/v2/gen/root/*/bin/__ppx_usage_example__/_nativeobj_
+B ./buck-out/v2/gen/root/*/lib/__ppx__/_nativeobj_
+B ./buck-out/v2/gen/root/*/lib/__ppx_usage_example__/_nativeobj_
+B ./buck-out/v2/gen/root/*/lib/__ppx_usage_example__/_nativeobj_/_native_gen_
+B ./buck-out/v2/gen/root/*/lib/__ppx_usage_example____/_nativeobj_
+B ./buck-out/v2/gen/root/*/test/__ppx_usage_example__/_nativeobj_
+
+PKG sedlex menhirLib qcheck-alcotest alcotest sedlex.ppx
+```
+
+You can generate the `B` stanzas using `find`, the `cmi` files are located at `_nativeobj_` directories in `buck-out`.
+
+```shell
+dirname $(find ./buck-out -name "*.cmi") | sort | uniq
+```
+
+To be able to use the `.merlin` file with OCaml-LSP, you need to add the command line argument `--fallback-read-dot-merlin` to the ocaml-lsp invocation and need the Opam package `dot-merlin-reader` installed. OCaml-LSP documentation: [Merlin configuration](https://github.com/ocaml/ocaml-lsp#merlin-configuration-advanced)
+
+For VS Code or Codium the setting to add the command line argument is
+
+```json
+    "ocaml.server.args": [
+        "--fallback-read-dot-merlin"
+    ],
+```
 
 ## Examples
 

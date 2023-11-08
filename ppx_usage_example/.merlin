@@ -1,0 +1,12 @@
+S bin
+S lib
+S test
+
+B ./buck-out/v2/gen/root/*/bin/__ppx_usage_example__/_nativeobj_
+B ./buck-out/v2/gen/root/*/lib/__ppx__/_nativeobj_
+B ./buck-out/v2/gen/root/*/lib/__ppx_usage_example__/_nativeobj_
+B ./buck-out/v2/gen/root/*/lib/__ppx_usage_example__/_nativeobj_/_native_gen_
+B ./buck-out/v2/gen/root/*/lib/__ppx_usage_example____/_nativeobj_
+B ./buck-out/v2/gen/root/*/test/__ppx_usage_example__/_nativeobj_
+
+PKG sedlex menhirLib qcheck-alcotest alcotest sedlex.ppx

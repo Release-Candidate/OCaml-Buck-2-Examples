@@ -139,3 +139,4 @@ Test Successful in 0.003s. 14 tests run.
 - [./lib/BUCK](./lib/BUCK) - The rules to build the library.
 - [./test/BUCK](./test/BUCK) - The rules to build the test.
 - [./prelude/](./prelude/) - Contains all toolchains and rules for all supported languages of Buck 2. A Git submodule.
+- [./.merlin](./.merlin) - Merlin configuration file for Merlin and the OCaml-LSP

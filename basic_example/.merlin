@@ -1,0 +1,9 @@
+S bin
+S lib
+S test
+
+B buck-out/v2/gen/root/*/bin/*/_nativeobj_/
+B buck-out/v2/gen/root/*/lib/*/_nativeobj_/
+B buck-out/v2/gen/root/*/test/*/_nativeobj_/
+
+PKG qcheck-alcotest alcotest
