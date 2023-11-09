@@ -84,6 +84,13 @@ The following steps are needed to setup a Buck 2 project. These are the same for
     BUILD SUCCEEDED
     ```
 
+- Set the execution platform in `./.buckconfig` to the default one of the prelude.
+
+  ```ini
+  [build]
+  execution_platforms = prelude//platforms:default
+  ```
+
 - Add the needed toolchains to `./toolchains/BUCK`:. edit the file `./toolchains/BUCK` as follows, to include the Python and C++ toolchains, which are always needed, and the OCaml toolchain:
 
 ```python
