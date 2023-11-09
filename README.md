@@ -507,7 +507,7 @@ See [Examples](#examples).
 
 ## Using Buck 2 with OCaml-LSP or Merlin
 
-You need to generate a `.merlin` file containing the paths to the source and build directories, see [Merlin - Project Configuration](https://github.com/ocaml/merlin/wiki/project-configuration)
+You need to generate a `.merlin` file containing the paths to the source and build directories and the list of Opam packages (but using `ocamlfind` names!), see [Merlin - Project Configuration](https://github.com/ocaml/merlin/wiki/project-configuration)
 
 Example:
 
