@@ -21,7 +21,7 @@ jobs:
         strategy:
             matrix:
                 os: [windows-latest]
-                dirs: [basic_example, ppx_usage_example, inline_test_runners, ocamllex_menhir_example]
+                dir: [basic_example, ppx_usage_example, inline_test_runners, ocamllex_menhir_example]
                 ocaml: [ocaml.5.0.0]
 
         runs-on: ${{ matrix.os }}
@@ -48,17 +48,17 @@ jobs:
 
             - name: install Opam Switch
               run: |
-                cd {{ matrix.dir }} && python3 ../ocaml-scripts/dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json
+                cd ${{ matrix.dir }} && python3 ../ocaml-scripts/dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json
 
             - name: Run Tests
               run: |
-                cd {{ matrix.dir }} && buck2 run :test
+                cd ${{ matrix.dir }} && buck2 run :test
 
     unix:
         strategy:
             matrix:
                 os: [macos-latest, ubuntu-latest]
-                dirs: [basic_example, ppx_usage_example, inline_test_runners, ocamllex_menhir_example]
+                dir: [basic_example, ppx_usage_example, inline_test_runners, ocamllex_menhir_example]
                 ocaml: [ocaml.5.1.0]
 
         runs-on: ${{ matrix.os }}
@@ -85,8 +85,8 @@ jobs:
 
             - name: install Opam Switch
               run: |
-                cd {{ matrix.dir }} && python3 ../ocaml-scripts/dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json
+                cd ${{ matrix.dir }} && python3 ../ocaml-scripts/dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json
 
             - name: Run Tests
               run: |
-                cd {{ matrix.dir }} && buck2 run :test
+                cd ${{ matrix.dir }} && buck2 run :test
