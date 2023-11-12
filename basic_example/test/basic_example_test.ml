@@ -46,4 +46,3 @@ let () =
                 (fun n -> fibonacci n = fibonacci_tailrec n))
         ] )
     ]
-;;

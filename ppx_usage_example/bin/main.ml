@@ -16,9 +16,7 @@ let list_of_terms =
   ; "let a = 5 in a / 3"
   ; "let a = 4.0 - 5.2 in let b = a * 0.123 in let c = 5.6 in a + b + c"
   ]
-;;
 
 let () =
   print_endline "Some examples:";
   List.iter (fun t -> t ^ " = " ^ Interpreter.interp_env t |> print_endline) list_of_terms
-;;

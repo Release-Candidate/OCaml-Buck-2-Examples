@@ -31,7 +31,6 @@ let parse (s : string) : expr =
       (Printf.sprintf
          "Parse error in column %d: syntax error."
          (Sedlexing.lexeme_start lexbuf))
-;;
 
 (** [Env] is the module of environments. An environment is a map of string to
     values. *)
@@ -87,7 +86,6 @@ and eval_let_env env x e1 e2 =
   let v1 = eval_env env e1 in
   let env' = Env.add x v1 env in
   eval_env env' e2
-;;
 
 (** [string_of_val_env e] converts the value [v] to a string representation and
     returns that. *)
@@ -95,11 +93,9 @@ let string_of_val_env (v : value) : string =
   match v with
   | VInt i -> string_of_int i
   | VFloat f -> string_of_float f
-;;
 
 (** [interp_env s] interprets the string [s] as a program by lexing, parsing
     and using a dynamic environment to evaluate it to the final string that is
     returned *)
 let interp_env (s : string) : string =
   s |> parse |> eval_env empty_env |> string_of_val_env
-;;

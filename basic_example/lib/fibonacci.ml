@@ -22,7 +22,6 @@ let rec fibonacci n =
   | 0 -> 0
   | 1 -> 1
   | n' -> fibonacci (n' - 1) + fibonacci (n' - 2)
-;;
 
 (** A tail recursive implementation of the fibonacci sequence.
     f_0 = 0
@@ -33,4 +32,3 @@ let rec fibonacci n =
 let fibonacci_tailrec n =
   let rec go i a b = if i = n then a else go (i + 1) b (a + b) in
   go 0 0 1
-;;

@@ -22,7 +22,6 @@ let rec fibonacci n =
   | 0 -> 0
   | 1 -> 1
   | n' -> fibonacci (n' - 1) + fibonacci (n' - 2)
-;;
 
 (** A tail recursive implementation of the fibonacci sequence.
     f_0 = 0
@@ -33,12 +32,9 @@ let rec fibonacci n =
 let fibonacci_tailrec n =
   let rec go i a b = if i = n then a else go (i + 1) b (a + b) in
   go 0 0 1
-;;
 
 let%test "fib 2 = fib_tailrec 2" =
   Alcotest.(check int) "same int" (fibonacci 2) (fibonacci_tailrec 2)
-;;
 
 let%test "fib 5 = fib_tailrec 5" =
   Alcotest.(check int) "same int" (fibonacci 5) (fibonacci_tailrec 5)
-;;

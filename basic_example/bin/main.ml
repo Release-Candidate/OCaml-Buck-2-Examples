@@ -10,7 +10,7 @@
 
 let main () =
   let fib10 = Basic_example.Fibonacci.fibonacci_tailrec 10 in
-  Printf.printf "Hello, World!\nBtw. Fibonacci number F_10 is %d\n" fib10
+  Printf.printf "Hello, World!\nBtw. Fibonacci number F_10 is %d\n" fib10 |> ignore
 ;;
 
 main ()

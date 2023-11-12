@@ -35,4 +35,3 @@ let rec token buf =
          (Printf.sprintf
             "Lexing error in column %d: unexpected character."
             (Sedlexing.lexeme_start buf)))
-;;
