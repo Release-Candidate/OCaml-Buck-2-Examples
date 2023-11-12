@@ -44,7 +44,7 @@ jobs:
             - name: Update Submodules and ocaml-scripts
               run: |
                 git submodule update --init --depth 1
-                git clone git@github.com:facebook/ocaml-scripts.git
+                git clone https://github.com/facebook/ocaml-scripts.git --depth 1
 
             - name: install Opam Switch
               run: |
@@ -81,7 +81,7 @@ jobs:
             - name: Update Submodules and ocaml-scripts
               run: |
                 git submodule update --init --depth 1
-                git clone git@github.com:facebook/ocaml-scripts.git
+                git clone https://github.com/facebook/ocaml-scripts.git --depth 1
 
             - name: install Opam Switch
               run: |
