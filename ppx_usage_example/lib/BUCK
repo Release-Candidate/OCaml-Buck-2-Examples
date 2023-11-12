@@ -21,7 +21,7 @@ ocaml_binary(
         "//third-party:sedlex.ppx",
         "//third-party:menhirLib",
     ],
-) if not host_info().os.is_windows else None
+)
 
 # buildifier: disable=no-effect
 ocaml_library(
@@ -36,7 +36,7 @@ ocaml_library(
         "-49",
     ],
     visibility = [":ppx_usage_example"],
-) if not host_info().os.is_windows else None
+)
 
 # buildifier: disable=no-effect
 ocaml_library(
@@ -62,4 +62,4 @@ ocaml_library(
         "//third-party:sedlex.ppx",
         "//third-party:menhirLib"],
     visibility = ["PUBLIC"],
-) if not host_info().os.is_windows else None
+)

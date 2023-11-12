@@ -22,7 +22,7 @@ jobs:
             matrix:
                 os: [windows-latest]
                 dirs: [basic_example, ppx_usage_example, inline_test_runners, ocamllex_menhir_example]
-                ocaml: [ocaml.5.1.x]
+                ocaml: [ocaml.5.1.0]
 
         runs-on: ${{ matrix.os }}
 
@@ -59,7 +59,7 @@ jobs:
             matrix:
                 os: [macos-latest, ubuntu-latest]
                 dirs: [basic_example, ppx_usage_example, inline_test_runners, ocamllex_menhir_example]
-                ocaml: [ocaml.5.1.x]
+                ocaml: [ocaml.5.1.0]
 
         runs-on: ${{ matrix.os }}
 

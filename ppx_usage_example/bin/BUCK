@@ -8,4 +8,4 @@ ocaml_binary(
         "//lib:ppx_usage_example",
     ],
     visibility = ["PUBLIC"],
-) if not host_info().os.is_windows else None
+)
