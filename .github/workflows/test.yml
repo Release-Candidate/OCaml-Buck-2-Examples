@@ -85,9 +85,11 @@ jobs:
 
             - name: install Opam Switch
               run: |
-                cd ${{ matrix.dir }} && rm ./third-party/opam
-                cd ${{ matrix.dir }} && python3 ../ocaml-scripts/dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json
+                cd ${{ matrix.dir }}
+                rm ./third-party/opam
+                python3 ../ocaml-scripts/dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json
 
             - name: Run Tests
               run: |
-                cd ${{ matrix.dir }} && buck2 run :test
+                cd ${{ matrix.dir }}
+                buck2 run :test
