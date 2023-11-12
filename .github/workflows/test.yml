@@ -1,0 +1,92 @@
+# SPDX-FileCopyrightText:  Copyright 2023 Roland Csaszar
+# SPDX-License-Identifier: MIT
+#
+# Project:  OCaml-Buck-2-Examples
+# File:     test.yml
+# Date:     12.Nov.2023
+#
+# ==============================================================================
+
+
+name: Test
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+
+jobs:
+    windows:
+        strategy:
+            matrix:
+                os: [windows-latest]
+                dirs: [basic_example, ppx_usage_example, inline_test_runners, ocamllex_menhir_example]
+                ocaml: [ocaml.5.1.x]
+
+        runs-on: ${{ matrix.os }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Install Buck 2
+              uses: dtolnay/install-buck2@latest
+
+            - name: Set-up OCaml
+              uses: ocaml/setup-ocaml@v2
+              with:
+                ocaml-compiler: ${{ matrix.ocaml }},ocaml-option-mingw
+                opam-repositories: |
+                 dra27: https://github.com/dra27/opam-repository.git#windows-5.0
+                 default: https://github.com/fdopen/opam-repository-mingw.git#opam2
+
+            - name: Update Submodules and ocaml-scripts
+              run: |
+                git submodule update --init --remote --no-fetch --depth 1 --single-branch tools/buck/prelude
+                git clone git@github.com:facebook/ocaml-scripts.git
+
+            - name: install Opam Switch
+              run: |
+                cd {{ matrix.dir }} && python3 ../ocaml-scripts/dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json
+
+            - name: Run Tests
+              run: |
+                cd {{ matrix.dir }} && buck2 run :test
+
+    unix:
+        strategy:
+            matrix:
+                os: [macos-latest, ubuntu-latest]
+                dirs: [basic_example, ppx_usage_example, inline_test_runners, ocamllex_menhir_example]
+                ocaml: [ocaml.5.1.x]
+
+        runs-on: ${{ matrix.os }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Install Buck 2
+              uses: dtolnay/install-buck2@latest
+
+            - name: Set-up OCaml
+              uses: ocaml/setup-ocaml@v2
+              with:
+                ocaml-compiler: ${{ matrix.ocaml }}
+                opam-disable-sandboxing: true
+                opam-pin: false
+                opam-depext: false
+
+            - name: Update Submodules and ocaml-scripts
+              run: |
+                git submodule update --init --remote --no-fetch --depth 1 --single-branch tools/buck/prelude
+                git clone git@github.com:facebook/ocaml-scripts.git
+
+            - name: install Opam Switch
+              run: |
+                cd {{ matrix.dir }} && python3 ../ocaml-scripts/dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json
+
+            - name: Run Tests
+              run: |
+                cd {{ matrix.dir }} && buck2 run :test
