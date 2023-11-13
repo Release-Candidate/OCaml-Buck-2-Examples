@@ -53,7 +53,7 @@ jobs:
                 import subprocess
                 import sys
                 file_names = ["${{ matrix.dir }}/third-party/dromedary.json"]
-                cmd = ["opam", "install", "ocamllex", "menhir", "ocamldep", "ocamlfind"]
+                cmd = ["opam", "install", "menhir", "ocamlfind"]
                 for file_name in file_names:
                     with open(file_name, "rt", encoding="utf-8") as fd:
                         package_list = json.load(fd)
@@ -83,9 +83,6 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Install Buck 2
-              uses: dtolnay/install-buck2@latest
-
             - name: Set-up OCaml
               uses: ocaml/setup-ocaml@v2
               with:
@@ -106,7 +103,7 @@ jobs:
                 import subprocess
                 import sys
                 file_names = ["${{ matrix.dir }}/third-party/dromedary.json"]
-                cmd = ["opam", "install", "ocamllex", "menhir", "ocamldep", "ocamlfind"]
+                cmd = ["opam", "install", "menhir", "ocamlfind"]
                 for file_name in file_names:
                     with open(file_name, "rt", encoding="utf-8") as fd:
                         package_list = json.load(fd)
@@ -115,8 +112,12 @@ jobs:
 
             - name: Run dromedary
               run: |
+                eval $(opam env --set-switch)
                 cd ${{ matrix.dir }}
                 python3 ../ocaml-scripts/dromedary.py -o third-party/BUCK
+
+            - name: Install Buck 2
+              uses: dtolnay/install-buck2@latest
 
             - name: Run Tests
               run: |
