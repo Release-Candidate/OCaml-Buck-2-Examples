@@ -565,7 +565,7 @@ All of these examples also use Dune configuration files, so you can compare them
 
 ### GitHub Actions
 
-In the file [./.github/workflows/test.yml](./.github/workflows/test.yml) there are working Github actions.
+In the file [./.github/workflows/test.yml](./.github/workflows/test.yml) there are working Github actions for MacOS and Linux. The Windows part does not work, as passing the PATH into `dromedary.py` (which calls other Python scripts, which call `ocamlfind`) fails.
 
 ## Other Buck 2 with OCaml Resources
 

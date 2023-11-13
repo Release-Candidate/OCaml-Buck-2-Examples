@@ -17,48 +17,48 @@ on:
         branches: ["main"]
 
 jobs:
-    windows:
-        strategy:
-            matrix:
-                os: [windows-latest]
-                dir: [basic_example, ppx_usage_example, inline_test_runners, ocamllex_menhir_example]
-                ocaml: [ocaml.5.0.0]
+    # windows:
+    #     strategy:
+    #         matrix:
+    #             os: [windows-latest]
+    #             dir: [basic_example, ppx_usage_example, inline_test_runners, ocamllex_menhir_example]
+    #             ocaml: [ocaml.5.0.0]
 
-        runs-on: ${{ matrix.os }}
+    #     runs-on: ${{ matrix.os }}
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
+    #     steps:
+    #         - name: Checkout
+    #           uses: actions/checkout@v3
 
-            - name: Install Buck 2
-              uses: dtolnay/install-buck2@latest
+    #         - name: Install Buck 2
+    #           uses: dtolnay/install-buck2@latest
 
-            - name: Set-up OCaml
-              uses: ocaml/setup-ocaml@v2
-              with:
-                ocaml-compiler: ${{ matrix.ocaml }},ocaml-option-mingw
-                opam-repositories: |
-                 dra27: https://github.com/dra27/opam-repository.git#windows-5.0
-                 default: https://github.com/fdopen/opam-repository-mingw.git#opam2
+    #         - name: Set-up OCaml
+    #           uses: ocaml/setup-ocaml@v2
+    #           with:
+    #             ocaml-compiler: ${{ matrix.ocaml }},ocaml-option-mingw
+    #             opam-repositories: |
+    #              dra27: https://github.com/dra27/opam-repository.git#windows-5.0
+    #              default: https://github.com/fdopen/opam-repository-mingw.git#opam2
 
-            - name: Update Submodules and ocaml-scripts
-              run: |
-                git submodule update --init --depth 1
-                git clone https://github.com/facebook/ocaml-scripts.git --depth 1
+    #         - name: Update Submodules and ocaml-scripts
+    #           run: |
+    #             git submodule update --init --depth 1
+    #             git clone https://github.com/facebook/ocaml-scripts.git --depth 1
 
-            - name: Install Opam Packages
-              run: |
-                opam install menhir ocamlfind menhirLib qcheck-alcotest alcotest ppx_inline_alcotest sedlex
+    #         - name: Install Opam Packages
+    #           run: |
+    #             opam install menhir ocamlfind menhirLib qcheck-alcotest alcotest ppx_inline_alcotest sedlex
 
-            - name: Run dromedary
-              run: |
-                cd ${{ matrix.dir }}
-                opam exec -- python3 ../ocaml-scripts/dromedary.py -o third-party/BUCK
+    #         - name: Run dromedary
+    #           run: |
+    #             cd ${{ matrix.dir }}
+    #             opam exec -- python3 ../ocaml-scripts/dromedary.py -o third-party/BUCK
 
-            - name: Run Tests
-              run: |
-                cd ${{ matrix.dir }}
-                opam exec -- buck2 run :test
+    #         - name: Run Tests
+    #           run: |
+    #             cd ${{ matrix.dir }}
+    #             opam exec -- buck2 run :test
 
     unix:
         strategy:
