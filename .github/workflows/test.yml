@@ -63,12 +63,12 @@ jobs:
             - name: Run dromedary
               run: |
                 cd ${{ matrix.dir }}
-                python3 ../ocaml-scripts/dromedary.py -o third-party/BUCK
+                opam exec -- python3 ../ocaml-scripts/dromedary.py -o third-party/BUCK
 
             - name: Run Tests
               run: |
                 cd ${{ matrix.dir }}
-                buck2 run :test
+                opam exec -- buck2 run :test
 
     unix:
         strategy:
@@ -122,4 +122,4 @@ jobs:
             - name: Run Tests
               run: |
                 cd ${{ matrix.dir }}
-                buck2 run :test
+                opam exec -- buck2 run :test
