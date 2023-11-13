@@ -46,9 +46,19 @@ jobs:
                 git submodule update --init --depth 1
                 git clone https://github.com/facebook/ocaml-scripts.git --depth 1
 
-            - name: install Opam Switch
+            - name: Install Opam Packages
+              shell: python
               run: |
-                cd ${{ matrix.dir }} && python3 ../ocaml-scripts/dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json
+                import json
+                import subprocess
+                import sys
+                file_names = ["${{ matrix.dir }}/third-party/dromedary.json"]
+                cmd = ["opam", "install"]
+                for file_name in file_names:
+                    with open(file_name, "rt", encoding="utf-8") as fd:
+                        package_list = json.load(fd)
+                        cmd.extend(package_list["packages"])
+                subprocess.run(cmd)
 
             - name: Run Tests
               run: |
@@ -83,11 +93,19 @@ jobs:
                 git submodule update --init --depth 1
                 git clone https://github.com/facebook/ocaml-scripts.git --depth 1
 
-            - name: install Opam Switch
+            - name: Install Opam Packages
+              shell: python
               run: |
-                cd ${{ matrix.dir }}
-                rm ./third-party/opam
-                python3 ../ocaml-scripts/dromedary.py -o ./third-party/BUCK ./third-party/dromedary.json
+                import json
+                import subprocess
+                import sys
+                file_names = ["${{ matrix.dir }}/third-party/dromedary.json"]
+                cmd = ["opam", "install"]
+                for file_name in file_names:
+                    with open(file_name, "rt", encoding="utf-8") as fd:
+                        package_list = json.load(fd)
+                        cmd.extend(package_list["packages"])
+                subprocess.run(cmd)
 
             - name: Run Tests
               run: |

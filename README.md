@@ -553,7 +553,7 @@ For VS Code or Codium the setting to add the command line argument is
 
 Each example project directory contains a `README.md` file explaining its Buck 2 configuration files.
 
-- [./my_project/](./my_project/) - a OCaml project which uses Opam package dependencies, but no PPX. Contains a library, an executable that uses the library and tests of the library.
+- [./basic_example/](./basic_example/) - a OCaml project which uses Opam package dependencies, but no PPX. Contains a library, an executable that uses the library and tests of the library.
 - [./ocamllex_menhir_example/](./ocamllex_menhir_example/) - a OCaml project which uses OCamlLex and Menhir to generate OCaml code. Contains a library, an executable that uses the library and tests of the library.
 - [./ppx_usage_example/](./ppx_usage_example/) - a OCaml project which uses Sedlex and Menhir as code generators and PPX for Sedlex to show the usage of PPX libraries. Contains a library, an executable that uses the library and tests of the library.
 - [./inline_test_runners](./inline_test_runners/) - a OCaml project which uses PPX inline tests, the library uses  Alcotest inline PPX. Contains a library, an executable that uses the library and tests and inline tests of the library.
