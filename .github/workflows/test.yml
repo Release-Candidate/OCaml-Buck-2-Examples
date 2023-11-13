@@ -60,9 +60,15 @@ jobs:
                         cmd.extend(package_list["packages"])
                 subprocess.run(cmd)
 
+            - name: Run dromedary
+              run: |
+                cd ${{ matrix.dir }}
+                python3 ../ocaml-scripts/dromedary.py -o third-party/BUCK
+
             - name: Run Tests
               run: |
-                cd ${{ matrix.dir }} && buck2 run :test
+                cd ${{ matrix.dir }}
+                buck2 run :test
 
     unix:
         strategy:
@@ -106,6 +112,11 @@ jobs:
                         package_list = json.load(fd)
                         cmd.extend(package_list["packages"])
                 subprocess.run(cmd)
+
+            - name: Run dromedary
+              run: |
+                cd ${{ matrix.dir }}
+                python3 ../ocaml-scripts/dromedary.py -o third-party/BUCK
 
             - name: Run Tests
               run: |
