@@ -53,7 +53,7 @@ jobs:
                 import subprocess
                 import sys
                 file_names = ["${{ matrix.dir }}/third-party/dromedary.json"]
-                cmd = ["opam", "install", "ocamllex", "menhir", "ocamldep"]
+                cmd = ["opam", "install", "ocamllex", "menhir", "ocamldep", "ocamlfind"]
                 for file_name in file_names:
                     with open(file_name, "rt", encoding="utf-8") as fd:
                         package_list = json.load(fd)
@@ -106,7 +106,7 @@ jobs:
                 import subprocess
                 import sys
                 file_names = ["${{ matrix.dir }}/third-party/dromedary.json"]
-                cmd = ["opam", "install", "ocamllex", "menhir", "ocamldep"]
+                cmd = ["opam", "install", "ocamllex", "menhir", "ocamldep", "ocamlfind"]
                 for file_name in file_names:
                     with open(file_name, "rt", encoding="utf-8") as fd:
                         package_list = json.load(fd)
