@@ -47,18 +47,8 @@ jobs:
                 git clone https://github.com/facebook/ocaml-scripts.git --depth 1
 
             - name: Install Opam Packages
-              shell: python
               run: |
-                import json
-                import subprocess
-                import sys
-                file_names = ["${{ matrix.dir }}/third-party/dromedary.json"]
-                cmd = ["opam", "install", "menhir", "ocamlfind"]
-                for file_name in file_names:
-                    with open(file_name, "rt", encoding="utf-8") as fd:
-                        package_list = json.load(fd)
-                        cmd.extend(package_list["packages"])
-                subprocess.run(cmd)
+                opam install menhir ocamlfind menhirLib qcheck-alcotest alcotest ppx_inline_alcotest sedlex
 
             - name: Run dromedary
               run: |
@@ -114,7 +104,7 @@ jobs:
               run: |
                 eval $(opam env --set-switch)
                 cd ${{ matrix.dir }}
-                python3 ../ocaml-scripts/dromedary.py -o third-party/BUCK
+                opam exec -- python3 ../ocaml-scripts/dromedary.py -o third-party/BUCK
 
             - name: Install Buck 2
               uses: dtolnay/install-buck2@latest

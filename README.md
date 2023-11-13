@@ -1,5 +1,7 @@
 # OCaml-Buck-2-Examples
 
+[![Test](https://github.com/Release-Candidate/OCaml-Buck-2-Examples/actions/workflows/test.yml/badge.svg)](https://github.com/Release-Candidate/OCaml-Buck-2-Examples/actions/workflows/test.yml)
+
 This contains documentation and examples on how to use Buck 2 to build OCaml projects.
 
 - [Installation](#installation)
@@ -19,6 +21,7 @@ This contains documentation and examples on how to use Buck 2 to build OCaml pro
     - [Aliases](#aliases)
 - [Using Buck 2 with OCaml-LSP or Merlin](#using-buck-2-with-ocaml-lsp-or-merlin)
 - [Examples](#examples)
+  - [GitHub Actions](#github-actions)
 - [Other Buck 2 with OCaml Resources](#other-buck-2-with-ocaml-resources)
 - [Questions and Answers](#questions-and-answers)
   - [Does Buck2 support OCaml on Windows?](#does-buck2-support-ocaml-on-windows)
@@ -559,6 +562,10 @@ Each example project directory contains a `README.md` file explaining its Buck 2
 - [./inline_test_runners](./inline_test_runners/) - a OCaml project which uses PPX inline tests, the library uses  Alcotest inline PPX. Contains a library, an executable that uses the library and tests and inline tests of the library.
 
 All of these examples also use Dune configuration files, so you can compare them to the `BUCK` files.
+
+### GitHub Actions
+
+In the file [./.github/workflows/test.yml](./.github/workflows/test.yml) there are working Github actions.
 
 ## Other Buck 2 with OCaml Resources
 
