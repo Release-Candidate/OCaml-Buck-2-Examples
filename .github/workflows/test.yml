@@ -87,7 +87,7 @@ jobs:
                 git clone https://github.com/facebook/ocaml-scripts.git --depth 1
 
             - name: Install Opam Packages
-              shell: python3
+              shell: python
               run: |
                 import json
                 import subprocess
