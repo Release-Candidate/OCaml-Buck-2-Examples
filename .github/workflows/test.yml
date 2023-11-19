@@ -87,16 +87,15 @@ jobs:
                 git clone https://github.com/facebook/ocaml-scripts.git --depth 1
 
             - name: Install Opam Packages
-              shell: python
+              shell: python3
               run: |
                 import json
                 import subprocess
                 import sys
-                import io
                 file_names = ["${{ matrix.dir }}/third-party/dromedary.json"]
                 cmd = ["opam", "install", "menhir", "ocamlfind"]
                 for file_name in file_names:
-                    with io.open(file_name, "rt", encoding="utf-8") as fd:
+                    with open(file_name, "rt", encoding="utf-8") as fd:
                         package_list = json.load(fd)
                         cmd.extend(package_list["packages"])
                 subprocess.run(cmd)
