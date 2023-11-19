@@ -16,7 +16,14 @@ buck = none
 target_platform_detector_spec = target:root//...->prelude//platforms:default
 
 [build]
-  execution_platforms = prelude//platforms:default
+execution_platforms = prelude//platforms:default
 
 [project]
 ignore = .git
+
+[buck2]
+materializations = deferred
+sqlite_materializer_state = true
+defer_write_actions = true
+hash_all_commands = true
+restarter = true
