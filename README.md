@@ -570,8 +570,10 @@ In the file [./.github/workflows/test.yml](./.github/workflows/test.yml) there a
 ## Other Buck 2 with OCaml Resources
 
 - the official Facebook/Meta examples in the [Buck 2 GitHub Repo](https://github.com/facebook/buck2/tree/main/examples/with_prelude/ocaml).
-- ICFP 2023, **Shayne Fletcher, Neil Mitchell**: [Buck2 for OCaml Users and Developers](https://ndmitchell.com/downloads/slides-buck2_for_ocaml_users_and_developers-09_sep_2023.pdf)
-
+- ICFP 2023, **Shayne Fletcher, Neil Mitchell**:
+  - Slides: [Buck2 for OCaml Users and Developers](https://ndmitchell.com/downloads/slides-buck2_for_ocaml_users_and_developers-09_sep_2023.pdf)
+  - Video: [OCaML'23: Buck2 for OCaml Users & Developers](https://www.youtube.com/watch?v=l4X4BxEEe-w)
+    
 ## Questions and Answers
 
 ### Does Buck2 support OCaml on Windows?
