@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repository has been moved to [Codeberg: OCaml-Buck-2-Examples](https://codeberg.org/Release-Candidate/OCaml-Buck-2-Examples)
+
 # OCaml-Buck-2-Examples
 
 [![Test](https://github.com/Release-Candidate/OCaml-Buck-2-Examples/actions/workflows/test.yml/badge.svg)](https://github.com/Release-Candidate/OCaml-Buck-2-Examples/actions/workflows/test.yml)
